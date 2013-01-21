@@ -14,22 +14,6 @@
 	{% macro js(src) %}{{ javascripts.append("/js/%s"%src) }}{%endmacro%}
 </head>
 <body>
-	{%if current_user%}
-	<a id="messages-panel" href="#">
-		<span id="msg-count">0</span> Msgs
-	</a>
-	{%endif%}
-	<div id="user-panel" class="{{'loggedin' if current_user else 'guest'}}">
-		{% if current_user %}
-		<div class="profilepic"></div>
-		<a href="/settings">Settings</a>
-		<a href="{{ '/'|logout_url }}">Logout</a>
-		{%if current_user.admin%}<a href="/admin">Admin</a>{%endif%}
-		<div class="nickname">{{current_user.google_user().nickname()}}</div>
-		{% else %}
-		<a href="{{ path|login_url }}">Login</a>
-		{% endif %}
-	</div>
 	<div id="header">
 		<div class="parent">
 			<div class="title">Saviors of Middle Earth</div>
@@ -44,5 +28,24 @@
 	<footer id="copyright">
 		&copy; Lisa Deng, Wes Kendrick, John King, Marc Rosen, and William Zhang 2013
 	</footer>
+{#This goes at the bottom so that it is at the highest z index#}
+	{%if current_user%}
+	<a id="messages-panel" href="#">
+		<span id="msg-count">0</span> Msgs
+	</a>
+	{%endif%}
+	<div id="user-panel" class="{{'loggedin' if current_user else 'guest'}}">
+		{% if current_user %}
+		<div class="profilepic">
+			<a class="highlight" href="/settings"></a>
+		</div>
+		<a href="/settings">Settings</a>
+		<a href="{{ '/'|logout_url }}">Logout</a>
+		{%if current_user.admin%}<a href="/admin">Admin</a>{%endif%}
+		<div class="nickname">{{current_user.google_user().nickname()}}</div>
+		{% else %}
+		<a href="{{ path|login_url }}">Login</a>
+		{% endif %}
+	</div>
 </body>
 </html>

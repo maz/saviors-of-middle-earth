@@ -74,9 +74,23 @@ html, body {
     background: blue;
     width: 36px;
     height: 36px;
-    float: left; }
+    float: left;
+    position: relative;
+    z-index: 99; }
+    #user-panel.loggedin .profilepic .highlight {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      bottom: 0px;
+      right: 0px;
+      border: 3px solid rgba(200, 200, 200, 0.75);
+      opacity: 0;
+      display: block; }
+    #user-panel.loggedin .profilepic .highlight:hover {
+      opacity: 1; }
   #user-panel.loggedin .nickname {
-    text-align: left; }
+    text-align: left;
+    height: auto; }
 
 #messages-panel {
   position: absolute;

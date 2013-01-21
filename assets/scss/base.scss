@@ -85,9 +85,25 @@ html,body{
 		width:36px;
 		height:36px;
 		float:left;
+		position:relative;
+		z-index:99;
+		.highlight{
+			position:absolute;
+			top:0px;
+			left:0px;
+			bottom:0px;
+			right:0px;
+			border:3px solid rgba(200,200,200,0.75);
+			opacity:0;
+			display:block;
+		}
+		.highlight:hover{
+			opacity:1;
+		}
 	}
 	.nickname{
 		text-align:left;
+		height:auto;
 	}
 }
 #messages-panel{
