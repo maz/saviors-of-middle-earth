@@ -6,6 +6,7 @@
 	{%macro css(href)%}<link rel="stylesheet" type="text/css" media="all" href="/css/{{href}}.css"/>{%endmacro%}
 	{%block javascript%}
 	{{js('timezone')}}
+	{{js('search-keyboard-shortcut')}}
 	{%endblock%}
 	{%block stylesheets%}
 	{{css('base')}}
@@ -16,7 +17,7 @@
 		<div class="parent">
 			<div class="title">Saviors of Middle Earth</div>
 			<form class="search-field" action="/search" method="get">
-				<input type="search" autocomplete="off" placeholder="Search" name="q"/>
+				<input type="search" id="search-field" autocomplete="off" placeholder="Search" name="q" title="Keyboard Shortcut: Ctrl-Alt-F"/>
 			</form>
 		</div>
 	</div>
