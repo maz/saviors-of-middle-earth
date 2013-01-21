@@ -5,6 +5,7 @@ window.addEventListener 'load',->
 			right=container.querySelector('.right-arrow')
 			contents=container.querySelector('.carousel-contents')
 			carousel=container.querySelector('.carousel')
+			return if contents.children.length<=1
 			extreme_width=contents.children[contents.children.length-2].offsetLeft
 			RIGHT_SPEED=5
 			LEFT_SPEED=-RIGHT_SPEED

@@ -13,6 +13,9 @@
         right = container.querySelector('.right-arrow');
         contents = container.querySelector('.carousel-contents');
         carousel = container.querySelector('.carousel');
+        if (contents.children.length <= 1) {
+          return;
+        }
         extreme_width = contents.children[contents.children.length - 2].offsetLeft;
         RIGHT_SPEED = 5;
         LEFT_SPEED = -RIGHT_SPEED;
