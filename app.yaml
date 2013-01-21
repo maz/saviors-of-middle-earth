@@ -10,8 +10,15 @@ handlers:
   script: main.app
   secure: always
 
-- url: /
-  static_dir: public
+- url: /js/
+  static_dir: public/js
+
+- url: /css/
+  static_dir: public/css
+
+- url: /images/
+  static_dir: public/images
+
 
 libraries:
 - name: webapp2

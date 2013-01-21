@@ -12,10 +12,16 @@ jinja2.default_config['template_path']='views'
 
 class BaseHandler(webapp2.RequestHandler):
     def log(self,msg):
-        user=StoreUser.current_user()
-        db.put_async(LogEntry(ip=self.request.remote_addr,user=(user.key() if user else None),msg=msg))
+        db.put_async(LogEntry(ip=self.request.remote_addr,user=(self.current_user.key() if self.current_user else None),msg=msg))
     def inner_dispatch(self):
+        self.current_user=StoreUser.current_user()
         webapp2.RequestHandler.dispatch(self)
+    def gmt_offset(self):
+        if self.current_user and self.current_user.gmt_offset!=24: return self.current_user.gmt_offset
+        if self.request.cookies.get('gmt_offset'): return float(self.request.cookies.get('gmt_offset'))
+        return 0
+    def convert_datetime(self,dt):
+        return dt.astimezone(self.gmt_offset())
     def dispatch(self):
         self.session_store=sessions.get_store(request=self.request)
         try:
@@ -37,6 +43,7 @@ class BaseHandler(webapp2.RequestHandler):
     def render_template(self,name,**values):
         values=dict(values)
         values['Markup']=Markup#there is probably a better way to add helper functions
+        values['current_user']=self.current_user
         self.response.write(self.jinja2.render_template(name,**values))
 
 class AdminHandler(BaseHandler):

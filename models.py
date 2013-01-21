@@ -1,5 +1,6 @@
 from google.appengine.ext import db
 from google.appengine.api import users
+import datetime
 
 class Item(db.Model):
     name=db.StringProperty()
@@ -7,6 +8,13 @@ class Item(db.Model):
     price=db.FloatProperty()
     description=db.StringProperty(multiline=True)
     creation_time=db.DateTimeProperty(auto_now_add=True)
+    def viewable_by(self,user):
+        return user.admin or user==self.owner or self.creation_time>=Item.expiry_cutoff()
+    def removeable_by(self,user):
+        return user.admin or user==self.owner
+    @staticmethod
+    def expiry_cutoff():
+        pass
 
 class LogEntry(db.Model):
     ip=db.StringProperty()
@@ -18,6 +26,7 @@ class StoreUser(db.Model):
     userid=db.StringProperty()
     admin=db.BooleanProperty()
     deactivated=db.BooleanProperty(default=False)
+    gmt_offset=db.FloatProperty(default=24)#24=autodetect
     @classmethod
     def current_user(cls):
         user=users.get_current_user()
