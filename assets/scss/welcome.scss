@@ -18,15 +18,20 @@
 			background:#CCC;
 			opacity:0.5;
 			cursor:pointer;
+			background-repeat:no-repeat;
+			background-size:contain;
+			background-position:center center;
 		}
 		.left-arrow:hover,.right-arrow:hover{
 			opacity:1;
 		}
 		.left-arrow{
 			left:0px;
+			background-image:url('/images/left.svg');
 		}
 		.right-arrow{
 			right:0px;
+			background-image:url('/images/right.svg');
 		}
 		.carousel{
 			position:absolute;

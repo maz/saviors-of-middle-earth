@@ -14,13 +14,18 @@
     width: 30px;
     background: #CCC;
     opacity: 0.5;
-    cursor: pointer; }
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center; }
   #content .row .left-arrow:hover, #content .row .right-arrow:hover {
     opacity: 1; }
   #content .row .left-arrow {
-    left: 0px; }
+    left: 0px;
+    background-image: url("/images/left.svg"); }
   #content .row .right-arrow {
-    right: 0px; }
+    right: 0px;
+    background-image: url("/images/right.svg"); }
   #content .row .carousel {
     position: absolute;
     left: 30px;
