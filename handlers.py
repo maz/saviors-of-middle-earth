@@ -6,11 +6,16 @@ from jinja2 import Markup
 from models import LogEntry,StoreUser
 from datetime import tzinfo
 import logging
+from google.appengine.api import users
 
 sessions.default_config['secret_key']="2vCmFcbxs4G4D8DiiGMLPQmSm8vun57ffl0lq5Wt"
 sessions.default_config['cookie_args']['httponly']=True
 
 jinja2.default_config['template_path']='views'
+jinja2.default_config['filters']={}
+jinja2.default_config['filters']['Markup']=Markup
+jinja2.default_config['filters']['login_url']=users.create_login_url
+jinja2.default_config['filters']['logout_url']=users.create_logout_url
 
 class FixedTimeZone(tzinfo):
     def __init__(self,offset):
@@ -70,8 +75,8 @@ class BaseHandler(webapp2.RequestHandler):
         return jinja2.get_jinja2(app=self.app)
     def render_template(self,name,**values):
         values=dict(values)
-        values['Markup']=Markup#there is probably a better way to add helper functions
         values['current_user']=self.current_user
+        values['path']=self.request.path_info
         self.response.headers['Content-Type']="text/html; charset=utf-8"#assume that our templates are for html
         self.response.write(self.jinja2.render_template(name,**values))
 

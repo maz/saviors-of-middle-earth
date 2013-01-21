@@ -27,7 +27,7 @@ class StoreUser(db.Model):
     userid=db.StringProperty()
     admin=db.BooleanProperty()
     deactivated=db.BooleanProperty(default=False)
-    gmt_offset=db.FloatProperty(default=24)#24=autodetect
+    gmt_offset=db.FloatProperty(default=float(24))#24=autodetect
     @classmethod
     def current_user(cls):
         user=users.get_current_user()
@@ -36,7 +36,7 @@ class StoreUser(db.Model):
         if len(arr):
             return arr[0]
         else:
-            model=cls(userid=user.user_id(),admin=is_current_user_admin() or user.email() in ["hardcodetest1@gmail.com","hardcodetest2@gmail.com"])
+            model=cls(userid=user.user_id(),admin=users.is_current_user_admin() or user.email() in ["hardcodetest1@gmail.com","hardcodetest2@gmail.com"])
             model.put()
             return model
     def google_user(self):
