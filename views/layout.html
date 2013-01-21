@@ -2,11 +2,13 @@
 <html>
 <head>
 	<title>{{ title if title else "Saviors of Middle Earth" }}</title>
+	{%macro js(src)%}<script src="/js/{{src}}.js" type="text/javascript"></script>{%endmacro%}
+	{%macro css(href)%}<link rel="stylesheet" type="text/css" media="all" href="/css/{{href}}.css"/>{%endmacro%}
 	{%block javascript%}
-	<script src="/js/timezone.js" type="text/javascript"></script>
+	{{js('timezone')}}
 	{%endblock%}
-	{%block css%}
-	<link rel="stylesheet" type="text/css" media="all" href="/css/base.css"/>
+	{%block stylesheets%}
+	{{css('base')}}
 	{%endblock%}
 </head>
 <body>

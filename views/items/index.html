@@ -1,70 +1,33 @@
 {% extends "layout.html" %}
-{%block css%}
+{%block stylesheets%}
 {{super()}}
-<link rel="stylesheet" type="text/css" media="all" href="/css/welcome.css"/>
+{{css("welcome")}}
+{%endblock%}
+{%block javascript%}
+{{super()}}
+{{js("carousel")}}
 {%endblock%}
 {% block content %}
+{%macro product(itm) %}
+<a class="product" href="#">
+	<div class="thumbnail"></div>
+	<div class="label">
+		<span class="name">Settlers of Catan</span>
+		<span class="price">$12</span>
+	</div>
+</a>
+<div class="product-spacer"></div>
+{%endmacro%}
 {%macro product_carousel(title,list) %}
-<div class="row">
+<div class="carousel-container">
 	<h1>{{title}}</h1>
 	<div class="carousel">
 		<div class="carousel-contents">
-			<a class="product" href="#">
-				<div class="thumbnail"></div>
-				<div class="label">
-					<span class="name">Settlers of Catan</span>
-					<span class="price">$12</span>
-				</div>
-			</a>
-			<a class="product" href="#">
-				<div class="thumbnail"></div>
-				<div class="label">
-					<span class="name">Settlers of Catan</span>
-					<span class="price">$12</span>
-				</div>
-			</a>
-			<a class="product" href="#">
-				<div class="thumbnail"></div>
-				<div class="label">
-					<span class="name">Settlers of Catan</span>
-					<span class="price">$12</span>
-				</div>
-			</a>
-			<a class="product" href="#">
-				<div class="thumbnail"></div>
-				<div class="label">
-					<span class="name">Settlers of Catan</span>
-					<span class="price">$12</span>
-				</div>
-			</a>
-			<a class="product" href="#">
-				<div class="thumbnail"></div>
-				<div class="label">
-					<span class="name">Settlers of Catan</span>
-					<span class="price">$12</span>
-				</div>
-			</a>
-			<a class="product" href="#">
-				<div class="thumbnail"></div>
-				<div class="label">
-					<span class="name">Settlers of Catan</span>
-					<span class="price">$12</span>
-				</div>
-			</a>
-			<a class="product" href="#">
-				<div class="thumbnail"></div>
-				<div class="label">
-					<span class="name">Settlers of Catan</span>
-					<span class="price">$12</span>
-				</div>
-			</a>
-			<a class="product" href="#">
-				<div class="thumbnail"></div>
-				<div class="label">
-					<span class="name">Settlers of Catan</span>
-					<span class="price">$12</span>
-				</div>
-			</a>
+			{{product(None)}}
+			{{product(None)}}
+			{{product(None)}}
+			{{product(None)}}
+			{{product(None)}}
 		</div>
 	</div>
 	<div class="left-arrow"></div>

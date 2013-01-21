@@ -1,13 +1,13 @@
-#content .row {
+#content .carousel-container {
   position: relative;
   width: 100%; }
-  #content .row h1 {
+  #content .carousel-container h1 {
     font-weight: bold;
     font-size: 30px; }
-  #content .row .spacer {
+  #content .carousel-container .spacer {
     height: 256px;
     width: 1px; }
-  #content .row .left-arrow, #content .row .right-arrow {
+  #content .carousel-container .left-arrow, #content .carousel-container .right-arrow {
     position: absolute;
     height: 234px;
     bottom: 20px;
@@ -18,47 +18,51 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center; }
-  #content .row .left-arrow:hover, #content .row .right-arrow:hover {
+  #content .carousel-container .left-arrow:hover, #content .carousel-container .right-arrow:hover {
     opacity: 1; }
-  #content .row .left-arrow {
+  #content .carousel-container .left-arrow {
     left: 0px;
     background-image: url("/images/left.svg"); }
-  #content .row .right-arrow {
+  #content .carousel-container .right-arrow {
     right: 0px;
     background-image: url("/images/right.svg"); }
-  #content .row .carousel {
+  #content .carousel-container .carousel {
     position: absolute;
     left: 30px;
     right: 30px;
     overflow: hidden;
     height: 256px;
     padding: 0; }
-    #content .row .carousel .carousel-contents {
+    #content .carousel-container .carousel .carousel-contents {
       height: 100%;
       margin: 0;
       padding: 0;
       width: 1000%; }
-      #content .row .carousel .carousel-contents .product {
+      #content .carousel-container .carousel .carousel-contents .product {
         display: inline-block;
         position: relative;
         height: 100%;
         width: 256px;
         color: black;
         text-decoration: none; }
-        #content .row .carousel .carousel-contents .product .thumbnail {
+        #content .carousel-container .carousel .carousel-contents .product .thumbnail {
           position: absolute;
           top: 2px;
           left: 2px;
           right: 2px;
           bottom: 20px;
           background-color: orange; }
-        #content .row .carousel .carousel-contents .product .label {
+        #content .carousel-container .carousel .carousel-contents .product .label {
           position: absolute;
           bottom: 0px;
           height: 20px;
           left: 0px;
           width: 100%; }
-          #content .row .carousel .carousel-contents .product .label .price {
+          #content .carousel-container .carousel .carousel-contents .product .label .price {
             float: right; }
-      #content .row .carousel .carousel-contents .product:not(:last-child) {
-        margin-right: 15px; }
+      #content .carousel-container .carousel .carousel-contents .product-spacer {
+        width: 15px;
+        display: inline-block;
+        height: 100%; }
+      #content .carousel-container .carousel .carousel-contents .product-spacer:last-child {
+        display: none; }

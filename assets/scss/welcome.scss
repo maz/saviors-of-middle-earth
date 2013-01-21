@@ -1,5 +1,5 @@
 #content{
-	.row{
+	.carousel-container{
 		position:relative;
 		width:100%;
 		h1{
@@ -71,8 +71,13 @@
 						}
 					}
 				}
-				.product:not(:last-child){
-					margin-right:15px;
+				.product-spacer{
+					width:15px;
+					display:inline-block;
+					height:100%;
+				}
+				.product-spacer:last-child{
+					display:none;
 				}
 			}
 		}
