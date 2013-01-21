@@ -1,4 +1,5 @@
 application: saviors-of-middle-earth
+#the below needs to be incremented after each upload to appengine
 version: 1
 runtime: python27
 api_version: 1
@@ -6,18 +7,45 @@ threadsafe: true
 
 handlers:
 
+#Items Controller
 - url: /
-  script: main.app
+  script: items_controller.app
+  secure: always
+- url: /search
+  script: items_controller.app
+  secure: always
+- url: /items/add
+  script: items_controller.app
+  secure: always
+  login: required
+- url: /items/edit/.*
+  script: items_controller.app
+  secure: always
+  login: required
+- url: /items/delete/.*
+  script: items_controller.app
+  secure: always
+  login: required
+- url: /items/
+  script: items_controller.app
+  secure: always
+  login: required
+- url: /items/.*
+  script: items_controller.app
   secure: always
 
+#Static Content
 - url: /js/
   static_dir: public/js
+  secure: always
 
 - url: /css/
   static_dir: public/css
+  secure: always
 
 - url: /images/
   static_dir: public/images
+  secure: always
 
 
 libraries:

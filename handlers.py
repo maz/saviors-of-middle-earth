@@ -4,22 +4,50 @@ from webapp2_extras import sessions
 from webapp2_extras import jinja2
 from jinja2 import Markup
 from models import LogEntry,StoreUser
+from datetime import tzinfo
+import logging
 
 sessions.default_config['secret_key']="2vCmFcbxs4G4D8DiiGMLPQmSm8vun57ffl0lq5Wt"
 sessions.default_config['cookie_args']['httponly']=True
 
 jinja2.default_config['template_path']='views'
 
+class FixedTimeZone(tzinfo):
+    def __init__(self,offset):
+        self.__offset=timedelta(hours=offset)
+    def utcoffset(self,dt):
+        return self.__offset
+    def tzname(self,dt):
+        return "USER"
+    def dst(self,dt):
+        return timedelta(0)
+
 class BaseHandler(webapp2.RequestHandler):
     def log(self,msg):
         db.put_async(LogEntry(ip=self.request.remote_addr,user=(self.current_user.key() if self.current_user else None),msg=msg))
+    def handle_exception(self,exception,debug):
+        if isinstance(exception,webapp2.HTTPException):
+            if exception.code==403:
+                #TODO: 403 error page
+                response.set_status(403)
+                response.write('403!')
+                self.log("Unauthorized attempt to access '%s'"%self.request.path_info)
+                return
+            elif exception.code==404:
+                #TODO: 404 error page
+                response.set_status(404)
+                response.write('404!')
+                return
+        webapp2.RequestHandler.handle_exception(self,exception,debug)
     def inner_dispatch(self):
         self.current_user=StoreUser.current_user()
         webapp2.RequestHandler.dispatch(self)
-    def gmt_offset(self):
+    def gmt_offset_hours(self):
         if self.current_user and self.current_user.gmt_offset!=24: return self.current_user.gmt_offset
         if self.request.cookies.get('gmt_offset'): return float(self.request.cookies.get('gmt_offset'))
         return 0
+    def gmt_offset(self):
+        return FixedTimeZone(self.gmt_offset_hours())
     def convert_datetime(self,dt):
         return dt.astimezone(self.gmt_offset())
     def dispatch(self):
@@ -44,6 +72,7 @@ class BaseHandler(webapp2.RequestHandler):
         values=dict(values)
         values['Markup']=Markup#there is probably a better way to add helper functions
         values['current_user']=self.current_user
+        self.response.headers['Content-Type']="text/html; charset=utf-8"#assume that our templates are for html
         self.response.write(self.jinja2.render_template(name,**values))
 
 class AdminHandler(BaseHandler):

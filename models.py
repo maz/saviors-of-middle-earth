@@ -1,8 +1,9 @@
 from google.appengine.ext import db
 from google.appengine.api import users
-import datetime
+from datetime import timedelta,datetime
 
 class Item(db.Model):
+    EXPIRATION_DELTA=timedelta(days=16)
     name=db.StringProperty()
     owner=db.ReferenceProperty()
     price=db.FloatProperty()
@@ -14,7 +15,7 @@ class Item(db.Model):
         return user.admin or user==self.owner
     @staticmethod
     def expiry_cutoff():
-        pass
+        return datetime.now()-EXPIRATION_DELTA
 
 class LogEntry(db.Model):
     ip=db.StringProperty()

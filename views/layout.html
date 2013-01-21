@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Saviors of Middle Earth</title>
-	<script src="/js/timezone.js" type="text/javascript" charset="utf-8"></script>
+	<title>Saviors of Middle Earth{{ ": %s"%title if title else "" }}</title>
+	{% set javascripts=["/js/timezone.js"] %}
+	{% set stylesheets=["/css/base.css"] %}
+	{%for src in javascripts%}
+	<script src="{{src}}" type="text/javascript"></script>
+	{%endfor%}
+	{%for href in stylesheets%}
+	<link rel="stylesheet" type="text/css" media="all" href="{{href}}"/>
+	{%endfor%}
+	{% macro css(href) %}{{ stylesheets.append("/css/%s"%href) }}{%endmacro%}
+	{% macro js(src) %}{{ javascripts.append("/js/%s"%src) }}{%endmacro%}
 </head>
 <body>
 	{% block content %}{% endblock %}
