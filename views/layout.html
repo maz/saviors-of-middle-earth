@@ -2,16 +2,12 @@
 <html>
 <head>
 	<title>{{ title if title else "Saviors of Middle Earth" }}</title>
-	{% set javascripts=["/js/timezone.js"] %}
-	{% set stylesheets=["/css/base.css"] %}
-	{%for src in javascripts%}
-	<script src="{{src}}" type="text/javascript"></script>
-	{%endfor%}
-	{%for href in stylesheets%}
-	<link rel="stylesheet" type="text/css" media="all" href="{{href}}"/>
-	{%endfor%}
-	{% macro css(href) %}{{ stylesheets.append("/css/%s"%href) }}{%endmacro%}
-	{% macro js(src) %}{{ javascripts.append("/js/%s"%src) }}{%endmacro%}
+	{%block javascript%}
+	<script src="/js/timezone.js" type="text/javascript"></script>
+	{%endblock%}
+	{%block css%}
+	<link rel="stylesheet" type="text/css" media="all" href="/css/base.css"/>
+	{%endblock%}
 </head>
 <body>
 	<div id="header">

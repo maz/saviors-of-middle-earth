@@ -1,0 +1,59 @@
+#content .row {
+  position: relative;
+  width: 100%; }
+  #content .row h1 {
+    font-weight: bold;
+    font-size: 30px; }
+  #content .row .spacer {
+    height: 256px;
+    width: 1px; }
+  #content .row .left-arrow, #content .row .right-arrow {
+    position: absolute;
+    height: 234px;
+    bottom: 20px;
+    width: 30px;
+    background: #CCC;
+    opacity: 0.5;
+    cursor: pointer; }
+  #content .row .left-arrow:hover, #content .row .right-arrow:hover {
+    opacity: 1; }
+  #content .row .left-arrow {
+    left: 0px; }
+  #content .row .right-arrow {
+    right: 0px; }
+  #content .row .carousel {
+    position: absolute;
+    left: 30px;
+    right: 30px;
+    overflow: hidden;
+    height: 256px;
+    padding: 0; }
+    #content .row .carousel .carousel-contents {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      width: 1000%; }
+      #content .row .carousel .carousel-contents .product {
+        display: inline-block;
+        position: relative;
+        height: 100%;
+        width: 256px;
+        color: black;
+        text-decoration: none; }
+        #content .row .carousel .carousel-contents .product .thumbnail {
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          right: 2px;
+          bottom: 20px;
+          background-color: orange; }
+        #content .row .carousel .carousel-contents .product .label {
+          position: absolute;
+          bottom: 0px;
+          height: 20px;
+          left: 0px;
+          width: 100%; }
+          #content .row .carousel .carousel-contents .product .label .price {
+            float: right; }
+      #content .row .carousel .carousel-contents .product:not(:last-child) {
+        margin-right: 15px; }

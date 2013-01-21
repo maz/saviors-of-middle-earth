@@ -1,4 +1,77 @@
 {% extends "layout.html" %}
+{%block css%}
+{{super()}}
+<link rel="stylesheet" type="text/css" media="all" href="/css/welcome.css"/>
+{%endblock%}
 {% block content %}
-Welcome!
+{%macro product_carousel(title,list) %}
+<div class="row">
+	<h1>{{title}}</h1>
+	<div class="carousel">
+		<div class="carousel-contents">
+			<a class="product" href="#">
+				<div class="thumbnail"></div>
+				<div class="label">
+					<span class="name">Settlers of Catan</span>
+					<span class="price">$12</span>
+				</div>
+			</a>
+			<a class="product" href="#">
+				<div class="thumbnail"></div>
+				<div class="label">
+					<span class="name">Settlers of Catan</span>
+					<span class="price">$12</span>
+				</div>
+			</a>
+			<a class="product" href="#">
+				<div class="thumbnail"></div>
+				<div class="label">
+					<span class="name">Settlers of Catan</span>
+					<span class="price">$12</span>
+				</div>
+			</a>
+			<a class="product" href="#">
+				<div class="thumbnail"></div>
+				<div class="label">
+					<span class="name">Settlers of Catan</span>
+					<span class="price">$12</span>
+				</div>
+			</a>
+			<a class="product" href="#">
+				<div class="thumbnail"></div>
+				<div class="label">
+					<span class="name">Settlers of Catan</span>
+					<span class="price">$12</span>
+				</div>
+			</a>
+			<a class="product" href="#">
+				<div class="thumbnail"></div>
+				<div class="label">
+					<span class="name">Settlers of Catan</span>
+					<span class="price">$12</span>
+				</div>
+			</a>
+			<a class="product" href="#">
+				<div class="thumbnail"></div>
+				<div class="label">
+					<span class="name">Settlers of Catan</span>
+					<span class="price">$12</span>
+				</div>
+			</a>
+			<a class="product" href="#">
+				<div class="thumbnail"></div>
+				<div class="label">
+					<span class="name">Settlers of Catan</span>
+					<span class="price">$12</span>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="left-arrow"></div>
+	<div class="right-arrow"></div>
+	<div class="spacer"></div>
+</div>
+{%endmacro%}
+{{product_carousel('Recently Added',recently_added)}}
+{{product_carousel('About to Expire',[])}}
 {%endblock%}
