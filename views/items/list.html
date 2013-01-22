@@ -18,7 +18,7 @@
 	</div>
 	{%if itm.removeable_by(current_user)%}{#all those who can edit item X can remove item X#}
 	<div class="actions">
-		{%if itm.owner==current_user.key()%}
+		{%if itm.owner.key()==current_user.key()%}
 		<a href="{{itm|url(action='edit')}}">Edit</a>
 		{%endif%}
 		<form action="{{itm|url(action='delete')}}" method="post" class="delete-form">
@@ -31,7 +31,7 @@
 {%endmacro%}
 <h1>Active Items</h1>
 <div class="item-container">
-	<a href="/items/add">Add Item</a>
+	<a href="/items/add" id="add-item-link">Add Item</a>
 	{%for itm in active_items%}
 	{{item(itm)}}
 	{%endfor%}

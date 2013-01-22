@@ -12,7 +12,7 @@ class SearchHandler(BaseHandler):
 class ItemListHandler(BaseHandler):
     def get(self):
         itms=self.current_user.owned_items().order('-creation_time')
-        self.render_template('items/list.html',active_items=Item.fresh(itms).run(),expired_items=Item.expired(itms).run())
+        self.render_template('items/list.html',active_items=Item.fresh(itms).run(),expired_items=Item.expired(self.current_user.owned_items().order('-creation_time')).run())
 class AddItemHandler(BaseHandler):
     def get(self):
         self.render_template('items/form.html',title="Add an Item",item_expiry=datetime.now()+Item.EXPIRATION_DELTA)

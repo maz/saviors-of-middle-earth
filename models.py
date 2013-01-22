@@ -13,13 +13,13 @@ class Item(db.Model):
     description=db.StringProperty(multiline=True)
     creation_time=db.DateTimeProperty(auto_now_add=True)
     def viewable_by(self,user):
-        return user.admin or user==self.owner or self.creation_time>=Item.expiry_cutoff()
+        return user.admin or user.key()==self.owner.key() or self.creation_time>=Item.expiry_cutoff()
     def removeable_by(self,user):
-        return user.admin or user==self.owner
+        return user.admin or user.key()==self.owner.key()
     def expiration(self):
-        return self.creation_time+EXPIRATION_DELTA
+        return self.creation_time+Item.EXPIRATION_DELTA
     def url_name(self):
-        return re.sub(NON_ALNUM_REGEX,'-',self.name)
+        return re.sub(Item.NON_ALNUM_REGEX,'-',self.name)
     def url(self,named=True,action=""):
         if action=="show": action=""
         if action!="" and not action.startswith("/"): action="/%s"%action
@@ -33,11 +33,11 @@ class Item(db.Model):
     @classmethod
     def fresh(cls,base=None):#'fresh' means not expired
         if not base: base=cls.all()
-        return base.filter('creation_time <',cls.expiry_cutoff())
+        return base.filter('creation_time >=',cls.expiry_cutoff())
     @classmethod
     def expired(cls,base=None):#'fresh' means not expired
         if not base: base=cls.all()
-        return base.filter('creation_time >=',cls.expiry_cutoff())
+        return base.filter('creation_time <',cls.expiry_cutoff())
 
 class LogEntry(db.Model):
     ip=db.StringProperty()
