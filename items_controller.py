@@ -3,6 +3,7 @@ from handlers import BaseHandler
 import env
 from models import Item
 from datetime import datetime
+import logging
 
 class IndexHandler(BaseHandler):
     def get(self):
@@ -41,13 +42,13 @@ class AddItemHandler(BaseHandler):
             self.redirect('/items')
     def post(self):
         self.commit_item_changes()
-def my_item_from_ident(handler,ident):
+def my_item_from_ident(handler,ident,allow_admin=False):
     try:
         item=Item.get_by_id(int(ident))
     except:
         handler.abort(404)
-    if item.owner.key()!=handler.current_user.key(): handler.abort(404)
     if not item: handler.abort(404)
+    if item.owner.key()!=handler.current_user.key() and not (allow_admin and handler.current_user.admin): handler.abort(404)
     return item
 class EditItemHandler(AddItemHandler):
     def get(self,ident):
@@ -57,16 +58,17 @@ class EditItemHandler(AddItemHandler):
         self.commit_item_changes(my_item_from_ident(self,ident))
 class DeleteItemHandler(BaseHandler):
     def post(self,ident):
-        item=my_item_from_ident(self,ident)
+        item=my_item_from_ident(self,ident,allow_admin=True)
         item.delete()
+        self.log('item deleted')
         self.redirect('/items/')
 class ShowItemHandler(BaseHandler):
     def get(self,ident):
         try:
             item=Item.get_by_id(int(ident))
         except:
-            handler.abort(404)
-        if not item: handler.abort(404)
+            self.abort(404)
+        if not item: self.abort(404)
         self.render_template('items/show.html',item=item)
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),
