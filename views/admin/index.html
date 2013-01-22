@@ -1,0 +1,19 @@
+{%extends 'layout.html'%}
+{%set title="Administration"%}
+{%block stylesheets%}
+{{super()}}
+{{css('admin/index')}}
+{%endblock%}
+{%block content%}
+<div id="actions">
+	<form method="get" action="/admin/logs">
+		<input type="submit" value="View Logs"/>
+	</form>
+	<form method="get" action="/admin/user">
+		<input type="submit" value="Search for a User"/>
+		<div>
+			<label for="email">Email:</label> <input type="text" name="email"/>
+		</div>
+	</form>
+</div>
+{%endblock%}

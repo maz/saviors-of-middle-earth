@@ -1,0 +1,35 @@
+@import "bourbon/bourbon";
+
+input[type=submit]{
+	@include button;
+}
+
+#actions{
+	width:50%;
+	margin:0 auto;
+	form{
+		font-size:18px;
+		width:100%;
+		input[type=submit]{
+			width:100%;
+		}
+		input{
+			font-size:inherit;
+		}
+		label{
+			font-weight:bold;
+			padding-top:4px;
+			height:35px;
+			display:inline-block;
+		}
+		position:relative;
+		input[type=text]{
+			position:absolute;
+			left:60px;
+			right:0px;
+		}
+	}
+	form:not(:last-child){
+		margin-bottom:20px;
+	}
+}

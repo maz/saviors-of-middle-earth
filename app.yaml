@@ -48,6 +48,35 @@ handlers:
   login: required
   secure: always
 
+#Admin Controller
+- url: /admin
+  script: admin_controller.app
+  login: required
+  secure: always
+- url: /admin/
+  script: admin_controller.app
+  login: required
+  secure: always
+- url: /admin/log
+  script: admin_controller.app
+  login: required
+  secure: always
+- url: /admin/user
+  script: admin_controller.app
+  login: required
+  secure: always
+- url: /admin/user/.*
+  script: admin_controller.app
+  login: required
+  secure: always
+- url: /admin/user/.*/promote
+  script: admin_controller.app
+  login: required
+  secure: always
+- url: /admin/user/.*/deactivate
+  script: admin_controller.app
+  login: required
+  secure: always
 
 #Static Content
 - url: /js/
