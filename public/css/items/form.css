@@ -51,3 +51,6 @@ form {
     padding-top: 2px; }
   form .actions input {
     float: right; }
+
+#errors {
+  color: red; }

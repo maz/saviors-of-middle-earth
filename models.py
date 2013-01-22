@@ -6,6 +6,7 @@ import re
 class Item(db.Model):
     EXPIRATION_DELTA=timedelta(days=16)
     NON_ALNUM_REGEX=re.compile(r'[^A-Za-z0-9]')
+    
     name=db.StringProperty()
     owner=db.ReferenceProperty()
     price=db.FloatProperty()

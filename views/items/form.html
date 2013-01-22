@@ -7,14 +7,17 @@
 <div id="thumbnail">
 	<div>Drag Picture Here</div>
 </div>
-{%if errors %}
-<ul id="errors">
-{%for err in errors%}
-	<li>{{err}}</li>
-{%endfor%}
-</ul>
-{%endif%}
 <form method="post">
+	{%if errors %}
+	<div id="errors">
+		<div>The following must be fixed:</div>
+		<ul>
+		{%for err in errors%}
+			<li>{{err}}</li>
+		{%endfor%}
+		</ul>
+	</div>
+	{%endif%}
 	{{csrf_field()}}
 	<div class="field">
 		<label for="name">Name:</label>
