@@ -46,7 +46,7 @@
 		<a href="/items/">My Items</a>
 		<a href="{{ '/'|logout_url }}">Logout</a>
 		{%if current_user.admin%}<a href="/admin">Admin</a>{%endif%}
-		<div class="nickname">{{current_user.google_user().nickname()}}</div>
+		<div class="nickname">{{current_user.nickname()}}</div>
 		{% else %}
 		<a href="{{ path|login_url }}">Login</a>
 		{% endif %}

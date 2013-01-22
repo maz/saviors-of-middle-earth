@@ -1,0 +1,20 @@
+.warning {
+  color: red;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center; }
+
+form {
+  font-size: 18px; }
+  form label {
+    display: block; }
+  form input {
+    width: 100%;
+    font-size: inherit;
+    display: block; }
+  form a {
+    text-align: center;
+    width: 100%;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 10px; }

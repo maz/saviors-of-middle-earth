@@ -1,0 +1,27 @@
+@import "bourbon/bourbon";
+
+#thumbnail{
+	float:left;
+	width:256px;
+	height:256px;
+	border:1px solid black;
+	background-color:orange;
+	text-align:center;
+	@include user-select(none);
+	position:relative;
+	div{
+		margin-top:-5px;
+		height:10px;
+		position:absolute;
+		top:50%;
+		left:0px;
+		width:100%;
+	}
+}
+#right{
+	float:right;
+	width:400px;
+}
+#clearer{
+	clear:both;
+}

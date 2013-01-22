@@ -1,0 +1,22 @@
+{%extends 'layout.html'%}
+{%set title="Settings"%}
+{%block stylesheets%}
+{{super()}}
+{{css('settings/delete')}}
+{%endblock%}
+{%block javascript%}
+{{super()}}
+{{js('settings/delete')}}
+{%endblock%}
+{%block content%}
+<div class="warning">
+	PROCEEDING WITH THIS ACTION WILL DELETE ALL YOUR DATA. IT WILL NOT BE RECOVERABLE!
+</div>
+<form method="post" class="delete-form" data-completing-label="Deleting...">
+	{{csrf_field()}}
+	<label for="confirm-field">Type 'unrecoverable' in the box below to continue:</label>
+	<input id="confirm-field" type="text"/>
+	<input type="submit" value="Delete" disabled id="delete-button"/>
+	<a href="/settings">Take me back to settings!</a>
+</form>
+{%endblock%}

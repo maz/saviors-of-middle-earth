@@ -34,6 +34,21 @@ handlers:
   script: items_controller.app
   secure: always
 
+#Settings Controller
+- url: /settings
+  script: settings_controller.app
+  login: required
+  secure: always
+- url: /settings/
+  script: settings_controller.app
+  login: required
+  secure: always
+- url: /settings/delete
+  script: settings_controller.app
+  login: required
+  secure: always
+
+
 #Static Content
 - url: /js/
   static_dir: public/js
