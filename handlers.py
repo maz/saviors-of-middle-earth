@@ -8,6 +8,7 @@ from datetime import tzinfo,timedelta
 import logging
 from google.appengine.api import users
 from google.appengine.ext import db
+import urllib
 
 sessions.default_config['secret_key']="2vCmFcbxs4G4D8DiiGMLPQmSm8vun57ffl0lq5Wt"
 sessions.default_config['cookie_args']['httponly']=True
@@ -22,6 +23,7 @@ def generate_url(x,*args,**kwargs):
 jinja2.default_config['filters']['url']=generate_url
 jinja2.default_config['filters']['date']=lambda x: x.strftime("%m/%d/%y")
 jinja2.default_config['filters']['price']=lambda x: "$%.2f"%x
+jinja2.default_config['filters']['urlencode']=urllib.quote_plus
 
 class FixedTimeZone(tzinfo):
     def __init__(self,offset):

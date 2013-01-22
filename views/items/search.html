@@ -1,0 +1,25 @@
+{%extends 'layout.html'%}
+{%set title="Search Results for '%s'"%q %}
+{%block stylesheets%}
+{{super()}}
+{{css('items/search')}}
+{%endblock%}
+
+{%block content%}
+{%from 'items/macros.html' import item with context%}
+
+{%if total %}
+{%for itm in results%}
+{{item(itm)}}
+{%endfor%}
+{%else%}
+No results were found.
+{%endif%}
+
+{%if offset>0 %}
+<a href="/search?q={{q|urlencode}}&amp;offset={{offset-per_page}}">&larr;</a>
+{%endif%}
+{%if total>=per_page%}
+<a href="/search?q={{q|urlencode}}&amp;offset={{offset+per_page}}">&rarr;</a>
+{%endif%}
+{%endblock%}

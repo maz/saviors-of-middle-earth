@@ -9,7 +9,16 @@ class IndexHandler(BaseHandler):
     def get(self):
         self.render_template('items/index.html',recently_added=Item.fresh().order('-creation_time').run(limit=10),about_to_expire=Item.fresh().order('creation_time').run(limit=10))
 class SearchHandler(BaseHandler):
-    pass
+    def get(self):
+        def generate_ctx():
+            return Item.all() if self.current_user.admin else Item.fresh()
+        per_page=10
+        off=int(self.request.get('offset')) if self.request.get('offset') else 0
+        if off<0: off=0
+        total=generate_ctx().count(limit=per_page,offset=off)
+        results=generate_ctx().run(limit=per_page,offset=off)
+        #TODO: how do we actually search this stuff?
+        self.render_template('items/search.html',q=self.request.get('q'),results=results,total=total,offset=off,per_page=per_page)
 class ItemListHandler(BaseHandler):
     def get(self):
         itms=self.current_user.owned_items().order('-creation_time')
