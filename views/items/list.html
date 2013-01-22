@@ -5,6 +5,19 @@
 {{css('items/list')}}
 {%endblock%}
 {%block content%}
+{%macro item_actions(itm)%}
+{%if itm.removeable_by(current_user)%}{#all those who can edit item X can remove item X#}
+<div class="actions">
+	{%if itm.owner.key()==current_user.key()%}
+	<a href="{{itm|url(action='edit')}}">Edit</a>
+	{%endif%}
+	<form action="{{itm|url(action='delete')}}" method="post" class="delete-form" data-completing-label="Deleting...">
+		{{csrf_field()}}
+		<input type="submit" value="Delete"/>
+	</form>
+</div>
+{%endif%}
+{%endmacro%}
 {%macro item(itm)%}
 <div class="item">
 	<a class="thumbnail" href="{{itm|url}}"></a>
@@ -16,17 +29,7 @@
 	<div class="description">
 		{{itm.description}}
 	</div>
-	{%if itm.removeable_by(current_user)%}{#all those who can edit item X can remove item X#}
-	<div class="actions">
-		{%if itm.owner.key()==current_user.key()%}
-		<a href="{{itm|url(action='edit')}}">Edit</a>
-		{%endif%}
-		<form action="{{itm|url(action='delete')}}" method="post" class="delete-form" data-completing-label="Deleting...">
-			{{csrf_field()}}
-			<input type="submit" value="Delete"/>
-		</form>
-	</div>
-	{%endif%}
+	{{item_actions(itm)}}
 </div>
 {%endmacro%}
 <h1>Active Items</h1>
