@@ -11,7 +11,7 @@
 	<div class="details">
 		<div class="name">{{itm.name}}</div>
 		<div class="price">${{itm.price}}</div>
-		<div class="expiration">{{convert_datetime(itm.expiration())}}</div>
+		<div class="expiration">Expiration: {{convert_datetime(itm.expiration())|date}}</div>
 	</div>
 	<div class="description">
 		{{itm.description}}

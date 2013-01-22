@@ -4,7 +4,7 @@ from webapp2_extras import sessions
 from webapp2_extras import jinja2
 from jinja2 import Markup
 from models import LogEntry,StoreUser
-from datetime import tzinfo
+from datetime import tzinfo,timedelta
 import logging
 from google.appengine.api import users
 
@@ -19,6 +19,9 @@ jinja2.default_config['filters']['logout_url']=users.create_logout_url
 def generate_url(x,*args,**kwargs):
     return x.url(*args,**kwargs)
 jinja2.default_config['filters']['url']=generate_url
+def date_str(x):
+    return x.strftime("%m/%d/%y")
+jinja2.default_config['filters']['date']=date_str
 
 class FixedTimeZone(tzinfo):
     def __init__(self,offset):
@@ -29,6 +32,8 @@ class FixedTimeZone(tzinfo):
         return "USER"
     def dst(self,dt):
         return timedelta(0)
+
+UTC=FixedTimeZone(0)
 
 class BaseHandler(webapp2.RequestHandler):
     def log(self,msg):
@@ -57,6 +62,7 @@ class BaseHandler(webapp2.RequestHandler):
     def gmt_offset(self):
         return FixedTimeZone(self.gmt_offset_hours())
     def convert_datetime(self,dt):
+        if not dt.tzinfo: dt=dt.replace(tzinfo=UTC)
         return dt.astimezone(self.gmt_offset())
     def dispatch(self):
         self.session_store=sessions.get_store(request=self.request)

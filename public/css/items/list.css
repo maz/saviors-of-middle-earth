@@ -26,6 +26,8 @@
       font-weight: bold; }
     .item .details .price, .item .details .expiration {
       font-size: 13px; }
+    .item .details .expiration {
+      font-style: italic; }
   .item .description {
     position: absolute;
     left: 460px;

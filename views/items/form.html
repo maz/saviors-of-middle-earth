@@ -1,1 +1,36 @@
 {% extends "layout.html" %}
+{%block stylesheets%}
+{{super()}}
+{{css('items/form')}}
+{%endblock%}
+{%block content%}
+<div id="thumbnail">
+	<div>Drag Picture Here</div>
+</div>
+{%if errors %}
+<ul id="errors">
+{%for err in errors%}
+	<li>{{err}}</li>
+{%endfor%}
+</ul>
+{%endif%}
+<form method="post">
+	{{csrf_field()}}
+	<div class="field">
+		<label for="name">Name:</label>
+		<input type="text" name="name" value="{{item_name|default}}"/>
+	</div>
+	<div class="field">
+		<label for="price">Price:</label>
+		<input type="text" name="price" value="{{item_price|default}}"/>
+	</div>
+	<div class="expiration">This item will expire on {{convert_datetime(item_expiry)|date}}</div>
+	<label for="description">Description:</label>
+	<textarea name="description">{{item_description|default}}</textarea>
+	<div class="actions">
+		<a href="/items">Back to My Items</a>
+		<input type="submit" value="Submit"/>
+	</div>
+</form>
+<div id="clearer"></div>
+{%endblock%}

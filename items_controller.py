@@ -2,6 +2,7 @@ import webapp2
 from handlers import BaseHandler
 import env
 from models import Item
+from datetime import datetime
 
 class IndexHandler(BaseHandler):
     def get(self):
@@ -14,7 +15,7 @@ class ItemListHandler(BaseHandler):
         self.render_template('items/list.html',active_items=Item.fresh(itms).run(),expired_items=Item.expired(itms).run())
 class AddItemHandler(BaseHandler):
     def get(self):
-        self.render_template('items/form.html',title="Add an Item")
+        self.render_template('items/form.html',title="Add an Item",item_expiry=datetime.now()+Item.EXPIRATION_DELTA)
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),
     ('/search',SearchHandler),
