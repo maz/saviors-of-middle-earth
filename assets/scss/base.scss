@@ -34,8 +34,13 @@ html,body{
 			left:0px;
 			width:100%;
 			text-align:center;
-			font-weight:bold;
-			font-size:36px;
+			.branding{
+				font-size:36px;
+				font-weight:bold;
+			}
+			.subtitle{
+				font-size:24px;
+			}
 		}
 		.search-field{
 			position:absolute;

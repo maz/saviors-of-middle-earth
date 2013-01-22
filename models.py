@@ -13,6 +13,8 @@ class Item(db.Model):
         return user.admin or user==self.owner or self.creation_time>=Item.expiry_cutoff()
     def removeable_by(self,user):
         return user.admin or user==self.owner
+    def expiration(self):
+        return self.creation_time+EXPIRATION_DELTA
     @classmethod
     def expiry_cutoff(cls):
         return datetime.now()-cls.EXPIRATION_DELTA

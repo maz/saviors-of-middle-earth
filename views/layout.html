@@ -15,7 +15,10 @@
 <body>
 	<div id="header">
 		<div class="parent">
-			<div class="title">Saviors of Middle Earth</div>
+			<div class="title">
+				<div class="branding">Saviors of Middle Earth</div>
+				<div class="subtitle">{{title if title else ""}}</div>
+			</div>
 			<form class="search-field" action="/search" method="get">
 				<input type="search" id="search-field" autocomplete="off" placeholder="Search" name="q" title="Keyboard Shortcut: Ctrl-Alt-F"/>
 			</form>
