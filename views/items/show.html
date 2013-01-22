@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{%block stylesheets%}
+{{super()}}
+{{css("items/show")}}
+{%endblock%}
+{% set title=item.name %}
+{%block content%}
+<div id="right">
+	<div class="name">{{item.name}}</div>
+	<div class="thumbnail"></div>
+</div>
+<div id="price"><span class="label">Price:</span> {{item.price|price}}</div>
+<div id="expiration">Expires on {{item.expiration()|date}}</div>
+<div id="description">
+	{{item.description}}
+</div>
+<div id="clearer"></div>
+{%endblock%}
