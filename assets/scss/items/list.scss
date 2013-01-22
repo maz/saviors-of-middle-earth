@@ -21,15 +21,17 @@
 		background-size:contain;
 		background-position:center center;
 		background-color:orange;
+		display:block;
 	}
 	.details{
 		position:absolute;
 		top:0px;
 		left:150px;
 		height:100%;
-		width:300px;
+		width:190px;
 		.name{
 			font-weight:bold;
+			display:block;
 		}
 		.price,.expiration{
 			font-size:13px;
@@ -40,7 +42,7 @@
 	}
 	.description{
 		position:absolute;
-		left:460px;
+		left:350px;
 		height:100%;
 		top:0px;
 	}
@@ -54,7 +56,7 @@
 	.actions{
 		position:absolute;
 		top:0px;
-		width:45px;
+		width:50px;
 		height:100%;
 		right:2px;
 		input,form,a{

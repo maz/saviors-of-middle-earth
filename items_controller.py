@@ -55,7 +55,11 @@ class EditItemHandler(AddItemHandler):
         self.render_template('items/form.html',item_price=item.price,item_name=item.name,item_description=item.description,title="Edit '%s'"%item.name,item_expiry=datetime.now()+Item.EXPIRATION_DELTA)
     def post(self,ident):
         self.commit_item_changes(item_from_ident(self,ident))
-
+class DeleteItemHandler(BaseHandler):
+    def post(self,ident):
+        item=item_from_ident(self,ident)
+        item.delete()
+        self.redirect('/items/')
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),
     ('/search',SearchHandler),
@@ -63,5 +67,7 @@ app = webapp2.WSGIApplication([
     ('/items',ItemListHandler),
     ('/items/add',AddItemHandler),
     (r'/items/(\d+)/.*/edit',EditItemHandler),
-    (r'/items/(\d+)/edit',EditItemHandler)
+    (r'/items/(\d+)/edit',EditItemHandler),
+    (r'/items/(\d+)/.*/delete',DeleteItemHandler),
+    (r'/items/(\d+)/delete',DeleteItemHandler)
 ], debug=(env.env==env.DEVELOPMENT))

@@ -19,22 +19,24 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    background-color: orange; }
+    background-color: orange;
+    display: block; }
   .item .details {
     position: absolute;
     top: 0px;
     left: 150px;
     height: 100%;
-    width: 300px; }
+    width: 190px; }
     .item .details .name {
-      font-weight: bold; }
+      font-weight: bold;
+      display: block; }
     .item .details .price, .item .details .expiration {
       font-size: 13px; }
     .item .details .expiration {
       font-style: italic; }
   .item .description {
     position: absolute;
-    left: 460px;
+    left: 350px;
     height: 100%;
     top: 0px; }
   .item .description:last-child {
@@ -44,7 +46,7 @@
   .item .actions {
     position: absolute;
     top: 0px;
-    width: 45px;
+    width: 50px;
     height: 100%;
     right: 2px; }
     .item .actions input, .item .actions form, .item .actions a {
