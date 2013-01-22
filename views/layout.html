@@ -38,7 +38,7 @@
 		<div class="profilepic">
 			<a class="highlight" href="/settings"></a>
 		</div>
-		<a href="/settings">Settings</a>
+		<a href="/items/">My Items</a>
 		<a href="{{ '/'|logout_url }}">Logout</a>
 		{%if current_user.admin%}<a href="/admin">Admin</a>{%endif%}
 		<div class="nickname">{{current_user.google_user().nickname()}}</div>
