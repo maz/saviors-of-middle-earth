@@ -7,7 +7,7 @@ import logging
 
 class IndexHandler(BaseHandler):
     def get(self):
-        self.render_template('items/index.html',recently_added=Item.fresh().order('-creation_time').run(limit=10))
+        self.render_template('items/index.html',recently_added=Item.fresh().order('-creation_time').run(limit=10),about_to_expire=Item.fresh().order('creation_time').run(limit=10))
 class SearchHandler(BaseHandler):
     pass
 class ItemListHandler(BaseHandler):

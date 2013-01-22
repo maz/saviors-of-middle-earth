@@ -37,7 +37,7 @@ UTC=FixedTimeZone(0)
 
 class BaseHandler(webapp2.RequestHandler):
     def log(self,msg):
-        db.put_async(LogEntry(ip=self.request.remote_addr,user=(self.current_user.key() if self.current_user else None),msg=msg))
+        LogEntry(ip=self.request.remote_addr,user=(self.current_user.key() if self.current_user else None),msg=msg).put()
     def handle_exception(self,exception,debug):
         if isinstance(exception,webapp2.HTTPException):
             if exception.code==403:

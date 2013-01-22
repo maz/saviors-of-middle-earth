@@ -9,25 +9,23 @@
 {%endblock%}
 {% block content %}
 {%macro product(itm) %}
-<a class="product" href="#">
+<a class="product" href="{{itm|url}}">
 	<div class="thumbnail"></div>
 	<div class="label">
-		<span class="name">Settlers of Catan</span>
-		<span class="price">$12</span>
+		<span class="name">{{itm.name}}</span>
+		<span class="price">{{itm.price|price}}</span>
 	</div>
 </a>
 <div class="product-spacer"></div>
 {%endmacro%}
-{%macro product_carousel(title,list) %}
+{%macro product_carousel(title,lst) %}
 <div class="carousel-container">
 	<h1>{{title}}</h1>
 	<div class="carousel">
 		<div class="carousel-contents">
-			{{product(None)}}
-			{{product(None)}}
-			{{product(None)}}
-			{{product(None)}}
-			{{product(None)}}
+			{%for itm in lst%}
+			{{product(itm)}}
+			{%endfor%}
 		</div>
 	</div>
 	<div class="left-arrow"></div>
@@ -36,5 +34,5 @@
 </div>
 {%endmacro%}
 {{product_carousel('Recently Added',recently_added)}}
-{{product_carousel('About to Expire',[])}}
+{{product_carousel('About to Expire',about_to_expire)}}
 {%endblock%}
