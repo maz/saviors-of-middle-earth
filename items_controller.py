@@ -30,6 +30,7 @@ class AddItemHandler(BaseHandler):
             item_price=float(item_price)
         except ValueError:
             errors.append("The price must be a number.")
+        if item_price <=0: errors.append("The price must be greater than zero.")
         if len(errors):
             self.render_template('items/form.html',title="Add an Item",errors=errors,item_expiry=datetime.now()+Item.EXPIRATION_DELTA,item_name=item_name,item_description=item_description,item_price=item_price)
         else:
