@@ -21,7 +21,7 @@
 		{%if itm.owner.key()==current_user.key()%}
 		<a href="{{itm|url(action='edit')}}">Edit</a>
 		{%endif%}
-		<form action="{{itm|url(action='delete')}}" method="post" class="delete-form">
+		<form action="{{itm|url(action='delete')}}" method="post" class="delete-form" data-completing-label="Deleting...">
 			{{csrf_field()}}
 			<input type="submit" value="Delete"/>
 		</form>
