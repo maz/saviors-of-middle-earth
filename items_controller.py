@@ -16,7 +16,9 @@ class ItemListHandler(BaseHandler):
 class AddItemHandler(BaseHandler):
     def get(self):
         self.render_template('items/form.html',title="Add an Item",item_expiry=datetime.now()+Item.EXPIRATION_DELTA)
-    def post(self):
+    def commit_item_changes(self,item=None):
+        creation=not(not(item))
+        if not item: item=Item()
         item_name=self.request.get('name')
         item_price=self.request.get('price')
         item_description=self.request.get('description')
@@ -30,17 +32,36 @@ class AddItemHandler(BaseHandler):
         if len(errors):
             self.render_template('items/form.html',title="Add an Item",errors=errors,item_expiry=datetime.now()+Item.EXPIRATION_DELTA,item_name=item_name,item_description=item_description,item_price=item_price)
         else:
-            item=Item()
             item.name=item_name
             item.owner=self.current_user.key()
             item.price=item_price
             item.description=item_description
             item.put()
+            self.log("item %s"%"created" if creation else "edited")
             self.redirect('/items')
+    def post(self):
+        self.commit_item_changes()
+def item_from_ident(handler,ident):
+    try:
+        item=Item.get_by_id(int(ident))
+    except:
+        handler.abort(404)
+    if item.owner.key()!=handler.current_user.key(): handler.abort(404)
+    if not item: handler.abort(404)
+    return item
+class EditItemHandler(AddItemHandler):
+    def get(self,ident):
+        item=item_from_ident(self,ident)
+        self.render_template('items/form.html',item_price=item.price,item_name=item.name,item_description=item.description,title="Edit '%s'"%item.name,item_expiry=datetime.now()+Item.EXPIRATION_DELTA)
+    def post(self,ident):
+        self.commit_item_changes(item_from_ident(self,ident))
+
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),
     ('/search',SearchHandler),
     ('/items/',ItemListHandler),
     ('/items',ItemListHandler),
-    ('/items/add',AddItemHandler)
+    ('/items/add',AddItemHandler),
+    (r'/items/(\d+)/.*/edit',EditItemHandler),
+    (r'/items/(\d+)/edit',EditItemHandler)
 ], debug=(env.env==env.DEVELOPMENT))

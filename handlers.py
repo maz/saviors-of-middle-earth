@@ -7,6 +7,7 @@ from models import LogEntry,StoreUser
 from datetime import tzinfo,timedelta
 import logging
 from google.appengine.api import users
+from google.appengine.ext import db
 
 sessions.default_config['secret_key']="2vCmFcbxs4G4D8DiiGMLPQmSm8vun57ffl0lq5Wt"
 sessions.default_config['cookie_args']['httponly']=True
@@ -19,9 +20,8 @@ jinja2.default_config['filters']['logout_url']=users.create_logout_url
 def generate_url(x,*args,**kwargs):
     return x.url(*args,**kwargs)
 jinja2.default_config['filters']['url']=generate_url
-def date_str(x):
-    return x.strftime("%m/%d/%y")
-jinja2.default_config['filters']['date']=date_str
+jinja2.default_config['filters']['date']=lambda x: x.strftime("%m/%d/%y")
+jinja2.default_config['filters']['price']=lambda x: "$%.2f"%x
 
 class FixedTimeZone(tzinfo):
     def __init__(self,offset):
@@ -42,14 +42,14 @@ class BaseHandler(webapp2.RequestHandler):
         if isinstance(exception,webapp2.HTTPException):
             if exception.code==403:
                 #TODO: 403 error page
-                response.set_status(403)
-                response.write('403!')
+                self.response.set_status(403)
+                self.response.write('403!')
                 self.log("Unauthorized attempt to access '%s'"%self.request.path_info)
                 return
             elif exception.code==404:
                 #TODO: 404 error page
-                response.set_status(404)
-                response.write('404!')
+                self.response.set_status(404)
+                self.response.write('404!')
                 return
         webapp2.RequestHandler.handle_exception(self,exception,debug)
     def inner_dispatch(self):
