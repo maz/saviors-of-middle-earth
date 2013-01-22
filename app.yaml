@@ -47,6 +47,10 @@ handlers:
   static_dir: public/images
   secure: always
 
+#Not Found Handler (must go last)
+- url: /.*
+  script: not_found.app
+  secure: always
 
 libraries:
 - name: webapp2
