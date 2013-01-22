@@ -70,6 +70,7 @@ class ShowItemHandler(BaseHandler):
         except:
             self.abort(404)
         if not item: self.abort(404)
+        if not item.viewable_by(self.current_user): self.abort(403)
         self.render_template('items/show.html',item=item)
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),
