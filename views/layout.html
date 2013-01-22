@@ -7,12 +7,14 @@
 	{%block javascript%}
 	{{js('timezone')}}
 	{{js('search-keyboard-shortcut')}}
+	{{js('delete-forms')}}
 	{%endblock%}
 	{%block stylesheets%}
 	{{css('base')}}
 	{%endblock%}
 </head>
 <body>
+	{%macro csrf_field()%}<input type="hidden" name="csrf_token" value="{{csrf_token}}"/>{%endmacro%}
 	<div id="header">
 		<div class="parent">
 			<div class="title">

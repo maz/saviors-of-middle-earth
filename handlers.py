@@ -16,6 +16,9 @@ jinja2.default_config['filters']={}
 jinja2.default_config['filters']['Markup']=Markup
 jinja2.default_config['filters']['login_url']=users.create_login_url
 jinja2.default_config['filters']['logout_url']=users.create_logout_url
+def generate_url(x,*args,**kwargs):
+    return x.url(*args,**kwargs)
+jinja2.default_config['filters']['url']=generate_url
 
 class FixedTimeZone(tzinfo):
     def __init__(self,offset):
@@ -77,6 +80,10 @@ class BaseHandler(webapp2.RequestHandler):
         values=dict(values)
         values['current_user']=self.current_user
         values['path']=self.request.path_info
+        values['csrf_token']=self.session['csrf_token']
+        def convert_datetime(x):
+            return self.convert_datetime(x)
+        values['convert_datetime']=convert_datetime#this is bound to self, so it can't be a normal filter
         self.response.headers['Content-Type']="text/html; charset=utf-8"#assume that our templates are for html
         self.response.write(self.jinja2.render_template(name,**values))
 

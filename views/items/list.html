@@ -4,3 +4,40 @@
 {{super()}}
 {{css('items/list')}}
 {%endblock%}
+{%block content%}
+{%macro item(itm)%}
+<div class="item">
+	<div class="thumbnail"></div>
+	<div class="details">
+		<div class="name">{{itm.name}}</div>
+		<div class="price">${{itm.price}}</div>
+		<div class="expiration">{{convert_datetime(itm.expiration())}}</div>
+	</div>
+	<div class="description">
+		{{itm.description}}
+	</div>
+	{%if itm.removeable_by(current_user)%}{#all those who can edit item X can remove item X#}
+	<div class="actions">
+		{%if itm.owner==current_user.key()%}
+		<a href="{{itm|url(action='edit')}}">Edit</a>
+		{%endif%}
+		<form action="{{itm|url(action='delete')}}" method="post" class="delete-form">
+			{{csrf_field()}}
+			<input type="submit" value="Delete"/>
+		</form>
+	</div>
+	{%endif%}
+</div>
+{%endmacro%}
+<h1>Active Items</h1>
+<div class="item-container">
+	<a href="/items/add">Add Item</a>
+	{%for itm in active_items%}
+	{{item(itm)}}
+	{%endfor%}
+</div>
+<h1>Expired Items</h1>
+{%for itm in expired_items%}
+{{item(itm)}}
+{%endfor%}
+{%endblock%}
