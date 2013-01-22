@@ -50,9 +50,21 @@ class StoreUser(db.Model):
     admin=db.BooleanProperty()
     deactivated=db.BooleanProperty(default=False)
     gmt_offset=db.FloatProperty(default=float(24))#24=autodetect
-    override_nickname=db.StringProperty()
+    override_email=db.StringProperty()
     def owned_items(self):
         return Item.all().filter("owner =",self.key())
+    @classmethod
+    def by_email(cls,email):
+        google_user=users.User(email=email)
+        if google_user:
+            arr=cls.all().filter("userid =",google_user.user_id()).fetch(limit=1)
+            if len(arr):
+                return arr[0]
+        arr=cls.all().filter("override_email =",email).fetch(limit=1)
+        if len(arr):
+            return arr[0]
+        else:
+            return None
     @classmethod
     def current_user(cls):
         user=users.get_current_user()
@@ -65,7 +77,9 @@ class StoreUser(db.Model):
             model.put()
             return model
     def nickname(self):
-        return self.override_nickname if self.override_nickname else self.google_user().nickname()
+        return self.override_email if self.override_email else self.google_user().nickname()
+    def email(self):
+        return self.override_email or self.google_user().email()
     def google_user(self):
         return users.User(_user_id=self.userid)
     def delete_data(self):
