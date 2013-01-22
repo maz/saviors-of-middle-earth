@@ -1,0 +1,40 @@
+html, body {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  font-family: Arial,Helvetica,'Ubuntu','Droid Sans','Open Sans',sans-serif;
+  font-size: 20px;
+  width: 100%;
+  height: 100%;
+  text-align: center; }
+
+#header {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+  background-image: url("/images/logo.svg");
+  height: 100px;
+  width: 85%; }
+  #header .parent {
+    position: absolute;
+    left: 105px;
+    right: 5px;
+    height: 100%; }
+    #header .parent .title {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      text-align: center; }
+      #header .parent .title .branding {
+        font-size: 36px;
+        font-weight: bold; }
+      #header .parent .title .subtitle {
+        font-size: 24px;
+        font-style: italic; }

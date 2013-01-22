@@ -56,6 +56,10 @@ class BaseHandler(webapp2.RequestHandler):
         webapp2.RequestHandler.handle_exception(self,exception,debug)
     def inner_dispatch(self):
         self.current_user=StoreUser.current_user()
+        if self.current_user and self.current_user.deactivated:
+            self.response.set_status(403)
+            self.render_template('deactivated-account.html')
+            return
         webapp2.RequestHandler.dispatch(self)
     def gmt_offset_hours(self):
         if self.current_user and self.current_user.gmt_offset!=24: return self.current_user.gmt_offset
