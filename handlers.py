@@ -88,11 +88,15 @@ class BaseHandler(webapp2.RequestHandler):
     @webapp2.cached_property
     def jinja2(self):
         return jinja2.get_jinja2(app=self.app)
+    def set_flash(self,msg):
+        self.session['flash']=msg
     def render_template(self,name,**values):
         values=dict(values)
         values['current_user']=self.current_user
         values['path']=self.request.path_info
         values['csrf_token']=self.session['csrf_token']
+        values['flash']=self.session.get('flash')
+        self.session['flash']=None
         def convert_datetime(x):
             return self.convert_datetime(x)
         values['convert_datetime']=convert_datetime#this is bound to self, so it can't be a normal filter

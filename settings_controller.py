@@ -11,6 +11,7 @@ class SettingsDelete(BaseHandler):
         self.render_template('settings/delete.html')
     def post(self):
         self.current_user.delete_data()
+        self.current_user.delete()
         self.log('user deleted')
         self.redirect(users.create_logout_url('/'))
 app = webapp2.WSGIApplication([

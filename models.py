@@ -85,4 +85,3 @@ class StoreUser(db.Model):
     def delete_data(self):
         #TODO: add other models here, as they get added to the database
         for itm in self.owned_items().run(): itm.delete()
-        self.delete()
