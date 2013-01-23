@@ -1,0 +1,16 @@
+#table .header {
+  font-weight: bold; }
+#table .ip, #table .timestamp, #table .message {
+  display: inline-block; }
+#table .ip, #table .timestamp {
+  float: left; }
+#table .ip {
+  width: 100px; }
+#table .timestamp {
+  width: 200px; }
+#table .message {
+  margin-left: 10px; }
+
+#nav {
+  margin-top: 10px;
+  text-align: center; }

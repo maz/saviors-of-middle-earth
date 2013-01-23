@@ -1,0 +1,31 @@
+{%extends 'layout.html'%}
+{%set title="Logs"%}
+{%block stylesheets%}
+{{super()}}
+{{css('admin/logs')}}
+{%endblock%}
+{%block content%}
+<div id="table">
+	<div class="header">
+		<div class="ip">IP</div>
+		<div class="timestamp">Timestamp</div>
+		<div class="message">Message</div>
+	</div>
+	{%for entry in entries%}
+	<div class="row">
+		<div class="ip">{{entry.ip}}</div>
+		<div class="timestamp">{{entry.time.isoformat()}}</div>
+		<div class="message">{{entry.msg}}</div>
+	</div>
+	{%endfor%}
+</div>
+<div id="nav">
+	{%if page>0%}
+	<a href="/admin/logs?page={{page-1}}">Back</a>
+	{%endif%}
+	{%if more_pages %}
+	<a href="/admin/logs?page={{page+1}}">Forward</a>
+	{%endif%}
+</div>
+
+{%endblock%}

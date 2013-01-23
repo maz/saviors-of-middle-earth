@@ -57,7 +57,7 @@ handlers:
   script: admin_controller.app
   login: required
   secure: always
-- url: /admin/log
+- url: /admin/logs
   script: admin_controller.app
   login: required
   secure: always
