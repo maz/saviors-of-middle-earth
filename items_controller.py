@@ -27,7 +27,7 @@ class AddItemHandler(BaseHandler):
     def get(self):
         self.render_template('items/form.html',title="Add an Item",item_expiry=datetime.now()+Item.EXPIRATION_DELTA)
     def commit_item_changes(self,item=None):
-        creation=not(not(item))
+        creation=not(item)
         if not item: item=Item()
         item_name=self.request.get('name')
         item_price=self.request.get('price')
@@ -49,6 +49,7 @@ class AddItemHandler(BaseHandler):
             item.description=item_description
             item.put()
             self.log("item %s"%"created" if creation else "edited")
+            self.flash("'%s' was %s!"%(item_name,"created" if creation else "edited"))
             self.redirect('/items')
     def post(self):
         self.commit_item_changes()
@@ -69,6 +70,7 @@ class EditItemHandler(AddItemHandler):
 class DeleteItemHandler(BaseHandler):
     def post(self,ident):
         item=my_item_from_ident(self,ident,allow_admin=True)
+        self.flash("'%s' was deleted!"%item.name)
         item.delete()
         self.log('item deleted')
         self.redirect('/items/')

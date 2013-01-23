@@ -88,7 +88,7 @@ class BaseHandler(webapp2.RequestHandler):
     @webapp2.cached_property
     def jinja2(self):
         return jinja2.get_jinja2(app=self.app)
-    def set_flash(self,msg):
+    def flash(self,msg):
         self.session['flash']=msg
     def render_template(self,name,**values):
         values=dict(values)

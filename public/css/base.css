@@ -47,6 +47,32 @@ html, body {
         width: 50%;
         text-align: center; }
 
+#flash {
+  background-color: yellow;
+  width: 100%;
+  padding-left: 20px;
+  min-height: 20px;
+  position: relative; }
+  #flash .close-button {
+    position: absolute;
+    top: 0px;
+    right: 40px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #2d88ee;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2d88ee), color-stop(100%, #1554ce));
+    background-image: -webkit-linear-gradient(top, #2d88ee, #1554ce);
+    background-image: -moz-linear-gradient(top, #2d88ee, #1554ce);
+    background-image: -ms-linear-gradient(top, #2d88ee, #1554ce);
+    background-image: -o-linear-gradient(top, #2d88ee, #1554ce);
+    background-image: linear-gradient(top, #2d88ee, #1554ce); }
+  #flash .close-button:hover {
+    color: white; }
+
 #content {
   margin: 0 auto;
   width: 85%;

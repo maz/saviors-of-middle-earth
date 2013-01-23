@@ -57,6 +57,29 @@ html,body{
 	}
 }
 
+#flash{
+	background-color:yellow;
+	width:100%;
+	padding-left:20px;
+	min-height:20px;
+	position:relative;
+	.close-button{
+		position:absolute;
+		top:0px;
+		right:40px;
+		width:18px;
+		height:18px;
+		border:1px solid black;
+		cursor:pointer;
+		border-radius:10px;
+		text-align:center;
+		@include linear-gradient(top, #2d88ee, #1554ce);
+	}
+	.close-button:hover{
+		color:white;
+	}
+}
+
 #content{
 	margin:0 auto;
 	width:85%;
