@@ -48,12 +48,12 @@
 	<div id="user-panel" class="{{'loggedin' if current_user else 'guest'}}">
 		{% if current_user %}
 		<div class="profilepic">
-			<a class="highlight" href="/settings"></a>
+			<a class="highlight" href="{{current_user|url}}"></a>
 		</div>
-		<a href="/items/">My Items</a>
-		<a href="{{ '/'|logout_url }}">Logout</a>
+		<a href="{{current_user|url}}">My Items</a>
 		{%if current_user.admin%}<a href="/admin">Admin</a>{%endif%}
-		<div class="nickname">{{current_user.nickname()}}</div>
+		<a href="{{ '/'|logout_url }}">Logout</a>
+		<div class="nickname">{{current_user.nickname}}</div>
 		{% else %}
 		<a href="{{ path|login_url }}">Login</a>
 		{% endif %}

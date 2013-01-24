@@ -32,7 +32,7 @@
       display: block; }
     .item .details .price, .item .details .expiration {
       font-size: 13px; }
-    .item .details .expiration {
+    .item .details .expiration, .item .details .author {
       font-style: italic; }
   .item .description {
     position: absolute;

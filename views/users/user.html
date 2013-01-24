@@ -1,0 +1,45 @@
+{%extends 'layout.html'%}
+{%set title="User: '%s'"%user.nickname%}
+{%block stylesheets%}
+{{super()}}
+{{css('users/user')}}
+{%endblock%}
+{%block content%}
+{%from 'items/macros.html' import item with context%}
+<div id="thumbnail">
+	<div>Drag Image Here</div>
+</div>
+<div id="right">
+	<div class="labeled">
+		<span>Nickname:</span>
+		{{user.nickname}}
+	</div>
+	{%if current_user and user.key()==current_user.key()%}
+	<a href="{{current_user|url(action='delete')}}">Delete All Your Data</a>
+	{%endif%}
+	{%if current_user and current_user.admin%}
+	<div class="labeled">
+		<span>E-Mail:</span>
+		{{user.email}}
+	</div>
+	<form action="{{user|url(action='deactivate')}}" method="post" data-confirmation-message="Do you really want to deactivate this user?">
+		{{csrf_field()}}
+		<input type="submit" value="Deactivate this user"/>
+	</form>
+	{%endif%}
+</div>
+<div id="clearer"></div>
+<div id="items">
+	<h1>{{'Fresh ' if current_user and (current_user.admin or current_user.key()==user.key()) else ''}}Items</h1>
+	{%if current_user and current_user.key()==user.key()%}<a href="/items/add" id="add-item-link">Add an Item</a>{%endif%}
+	{%for itm in fresh_items %}
+	{{item(itm)}}
+	{%endfor%}
+	{%if current_user and (current_user.admin or current_user.key()==user.key()) %}
+	<h1>Expired Items</h1>
+	{%for itm in expired_items%}
+	{{item(itm)}}
+	{%endfor%}
+	{%endif%}
+</div>
+{%endblock%}

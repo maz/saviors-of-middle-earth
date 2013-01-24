@@ -31,7 +31,7 @@
 	<label for="description">Description:</label>
 	<textarea name="description">{{item_description|default}}</textarea>
 	<div class="actions">
-		<a href="/items">Back to My Items</a>
+		<a href="{{current_user|url}}">Back to My Items</a>
 		<input type="submit" value="Submit"/>
 	</div>
 </form>

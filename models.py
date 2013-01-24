@@ -13,9 +13,9 @@ class Item(db.Model):
     description=db.StringProperty(multiline=True)
     creation_time=db.DateTimeProperty(auto_now_add=True)
     def viewable_by(self,user):
-        return user.admin or user.key()==self.owner.key() or self.creation_time>=Item.expiry_cutoff()
+        return self.creation_time>=Item.expiry_cutoff() or (user and (user.admin or user.key()==self.owner.key()))
     def removeable_by(self,user):
-        return user.admin or user.key()==self.owner.key()
+        return user and (user.admin or user.key()==self.owner.key())
     def expiration(self):
         return self.creation_time+Item.EXPIRATION_DELTA
     def url_name(self):
@@ -50,17 +50,23 @@ class StoreUser(db.Model):
     admin=db.BooleanProperty()
     deactivated=db.BooleanProperty(default=False)
     gmt_offset=db.FloatProperty(default=float(24))#24=autodetect
-    override_email=db.StringProperty()
+    email=db.StringProperty()
+    nickname=db.StringProperty()
+    @db.transactional
+    def deactivate(self):
+        self.deactivated=true
+        self.put()
+        self.delete_data()
     def owned_items(self):
         return Item.all().filter("owner =",self.key())
+    def url(self,action=None):
+        if action:
+            return "/users/%d/%s"%(self.key().id(),action)
+        else:
+            return "/users/%d"%self.key().id()
     @classmethod
-    def by_email(cls,email):
-        google_user=users.User(email=email)
-        if google_user:
-            arr=cls.all().filter("userid =",google_user.user_id()).fetch(limit=1)
-            if len(arr):
-                return arr[0]
-        arr=cls.all().filter("override_email =",email).fetch(limit=1)
+    def get_by_email(cls,email):
+        arr=cls.all().filter("email =",email).fetch(limit=1)
         if len(arr):
             return arr[0]
         else:
@@ -71,17 +77,19 @@ class StoreUser(db.Model):
         if not user: return None
         arr=cls.gql("WHERE userid=:1",user.user_id()).fetch(limit=1)
         if len(arr):
-            return arr[0]
+            model=arr[0]
+            if model.email!=user.email() or model.nickname!=user.nickname():
+                model.email=user.email()
+                model.nickname=user.nickname()
+                model.put()
+            return model
         else:
-            model=cls(userid=user.user_id(),admin=users.is_current_user_admin() or user.email() in ["hardcodetest1@gmail.com","hardcodetest2@gmail.com"])
+            model=cls(userid=user.user_id(),admin=users.is_current_user_admin() or user.email() in ["hardcodetest1@gmail.com","hardcodetest2@gmail.com"],email=user.email(),nickname=user.nickname())
             model.put()
             return model
-    def nickname(self):
-        return self.override_email if self.override_email else self.google_user().nickname()
-    def email(self):
-        return self.override_email or self.google_user().email()
     def google_user(self):
         return users.User(_user_id=self.userid)
+    @db.transactional
     def delete_data(self):
         #TODO: add other models here, as they get added to the database
         for itm in self.owned_items().run(): itm.delete()

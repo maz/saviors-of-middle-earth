@@ -19,10 +19,6 @@ class SearchHandler(BaseHandler):
         results=generate_ctx().run(limit=per_page,offset=off)
         #TODO: how do we actually search this stuff?
         self.render_template('items/search.html',q=self.request.get('q'),results=results,total=total,offset=off,per_page=per_page)
-class ItemListHandler(BaseHandler):
-    def get(self):
-        itms=self.current_user.owned_items().order('-creation_time')
-        self.render_template('items/list.html',active_items=Item.fresh(itms).run(),expired_items=Item.expired(self.current_user.owned_items().order('-creation_time')).run())
 class AddItemHandler(BaseHandler):
     def get(self):
         self.render_template('items/form.html',title="Add an Item",item_expiry=datetime.now()+Item.EXPIRATION_DELTA)
@@ -50,7 +46,7 @@ class AddItemHandler(BaseHandler):
             item.put()
             self.log("item %s"%"created" if creation else "edited")
             self.flash("'%s' was %s!"%(item_name,"created" if creation else "edited"))
-            self.redirect('/items')
+            self.redirect(self.current_user.url())
     def post(self):
         self.commit_item_changes()
 def my_item_from_ident(handler,ident,allow_admin=False):
@@ -73,7 +69,7 @@ class DeleteItemHandler(BaseHandler):
         self.flash("'%s' was deleted!"%item.name)
         item.delete()
         self.log('item deleted')
-        self.redirect('/items/')
+        self.redirect(self.current_user.url())
 class ShowItemHandler(BaseHandler):
     def get(self,ident):
         try:
@@ -86,8 +82,6 @@ class ShowItemHandler(BaseHandler):
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),
     ('/search',SearchHandler),
-    ('/items/',ItemListHandler),
-    ('/items',ItemListHandler),
     ('/items/add',AddItemHandler),
     (r'/items/(\d+)/.*/edit',EditItemHandler),
     (r'/items/(\d+)/edit',EditItemHandler),

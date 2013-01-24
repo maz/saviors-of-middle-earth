@@ -55,12 +55,8 @@ class BaseHandler(webapp2.RequestHandler):
                 return
         webapp2.RequestHandler.handle_exception(self,exception,debug)
     def inner_dispatch(self):
-        self.current_user=StoreUser.current_user()
-        if self.current_user and self.current_user.deactivated:
-            self.response.set_status(403)
-            self.render_template('deactivated-account.html')
-            return
-        webapp2.RequestHandler.dispatch(self)
+        super(BaseHandler,self).dispatch()
+        #webapp2.RequestHandler.dispatch(self)
     def gmt_offset_hours(self):
         if self.current_user and self.current_user.gmt_offset!=24: return self.current_user.gmt_offset
         if self.request.cookies.get('gmt_offset'): return float(self.request.cookies.get('gmt_offset'))
@@ -79,6 +75,11 @@ class BaseHandler(webapp2.RequestHandler):
                     self.abort(403)
             elif not self.session.get('csrf_token'):
                 self.session['csrf_token']=generate_random_string(48)
+            self.current_user=StoreUser.current_user()
+            if self.current_user and self.current_user.deactivated:
+                self.response.set_status(403)
+                self.render_template('deactivated-account.html')
+                return
             self.inner_dispatch()
         finally:
             self.session_store.save_sessions(self.response)
@@ -107,4 +108,5 @@ class AdminHandler(BaseHandler):
     def inner_dispatch(self):
         user=StoreUser.current_user()
         if not user or not user.admin: self.abort(403)
-        BaseHandler.inner_dispatch(self)
+        #BaseHandler.inner_dispatch(self)
+        super(AdminHandler,self).inner_dispatch()

@@ -19,9 +19,11 @@ class LogsHandler(AdminHandler):
 class UserSearchHandler(AdminHandler):
     def get(self):
         user=StoreUser.by_email(self.request.get('email'))
-        if not user:
-            self.set_flash("There is no registered user with the email address: '%s'"%self.request.get('email'))
-            self.redirect()
+        if user:
+            self.redirect('/user/%d'%user.key().id())
+        else:
+            self.flash("There is no registered user with the email address: '%s'"%self.request.get('email'))
+            self.redirect('/admin/')
 app = webapp2.WSGIApplication([
     ('/admin',IndexHandler),
     ('/admin/',IndexHandler),

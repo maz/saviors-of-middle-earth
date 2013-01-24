@@ -21,7 +21,19 @@
 #right{
 	float:right;
 	width:400px;
+	.labeled{
+		span{
+			font-weight:bold;
+		}
+	}
 }
+
 #clearer{
 	clear:both;
+}
+
+@import "items/items-list";
+
+#add-item-link{
+	margin-bottom:20px;
 }
