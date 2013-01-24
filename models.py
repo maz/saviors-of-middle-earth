@@ -65,7 +65,7 @@ class StoreUser(db.Model):
         else:
             return "/users/%d"%self.key().id()
     @classmethod
-    def get_by_email(cls,email):
+    def by_email(cls,email):
         arr=cls.all().filter("email =",email).fetch(limit=1)
         if len(arr):
             return arr[0]

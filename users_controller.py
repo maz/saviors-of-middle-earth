@@ -8,7 +8,7 @@ class UserFindingHandler(BaseHandler):
         try:
             self.user=StoreUser.get_by_id(int(self.request.route_args[0]))
         except ValueError:
-            self.user=StoreUser.get_by_email(self.request.route_args[0])
+            self.user=StoreUser.by_email(self.request.route_args[0])
         if self.user:
             super(UserFindingHandler,self).inner_dispatch()
         else:
@@ -32,9 +32,12 @@ class UserDeletionHandler(UserFindingHandler):
         self.log('user deleted')
         self.redirect(users.create_logout_url('/'))
 class UserDeactivationHandler(AdminHandler,UserFindingHandler):
-    pass
+    def post(self,user_id):
+        self.user.deactivate()
+        self.redirect(self.user.url())
 app = webapp2.WSGIApplication([
     (r'/users/(.*)/delete',UserDeletionHandler),
+    (r'/users/(.*)/deactivate',UserDeactivationHandler),
     (r'/users/(.*)',UserProfileHandler),
     (r'/users/(.*)/',UserProfileHandler)
 ], debug=(env.env==env.DEVELOPMENT))

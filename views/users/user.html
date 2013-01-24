@@ -24,7 +24,11 @@
 	</div>
 	<form action="{{user|url(action='deactivate')}}" method="post" data-confirmation-message="Do you really want to deactivate this user?">
 		{{csrf_field()}}
-		<input type="submit" value="Deactivate this user"/>
+		{%if user.deactivated%}
+		<input type="submit" value="User Already Deactivated" disabled class="deactivation-button"/>
+		{%else%}
+		<input type="submit" value="Deactivate this user" class="deactivation-button"/>
+		{%endif%}
 	</form>
 	{%endif%}
 </div>

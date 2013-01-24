@@ -59,6 +59,10 @@ handlers:
   script: admin_controller.app
   login: required
   secure: always
+- url: /admin/user
+  script: admin_controller.app
+  login: required
+  secure: always
 
 #Static Content
 - url: /js/

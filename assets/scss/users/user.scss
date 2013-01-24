@@ -37,3 +37,7 @@
 #add-item-link{
 	margin-bottom:20px;
 }
+
+.deactivation-button{
+	@include button;
+}

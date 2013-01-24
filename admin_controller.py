@@ -20,7 +20,7 @@ class UserSearchHandler(AdminHandler):
     def get(self):
         user=StoreUser.by_email(self.request.get('email'))
         if user:
-            self.redirect('/user/%d'%user.key().id())
+            self.redirect(user.url())
         else:
             self.flash("There is no registered user with the email address: '%s'"%self.request.get('email'))
             self.redirect('/admin/')
