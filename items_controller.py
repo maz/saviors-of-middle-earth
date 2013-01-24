@@ -11,7 +11,7 @@ class IndexHandler(BaseHandler):
 class SearchHandler(BaseHandler):
     def get(self):
         def generate_ctx():
-            return Item.all() if self.current_user.admin else Item.fresh()
+            return Item.all() if self.current_user and self.current_user.admin else Item.fresh()
         per_page=10
         off=int(self.request.get('offset')) if self.request.get('offset') else 0
         if off<0: off=0

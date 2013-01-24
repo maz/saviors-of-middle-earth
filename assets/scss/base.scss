@@ -17,12 +17,20 @@ html,body{
 	margin-right:auto;
 	margin-top:20px;
 	margin-bottom:20px;
-	background-repeat:no-repeat;
-	background-position:left center;
-	background-size:contain;
-	background-image:url('/images/logo.svg');
 	height:100px;
 	width:85%;
+	.homepage-link{
+		position:absolute;
+		background-repeat:no-repeat;
+		background-position:left center;
+		background-size:contain;
+		background-image:url('/images/logo.svg');
+		top:0px;
+		left:0px;
+		display:block;
+		width:100px;
+		height:100px;
+	}
 	.parent{
 		position:absolute;
 		left:105px;

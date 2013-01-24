@@ -39,6 +39,10 @@ handlers:
   script: users_controller.app
   login: required
   secure: always
+- url: /users/.*/promote
+  script: users_controller.app
+  login: required
+  secure: always
 - url: /users/.*/
   script: users_controller.app
   secure: always

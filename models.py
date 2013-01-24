@@ -52,9 +52,8 @@ class StoreUser(db.Model):
     gmt_offset=db.FloatProperty(default=float(24))#24=autodetect
     email=db.StringProperty()
     nickname=db.StringProperty()
-    @db.transactional
     def deactivate(self):
-        self.deactivated=true
+        self.deactivated=True
         self.put()
         self.delete_data()
     def owned_items(self):
@@ -89,7 +88,6 @@ class StoreUser(db.Model):
             return model
     def google_user(self):
         return users.User(_user_id=self.userid)
-    @db.transactional
     def delete_data(self):
         #TODO: add other models here, as they get added to the database
         for itm in self.owned_items().run(): itm.delete()

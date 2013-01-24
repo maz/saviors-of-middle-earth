@@ -2,6 +2,7 @@ import webapp2
 from handlers import BaseHandler,AdminHandler
 import env
 from models import StoreUser,Item
+from google.appengine.api import users
 
 class UserFindingHandler(BaseHandler):
     def inner_dispatch(self):
@@ -31,6 +32,10 @@ class UserDeletionHandler(UserFindingHandler):
         self.current_user.delete()
         self.log('user deleted')
         self.redirect(users.create_logout_url('/'))
+class UserPromotionHandler(AdminHandler,UserFindingHandler):
+    def post(self,user_id):
+        self.user.deactivate()
+        self.redirect(self.user.url())
 class UserDeactivationHandler(AdminHandler,UserFindingHandler):
     def post(self,user_id):
         self.user.deactivate()
@@ -38,6 +43,7 @@ class UserDeactivationHandler(AdminHandler,UserFindingHandler):
 app = webapp2.WSGIApplication([
     (r'/users/(.*)/delete',UserDeletionHandler),
     (r'/users/(.*)/deactivate',UserDeactivationHandler),
+    (r'/users/(.*)/promote',UserPromotionHandler),
     (r'/users/(.*)',UserProfileHandler),
     (r'/users/(.*)/',UserProfileHandler)
 ], debug=(env.env==env.DEVELOPMENT))
