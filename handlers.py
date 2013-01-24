@@ -9,6 +9,7 @@ import logging
 from google.appengine.api import users
 from google.appengine.ext import db
 import urllib
+import re
 
 sessions.default_config['secret_key']="2vCmFcbxs4G4D8DiiGMLPQmSm8vun57ffl0lq5Wt"
 sessions.default_config['cookie_args']['httponly']=True
@@ -22,7 +23,7 @@ def generate_url(x,*args,**kwargs):
     return x.url(*args,**kwargs)
 jinja2.default_config['filters']['url']=generate_url
 jinja2.default_config['filters']['date']=lambda x: x.strftime("%m/%d/%y")
-jinja2.default_config['filters']['price']=lambda x: "$%.2f"%x
+jinja2.default_config['filters']['price']=lambda x: "$%s"%(re.sub(r'(\d\d\d)(\d)',lambda match: "%s,%s"%(match.group(1),match.group(2)),("%.2f"%x)[::-1]))[::-1]
 jinja2.default_config['filters']['urlencode']=urllib.quote_plus
 
 class FixedTimeZone(tzinfo):
