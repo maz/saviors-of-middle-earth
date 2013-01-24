@@ -35,9 +35,10 @@
 @import "items/items-list";
 
 #add-item-link{
-	margin-bottom:20px;
+	min-height:20px;
+	display:block;
 }
 
-.deactivation-button{
+.admin-button{
 	@include button;
 }

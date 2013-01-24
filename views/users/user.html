@@ -25,9 +25,17 @@
 	<form action="{{user|url(action='deactivate')}}" method="post" data-confirmation-message="Do you really want to deactivate this user?">
 		{{csrf_field()}}
 		{%if user.deactivated%}
-		<input type="submit" value="User Already Deactivated" disabled class="deactivation-button"/>
+		<input type="submit" value="User Already Deactivated" disabled class="admin-button"/>
 		{%else%}
-		<input type="submit" value="Deactivate this user" class="deactivation-button"/>
+		<input type="submit" value="Deactivate this user" class="admin-button"/>
+		{%endif%}
+	</form>
+	<form action="{{user|url(action='promote')}}" method="post" data-confirmation-message="Do you really want to promote this user?">
+		{{csrf_field()}}
+		{%if user.admin%}
+		<input type="submit" value="User Already has Admin Privlages" disabled class="admin-button"/>
+		{%else%}
+		<input type="submit" value="Make this user an Admin" class="admin-button"/>
 		{%endif%}
 	</form>
 	{%endif%}

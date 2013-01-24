@@ -56,6 +56,9 @@ class StoreUser(db.Model):
         self.deactivated=True
         self.put()
         self.delete_data()
+    def promote(self):
+        self.admin=True
+        self.put()
     def owned_items(self):
         return Item.all().filter("owner =",self.key())
     def url(self,action=None):

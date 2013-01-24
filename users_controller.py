@@ -34,11 +34,13 @@ class UserDeletionHandler(UserFindingHandler):
         self.redirect(users.create_logout_url('/'))
 class UserPromotionHandler(AdminHandler,UserFindingHandler):
     def post(self,user_id):
-        self.user.deactivate()
+        self.user.promote()
+        self.log('user promoted')
         self.redirect(self.user.url())
 class UserDeactivationHandler(AdminHandler,UserFindingHandler):
     def post(self,user_id):
         self.user.deactivate()
+        self.log('user deactivated')
         self.redirect(self.user.url())
 app = webapp2.WSGIApplication([
     (r'/users/(.*)/delete',UserDeletionHandler),
