@@ -1,0 +1,30 @@
+.image-viewable {
+  text-align: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  background-color: white;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center; }
+
+.image-editable div {
+  margin-top: -5px;
+  height: 10px;
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  width: 100%;
+  display: none;
+  font-weight: bold; }
+
+.image-editable:not(.highlight) {
+  outline: 1px solid black; }
+
+.image-editable.highlight {
+  outline: 7px solid orange; }
+
+.image-editable:hover div {
+  display: block; }

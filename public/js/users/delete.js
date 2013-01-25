@@ -7,8 +7,8 @@
     delete_button = document.getElementById('delete-button');
     return confirm_field.addEventListener('keydown', function(evt) {
       if (evt.keyCode === 13) {
-        if (evt.stop) {
-          evt.stop();
+        if (evt.stopPropagation) {
+          evt.stopPropagation();
         }
         if (evt.preventDefault) {
           evt.preventDefault();

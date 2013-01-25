@@ -118,12 +118,15 @@ html,body{
 		display:block;
 	}
 	.profilepic{
-		background:blue;
 		width:36px;
 		height:36px;
 		float:left;
 		position:relative;
 		z-index:99;
+		background-size:contain;
+		background-repeat:no-repeat;
+		background-position:center center;
+		background-color:blue;
 		.highlight{
 			position:absolute;
 			top:0px;

@@ -3,7 +3,7 @@ window.addEventListener 'load',->
 	delete_button=document.getElementById('delete-button')
 	confirm_field.addEventListener 'keydown',(evt)->
 		if evt.keyCode==13#enter
-			evt.stop() if evt.stop
+			evt.stopPropagation() if evt.stopPropagation
 			evt.preventDefault() if evt.preventDefault
 		setTimeout ->
 			delete_button.disabled=(confirm_field.value!="unrecoverable")

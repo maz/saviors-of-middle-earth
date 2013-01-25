@@ -48,7 +48,7 @@
 	{%endif%}
 	<div id="user-panel" class="{{'loggedin' if current_user else 'guest'}}">
 		{% if current_user %}
-		<div class="profilepic">
+		<div class="profilepic" style="background-image:url('{{current_user|url(action='thumbnail')}}')">
 			<a class="highlight" href="{{current_user|url}}"></a>
 		</div>
 		<a href="{{current_user|url}}">My Items</a>

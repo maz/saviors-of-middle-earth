@@ -3,6 +3,7 @@ from handlers import BaseHandler,AdminHandler
 import env
 from models import StoreUser,Item
 from google.appengine.api import users
+import base64
 
 class UserFindingHandler(BaseHandler):
     def inner_dispatch(self):
@@ -22,6 +23,21 @@ class UserProfileHandler(UserFindingHandler):
             fresh_items=Item.fresh(self.user.owned_items()).order('-creation_time').run(),
             expired_items=Item.expired(self.user.owned_items()).order('-creation_time').run() if self.current_user and (self.current_user.admin or self.current_user.key()==self.user.key()) else []
         )
+class UserPictureHandler(UserFindingHandler):
+    def get(self,user_id):
+        self.response.headers['Content-Type']='image/png'
+        self.response.out.write(self.user.image)
+class UserThumbnailHandler(UserFindingHandler):
+    def get(self,user_id):
+        self.response.headers['Content-Type']='image/png'
+        self.response.out.write(self.user.thumbnail)
+class UserSetPictureHandler(UserFindingHandler):
+    def post(self,user_id):
+        if self.current_user.key()!=self.user.key(): return self.abort(403)
+        self.current_user.image=base64.b64decode(self.request.get('picture_512'))
+        self.current_user.thumbnail=base64.b64decode(self.request.get('picture_72'))
+        self.current_user.put()
+        self.redirect(self.current_user.url())
 class UserDeletionHandler(UserFindingHandler):
     def get(self,user_id):
         if self.current_user.key()!=self.user.key(): return self.abort(403)
@@ -44,6 +60,9 @@ class UserDeactivationHandler(AdminHandler,UserFindingHandler):
         self.redirect(self.user.url())
 app = webapp2.WSGIApplication([
     (r'/users/(.*)/delete',UserDeletionHandler),
+    (r'/users/(.*)/picture',UserPictureHandler),
+    (r'/users/(.*)/thumbnail',UserThumbnailHandler),
+    (r'/users/(.*)/set_picture',UserSetPictureHandler),
     (r'/users/(.*)/deactivate',UserDeactivationHandler),
     (r'/users/(.*)/promote',UserPromotionHandler),
     (r'/users/(.*)',UserProfileHandler),

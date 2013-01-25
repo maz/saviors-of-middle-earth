@@ -35,6 +35,16 @@ handlers:
   script: users_controller.app
   login: required
   secure: always
+- url: /users/.*/set_picture
+  script: users_controller.app
+  login: required
+  secure: always
+- url: /users/.*/picture
+  script: users_controller.app
+  secure: always
+- url: /users/.*/thumbnail
+  script: users_controller.app
+  secure: always
 - url: /users/.*/deactivate
   script: users_controller.app
   login: required

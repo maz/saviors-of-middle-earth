@@ -52,6 +52,8 @@ class StoreUser(db.Model):
     gmt_offset=db.FloatProperty(default=float(24))#24=autodetect
     email=db.StringProperty()
     nickname=db.StringProperty()
+    thumbnail=db.BlobProperty()
+    image=db.BlobProperty()
     def deactivate(self):
         self.deactivated=True
         self.put()

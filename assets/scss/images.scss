@@ -1,0 +1,44 @@
+@import "bourbon/bourbon";
+
+.image-viewable{
+	text-align:center;
+	@include user-select(none);
+	position:relative;
+	background-color:white;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+.image-editable{
+	@extend .image-viewable;
+	div{
+		margin-top:-5px;
+		height:10px;
+		position:absolute;
+		top:50%;
+		left:0px;
+		width:100%;
+		display:none;
+		font-weight:bold;
+	}
+	.image-submit{
+		@include button;
+		position:absolute;
+		width:100%;
+		left:0px;
+		bottom:0px;
+		display:none;
+	}
+}
+.image-editable:not(.highlight){
+	outline:1px solid black;
+}
+.image-editable.highlight{
+	outline:7px solid orange;
+}
+.image-editable:hover{
+	div{
+		display:block;
+	}
+}

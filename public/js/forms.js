@@ -11,8 +11,8 @@
         return form.addEventListener('submit', function(evt) {
           var button;
           if ((form.classList.contains('delete-form') && !confirm('Do you really want to delete?')) || (form.getAttribute('data-confirmation-message') && !confirm(form.getAttribute('data-confirmation-message')))) {
-            if (evt.stop) {
-              evt.stop();
+            if (evt.stopPropagation) {
+              evt.stopPropagation();
             }
             if (evt.preventDefault) {
               evt.preventDefault();

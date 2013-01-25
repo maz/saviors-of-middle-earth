@@ -3,12 +3,26 @@
 {%block stylesheets%}
 {{super()}}
 {{css('users/user')}}
+{%if current_user and user.key()==current_user.key()%}
+{%endif%}
+{%endblock%}
+{%block javascript%}
+{{super()}}
+{%if current_user and user.key()==current_user.key()%}
+{{js('image-editing')}}
+{%endif%}
 {%endblock%}
 {%block content%}
 {%from 'items/macros.html' import item with context%}
-<div id="thumbnail">
+{%if current_user and user.key()==current_user.key()%}
+<form id="thumbnail" style="background-image:url('{{user|url(action='picture')}}')" class="image-editable" method="post" action="{{current_user|url(action='set_picture')}}" data-sizes="512 72" data-field-name="picture">
 	<div>Drag Image Here</div>
-</div>
+	{{csrf_field()}}
+	<input type="submit" value="Upload" class="image-submit"/>
+</form>
+{%else%}
+<div id="thumbnail" class="image-viewable" style="background-image:url('{{user|url(action='picture')}}')"></div>
+{%endif%}
 <div id="right">
 	<div class="labeled">
 		<span>Nickname:</span>
