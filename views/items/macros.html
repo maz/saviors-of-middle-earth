@@ -15,13 +15,17 @@
 <div class="item">
 	<a class="thumbnail" href="{{itm|url}}" style="background-image:url('{{itm|url(named=False,action='picture')}}')"></a>
 	<div class="details">
-		<a class="name" href="{{itm|url}}">{{itm.name}}</a>
-		<div class="price">{{itm.price|price}}</div>
-		<div class="expiration">Expiration: {{convert_datetime(itm.expiration())|date}}</div>
-		<div class="author"><a href="{{itm.owner|url}}">{{itm.owner.nickname}}</a></div>
+		<div class="container">
+			<a class="name" href="{{itm|url}}">{{itm.name}}</a>
+			<div class="price">{{itm.price|price}}</div>
+			<div class="expiration">Expiration: {{convert_datetime(itm.expiration())|date}}</div>
+			<div class="author"><a href="{{itm.owner|url}}">{{itm.owner.nickname}}</a></div>
+		</div>
 	</div>
 	<div class="description">
-		{{itm.description}}
+		<div class="container">
+			{{itm.description}}
+		</div>
 	</div>
 	{{item_actions(itm)}}
 </div>

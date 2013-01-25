@@ -97,6 +97,11 @@
       font-size: 13px; }
     .item .details .expiration, .item .details .author {
       font-style: italic; }
+  .item .details, .item .description {
+    display: table; }
+    .item .details .container, .item .description .container {
+      display: table-cell;
+      vertical-align: middle; }
   .item .description {
     position: absolute;
     left: 350px;

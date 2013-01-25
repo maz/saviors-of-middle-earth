@@ -30,6 +30,13 @@
 			font-style:italic;
 		}
 	}
+	.details,.description{
+		display:table;
+		.container{
+			display:table-cell;
+			vertical-align:middle;
+		}
+	}
 	.description{
 		position:absolute;
 		left:350px;
