@@ -12,7 +12,8 @@
 	{{item_actions(item)}}
 </div>
 <div id="price"><span class="label">Price:</span> {{item.price|price}}</div>
-<div id="expiration">Expires on {{item.expiration()|date}}</div>
+<a id="owner" href="{{item.owner|url}}">{{item.owner.nickname}}</a>
+<div id="expiration">Created on {{item.creation_time|date}}<br/>Expires on {{item.expiration()|date}}</div>
 <div id="description">
 	{{item.description}}
 </div>
