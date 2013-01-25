@@ -10,7 +10,7 @@
 {% block content %}
 {%macro product(itm) %}
 <a class="product" href="{{itm|url}}">
-	<div class="thumbnail"></div>
+	<div class="thumbnail" style="background-image:url('{{itm|url(named=False,action='picture')}}')"></div>
 	<div class="label">
 		<span class="name">{{itm.name}}</span>
 		<span class="price">{{itm.price|price}}</span>

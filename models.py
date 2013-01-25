@@ -43,18 +43,17 @@ class Item(db.Model):
         return base.filter('creation_time <',cls.expiry_cutoff())
 
 class LogEntry(db.Model):
-    ip=db.StringProperty()
+    ip=db.StringProperty(indexed=False)
     time=db.DateTimeProperty(auto_now_add=True)
-    user=db.ReferenceProperty()
-    msg=db.StringProperty()
+    user=db.ReferenceProperty(indexed=False)
+    msg=db.StringProperty(indexed=False)
 
 class StoreUser(db.Model):
     userid=db.StringProperty()
     admin=db.BooleanProperty()
-    deactivated=db.BooleanProperty(default=False)
-    gmt_offset=db.FloatProperty(default=float(24))#24=autodetect
+    deactivated=db.BooleanProperty(default=False,indexed=False)
     email=db.StringProperty()
-    nickname=db.StringProperty()
+    nickname=db.StringProperty(indexed=False)
     thumbnail=db.BlobProperty()
     image=db.BlobProperty()
     def deactivate(self):

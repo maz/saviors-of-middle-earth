@@ -8,7 +8,7 @@
 {%from 'items/macros.html' import item_actions with context%}
 <div id="right">
 	<div class="name">{{item.name}}</div>
-	<div class="thumbnail"></div>
+	<div class="thumbnail" style="background-image:url('{{item|url(named=False,action='picture')}}')"></div>
 	{{item_actions(item)}}
 </div>
 <div id="price"><span class="label">Price:</span> {{item.price|price}}</div>

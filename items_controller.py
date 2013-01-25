@@ -4,6 +4,7 @@ import env
 from models import Item
 from datetime import datetime
 import logging
+import base64
 
 class IndexHandler(BaseHandler):
     def get(self):
@@ -28,6 +29,7 @@ class AddItemHandler(BaseHandler):
         item_name=self.request.get('name')
         item_price=self.request.get('price')
         item_description=self.request.get('description')
+        item_picture=self.request.get('picture_512')
         errors=[]
         if item_name=="": errors.append("The item name must not be blank.")
         if item_description=="": errors.append("The item description must not be blank.")
@@ -37,12 +39,13 @@ class AddItemHandler(BaseHandler):
             errors.append("The price must be a number.")
         if item_price <=0: errors.append("The price must be greater than zero.")
         if len(errors):
-            self.render_template('items/form.html',title="Add an Item",errors=errors,item_expiry=datetime.now()+Item.EXPIRATION_DELTA,item_name=item_name,item_description=item_description,item_price=item_price)
+            self.render_template('items/form.html',title="Add an Item",item_picture_data=item_picture,item_picture=("data:image/png;base64,%s"%item_picture if item_picture else item.url(named=False,action="picture")),errors=errors,item_expiry=datetime.now()+Item.EXPIRATION_DELTA,item_name=item_name,item_description=item_description,item_price=item_price)
         else:
             item.name=item_name
             item.owner=self.current_user.key()
             item.price=item_price
             item.description=item_description
+            item.picture=base64.b64decode(item_picture)
             item.put()
             self.log("item %s"%"created" if creation else "edited")
             self.flash("'%s' was %s!"%(item_name,"created" if creation else "edited"))
@@ -60,7 +63,7 @@ def my_item_from_ident(handler,ident,allow_admin=False):
 class EditItemHandler(AddItemHandler):
     def get(self,ident):
         item=my_item_from_ident(self,ident)
-        self.render_template('items/form.html',item_price=item.price,item_name=item.name,item_description=item.description,title="Edit '%s'"%item.name,item_expiry=datetime.now()+Item.EXPIRATION_DELTA)
+        self.render_template('items/form.html',item_picture=item.url(named=False,action="picture"),item_price=item.price,item_name=item.name,item_description=item.description,title="Edit '%s'"%item.name,item_expiry=datetime.now()+Item.EXPIRATION_DELTA)
     def post(self,ident):
         self.commit_item_changes(my_item_from_ident(self,ident))
 class DeleteItemHandler(BaseHandler):
@@ -96,7 +99,7 @@ app = webapp2.WSGIApplication([
     (r'/items/(\d+)/.*/edit',EditItemHandler),
     (r'/items/(\d+)/edit',EditItemHandler),
     (r'/items/(\d+)/.*/picture',ItemPictureHandler),
-    (r'/items/(\d+)/picutre',ItemPictureHandler),
+    (r'/items/(\d+)/picture',ItemPictureHandler),
     (r'/items/(\d+)/.*/delete',DeleteItemHandler),
     (r'/items/(\d+)/delete',DeleteItemHandler),
     (r'/items/(\d+)/.*',ShowItemHandler),

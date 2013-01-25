@@ -14,9 +14,4 @@ indexes:
   properties:
   - name: owner
   - name: creation_time
-
-- kind: Item
-  properties:
-  - name: owner
-  - name: creation_time
     direction: desc

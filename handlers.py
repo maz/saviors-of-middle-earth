@@ -59,7 +59,6 @@ class BaseHandler(webapp2.RequestHandler):
         super(BaseHandler,self).dispatch()
         #webapp2.RequestHandler.dispatch(self)
     def gmt_offset_hours(self):
-        if self.current_user and self.current_user.gmt_offset!=24: return self.current_user.gmt_offset
         if self.request.cookies.get('gmt_offset'): return float(self.request.cookies.get('gmt_offset'))
         return 0
     def gmt_offset(self):

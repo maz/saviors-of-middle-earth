@@ -3,11 +3,15 @@
 {{super()}}
 {{css('items/form')}}
 {%endblock%}
+{%block javascript%}
+{{super()}}
+{{js('image-editing')}}
+{%endblock%}
 {%block content%}
-<div id="thumbnail">
+<div id="thumbnail" class="image-editable" {%if item_picture%}style="background-image:url('{{item_picture}}')"{%endif%} data-sizes="512" data-field-name="picture" data-form="main-form">
 	<div>Drag Picture Here</div>
 </div>
-<form method="post" data-completing-label="Submitting...">
+<form method="post" data-completing-label="Submitting..." id="main-form">
 	{%if errors %}
 	<div id="errors">
 		<div>The following must be fixed:</div>
@@ -34,6 +38,9 @@
 		<a href="{{current_user|url}}">Back to My Items</a>
 		<input type="submit" value="Submit"/>
 	</div>
+	{%if item_picture_data%}
+	<input type="hidden" name="picture_512" value="{{item_picture_data}}"/>
+	{%endif%}
 </form>
 <div id="clearer"></div>
 {%endblock%}

@@ -13,7 +13,7 @@
 {%endmacro%}
 {%macro item(itm)%}
 <div class="item">
-	<a class="thumbnail" href="{{itm|url}}"></a>
+	<a class="thumbnail" href="{{itm|url}}" style="background-image:url('{{itm|url(named=False,action='picture')}}')"></a>
 	<div class="details">
 		<a class="name" href="{{itm|url}}">{{itm.name}}</a>
 		<div class="price">{{itm.price|price}}</div>
