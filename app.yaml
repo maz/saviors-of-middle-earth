@@ -18,11 +18,11 @@ handlers:
   script: items_controller.app
   secure: always
   login: required
-- url: /items/edit/.*
+- url: /items/.*/edit
   script: items_controller.app
   secure: always
   login: required
-- url: /items/delete/.*
+- url: /items/.*/delete
   script: items_controller.app
   secure: always
   login: required

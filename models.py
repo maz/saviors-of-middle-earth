@@ -12,6 +12,9 @@ class Item(db.Model):
     price=db.FloatProperty()
     description=db.StringProperty(multiline=True)
     creation_time=db.DateTimeProperty(auto_now_add=True)
+    
+    picture=db.BlobProperty()
+    
     def viewable_by(self,user):
         return self.creation_time>=Item.expiry_cutoff() or (user and (user.admin or user.key()==self.owner.key()))
     def removeable_by(self,user):

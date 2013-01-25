@@ -70,6 +70,16 @@ class DeleteItemHandler(BaseHandler):
         item.delete()
         self.log('item deleted')
         self.redirect(self.current_user.url())
+class ItemPictureHandler(BaseHandler):
+    def get(self,ident):
+        try:
+            item=Item.get_by_id(int(ident))
+        except:
+            self.abort(404)
+        if not item: self.abort(404)
+        if not item.viewable_by(self.current_user): self.abort(403)
+        self.response.headers['Content-Type']='image/png'
+        self.response.out.write(item.picture)
 class ShowItemHandler(BaseHandler):
     def get(self,ident):
         try:
@@ -85,6 +95,8 @@ app = webapp2.WSGIApplication([
     ('/items/add',AddItemHandler),
     (r'/items/(\d+)/.*/edit',EditItemHandler),
     (r'/items/(\d+)/edit',EditItemHandler),
+    (r'/items/(\d+)/.*/picture',ItemPictureHandler),
+    (r'/items/(\d+)/picutre',ItemPictureHandler),
     (r'/items/(\d+)/.*/delete',DeleteItemHandler),
     (r'/items/(\d+)/delete',DeleteItemHandler),
     (r'/items/(\d+)/.*',ShowItemHandler),
