@@ -2,6 +2,7 @@ from google.appengine.ext import db
 from google.appengine.api import users
 from datetime import timedelta,datetime
 import re
+from webapp2_extras.security import generate_random_string
 
 class Item(db.Model):
     EXPIRATION_DELTA=timedelta(days=16)
@@ -56,6 +57,14 @@ class StoreUser(db.Model):
     nickname=db.StringProperty(indexed=False)
     thumbnail=db.BlobProperty()
     image=db.BlobProperty()
+    
+    channel_token=db.StringProperty()
+    last_message_read=db.DateTimeProperty()
+    
+    def generate_channel_token(self):
+        self.channel_token="%d_%s"%(self.key().id(),generate_random_string(24))
+        self.put()
+        return self.channel_token
     def deactivate(self):
         self.deactivated=True
         self.put()
@@ -97,4 +106,17 @@ class StoreUser(db.Model):
         return users.User(_user_id=self.userid)
     def delete_data(self):
         #TODO: add other models here, as they get added to the database
+        #TODO: what to do with messages?
         for itm in self.owned_items().run(): itm.delete()
+    @property
+    def communiques(self,**kwargs):
+        return Communique.all().filter('users =',self.key()).run(**kwargs)
+    
+class Communique(db.Model):
+    users=db.ListProperty(db.Key)
+
+class Message(db.Model):
+    communique=db.ReferenceProperty(Communique,collection_name="messages")
+    time=db.DateTimeProperty(auto_now_add=True)
+    user=db.ReferenceProperty()
+    contents=db.StringProperty()
