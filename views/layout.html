@@ -18,7 +18,7 @@
 	{{css('base')}}
 	{%endblock%}
 </head>
-<body{%if current_user and not current_user.deactivated%} data-channel-token="{{channel_token}}"{%endif%}>
+<body{%if current_user%} data-channel-token="{{channel_token}}" data-csrf-token="{{csrf_token}}"{%endif%}>
 	{%macro csrf_field()%}<input type="hidden" name="csrf_token" value="{{csrf_token}}"/>{%endmacro%}
 	<div id="header">
 		<a href="/" class="homepage-link"></a>

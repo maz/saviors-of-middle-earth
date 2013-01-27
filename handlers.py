@@ -8,7 +8,7 @@ from datetime import tzinfo,timedelta
 import logging
 from google.appengine.api import users
 from google.appengine.ext import db
-from google.appengine.api.channel import create_channel, send_message
+from google.appengine.api.channel import create_channel
 import urllib
 import re
 import json
@@ -42,7 +42,7 @@ UTC=FixedTimeZone(0)
 
 class BaseHandler(webapp2.RequestHandler):
     def log(self,msg):
-        LogEntry(ip=self.request.remote_addr,user=(self.current_user.key() if self.current_user else None),msg=msg).put()
+        LogEntry(ip=self.request.remote_addr,user=(self.current_user.key() if self.current_user else None),msg=msg,referrer=self.request.headers['referrer']).put()
     def handle_exception(self,exception,debug):
         if isinstance(exception,webapp2.HTTPException):
             if exception.code==403:
@@ -93,10 +93,6 @@ class BaseHandler(webapp2.RequestHandler):
         return jinja2.get_jinja2(app=self.app)
     def flash(self,msg):
         self.session['flash']=msg
-    def tell_client(self,action,**kwargs):
-        kwargs=dict(kwargs) if kwargs else dict()
-        kwargs['action']=action
-        send_message(self.current_user.channel_token,json.dumps(kwargs))
     def render_template(self,name,**values):
         values=dict(values)
         values['current_user']=self.current_user
@@ -110,12 +106,6 @@ class BaseHandler(webapp2.RequestHandler):
         self.response.headers['Content-Type']="text/html; charset=utf-8"#assume that our templates are for html
         if self.current_user and not self.current_user.deactivated:
             #we do this here, once we assume we are generating html
-            if self.current_user.channel_token:
-                try:
-                    self.tell_client('close')
-                except:
-                    #We won't be sending data to them anymore, worst case, they don't know they've been cut off
-                    pass
             values['channel_token']=create_channel(self.current_user.generate_channel_token())
         self.response.write(self.jinja2.render_template(name,**values))
 

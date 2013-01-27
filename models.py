@@ -3,6 +3,8 @@ from google.appengine.api import users
 from datetime import timedelta,datetime
 import re
 from webapp2_extras.security import generate_random_string
+from google.appengine.api.channel import send_message
+import json
 
 class Item(db.Model):
     EXPIRATION_DELTA=timedelta(days=16)
@@ -48,6 +50,7 @@ class LogEntry(db.Model):
     time=db.DateTimeProperty(auto_now_add=True)
     user=db.ReferenceProperty(indexed=False)
     msg=db.StringProperty(indexed=False)
+    referrer=db.StringProperty(indexed=False)
 
 class StoreUser(db.Model):
     userid=db.StringProperty()
@@ -58,13 +61,20 @@ class StoreUser(db.Model):
     thumbnail=db.BlobProperty()
     image=db.BlobProperty()
     
-    channel_token=db.StringProperty()
-    last_message_read=db.DateTimeProperty()
+    channel_tokens=db.StringListProperty()
+    last_message_read=db.DateTimeProperty(auto_now_add=True)
     
+    def notify_channels(self,action,**kwargs):
+        kwargs=dict(kwargs)
+        kwargs['action']=action
+        encoded=json.dumps(kwargs)
+        for token in self.channel_tokens:
+            send_message(token,encoded)
+    def generate_channel_token_string(self): return "%d_%s"%(self.key().id(),generate_random_string(24))
     def generate_channel_token(self):
-        self.channel_token="%d_%s"%(self.key().id(),generate_random_string(24))
-        self.put()
-        return self.channel_token
+        token=self.generate_channel_token_string()
+        while token in self.channel_tokens: token=self.generate_channel_token_string()
+        return token
     def deactivate(self):
         self.deactivated=True
         self.put()
@@ -109,14 +119,21 @@ class StoreUser(db.Model):
         #TODO: what to do with messages?
         for itm in self.owned_items().run(): itm.delete()
     @property
-    def communiques(self,**kwargs):
-        return Communique.all().filter('users =',self.key()).run(**kwargs)
+    def communiques(self):
+        return Communique.all().filter('users =',self.key())
     
 class Communique(db.Model):
     users=db.ListProperty(db.Key)
+    last_message_sent=db.DateTimeProperty(auto_now_add=True)
+    def post_message(self,sender,contents):
+        Message(communique=self,user=sender,contents=contents).put()
+        for user in self.users:
+            if user!=sender.key().id(): StoreUser.get(user).notify_channels('new_message',user=sender.key().id(),communique=self.key().id(),contents=contents)
+    def messages(self):
+        Message.all().filter('communique =',self.key()).order('-time')
 
 class Message(db.Model):
-    communique=db.ReferenceProperty(Communique,collection_name="messages")
+    communique=db.ReferenceProperty(Communique,collection_name="messages_collection")
     time=db.DateTimeProperty(auto_now_add=True)
     user=db.ReferenceProperty()
     contents=db.StringProperty()

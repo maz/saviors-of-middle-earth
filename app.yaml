@@ -7,6 +7,24 @@ threadsafe: true
 
 handlers:
 
+#Messaging Controller
+- url: /_ah/channel/connected/
+#This should actually be "organic" admin only, artificial admins shouldn't be able to access this
+#  login: admin
+  script: messaging_controller.app
+- url: /_ah/channel/disconnected/
+#  login: admin
+  script: messaging_controller.app
+- url: /messaging/post
+  script: messaging_controller.app
+  login: required
+- url: /messaging/jumpstart
+  script: messaging_controller.app
+  login: required
+- url: /messaging/.*
+  script: messaging_controller.app
+  login: required
+
 #Items Controller
 - url: /
   script: items_controller.app
@@ -43,6 +61,9 @@ handlers:
   script: users_controller.app
   secure: always
 - url: /users/.*/thumbnail
+  script: users_controller.app
+  secure: always
+- url: /users/.*/nickname
   script: users_controller.app
   secure: always
 - url: /users/.*/deactivate
@@ -95,6 +116,9 @@ handlers:
 - url: /.*
   script: not_found.app
   secure: always
+
+inbound_services:
+- channel_presence
 
 libraries:
 - name: webapp2

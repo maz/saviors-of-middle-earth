@@ -31,6 +31,10 @@ class UserThumbnailHandler(UserFindingHandler):
     def get(self,user_id):
         self.response.headers['Content-Type']='image/png'
         self.response.out.write(self.user.thumbnail)
+class UserNicknameHandler(UserFindingHandler):
+    def get(self,user_id):
+        self.response.headers['Content-Type']='text/plain'
+        self.response.out.write(self.user.nickname)
 class UserSetPictureHandler(UserFindingHandler):
     def post(self,user_id):
         if self.current_user.key()!=self.user.key(): return self.abort(403)
@@ -62,6 +66,7 @@ app = webapp2.WSGIApplication([
     (r'/users/(.*)/delete',UserDeletionHandler),
     (r'/users/(.*)/picture',UserPictureHandler),
     (r'/users/(.*)/thumbnail',UserThumbnailHandler),
+    (r'/users/(.*)/nickname',UserNicknameHandler),
     (r'/users/(.*)/set_picture',UserSetPictureHandler),
     (r'/users/(.*)/deactivate',UserDeactivationHandler),
     (r'/users/(.*)/promote',UserPromotionHandler),
