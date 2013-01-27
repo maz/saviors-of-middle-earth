@@ -31,9 +31,10 @@ class CommuniqueFindingHandler(BaseHandler):
 class MessagingPostHandler(CommuniqueFindingHandler):
     def post(self,communique_id):
         self.communique.post_message(sender=self.current_user,contents=self.request.get('message'))
-class MessagingJumpStartHandler(BaseHandler):
+class MessagingListAllHandler(BaseHandler):
     def get(self):
         self.response.headers['Content-Type']='application/json'
+        self.response.write(json.dumps(map(lambda com:map(lambda user_id: StoreUser.get(user_id).nickname,com.users) ,json.dumps(self.current_user.communiques().run()))))
 class MessaingListHandler(CommuniqueFindingHandler):
     def get(self,communique_id):
         self.response.headers['Content-Type']='application/json'
@@ -53,6 +54,6 @@ app = webapp2.WSGIApplication([
     (r'/_ah/channel/connected/',ChannelConnectedHandler),
     (r'/_ah/channel/disconnected/',ChannelDisconnectedHandler),
     (r'/messaging/(\d+)/post',MessagingPostHandler),
-    (r'/messaging/jumpstart',MessagingJumpStartHandler),
+    (r'/messaging/list',MessagingListAllHandler),
     (r'/messaging/(\d+)',MessaingListHandler)
 ], debug=(env.env==env.DEVELOPMENT))

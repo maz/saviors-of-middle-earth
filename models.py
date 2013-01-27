@@ -118,7 +118,6 @@ class StoreUser(db.Model):
         #TODO: add other models here, as they get added to the database
         #TODO: what to do with messages?
         for itm in self.owned_items().run(): itm.delete()
-    @property
     def communiques(self):
         return Communique.all().filter('users =',self.key())
     

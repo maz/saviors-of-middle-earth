@@ -15,12 +15,6 @@ handlers:
 - url: /_ah/channel/disconnected/
 #  login: admin
   script: messaging_controller.app
-- url: /messaging/post
-  script: messaging_controller.app
-  login: required
-- url: /messaging/jumpstart
-  script: messaging_controller.app
-  login: required
 - url: /messaging/.*
   script: messaging_controller.app
   login: required

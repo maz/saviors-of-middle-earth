@@ -11,6 +11,8 @@ focused=true
 window.addEventListener 'focus',-> focused=true
 window.addEventListener 'blur',-> focused=false
 
+$=(id)->document.getElementById(id)
+
 window.addEventListener 'load',->
 	message_audio=new Audio
 	message_audio.src="/sounds/message.wav"
@@ -23,4 +25,8 @@ window.addEventListener 'load',->
 			play_message_notification() if not focused
 	socket.onerror=socket.onclose=->
 		null
+	messages_panel=$('messages-panel')
+	messages_panel.querySelector('.messages-opener').addEventListener 'click',->
+		messages_panel.classList.add('active')
+	,false
 ,false
