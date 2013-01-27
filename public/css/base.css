@@ -141,31 +141,39 @@ html, body {
   z-index: 2; }
   #messages-panel:not(.active) .messages-opener {
     border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px; }
+    border-bottom-right-radius: 10px;
+    background-color: #DDD; }
+  #messages-panel:not(.active) .messages-opener:hover {
+    background-color: #AAA; }
 
 #messages-panel.active {
   height: 100%;
   position: fixed;
   background-color: rgba(200, 200, 200, 0.75);
-  z-index: 99; }
+  z-index: 99;
+  -webkit-transition: height 5s, background-color 5s;
+  -moz-transition: height 5s, background-color 5s;
+  -ms-transition: height 5s, background-color 5s;
+  -o-transition: height 5s, background-color 5s;
+  transition: height 5s, background-color 5s; }
   #messages-panel.active .messages-opener {
     border-top-left-radius: 10px;
-    border-top-right-radius: 10px; }
+    border-top-right-radius: 10px;
+    background-color: #AAA; }
 
 #messages-panel {
   width: 100%;
   left: 0px;
   top: 0px;
-  -webkit-transition: height 5s, background-color 5s;
-  -moz-transition: height 5s, background-color 5s;
-  -ms-transition: height 5s, background-color 5s;
-  -o-transition: height 5s, background-color 5s;
-  transition: height 5s, background-color 5s;
+  -webkit-transition: height 5s, background-color 5s, z-index 0.01s linear 5s;
+  -moz-transition: height 5s, background-color 5s, z-index 0.01s linear 5s;
+  -ms-transition: height 5s, background-color 5s, z-index 0.01s linear 5s;
+  -o-transition: height 5s, background-color 5s, z-index 0.01s linear 5s;
+  transition: height 5s, background-color 5s, z-index 0.01s linear 5s;
   overflow: hidden; }
   #messages-panel .messages-opener {
     position: absolute;
     bottom: 0px;
-    background-color: #DDD;
     padding-right: 4px;
     padding-left: 4px;
     margin-left: -25px;
@@ -188,8 +196,6 @@ html, body {
     -ms-transition: border-bottom-left-radius 5s, border-bottom-right-radius 5s, border-top-left-radius 5s, border-top-right-radius 5s;
     -o-transition: border-bottom-left-radius 5s, border-bottom-right-radius 5s, border-top-left-radius 5s, border-top-right-radius 5s;
     transition: border-bottom-left-radius 5s, border-bottom-right-radius 5s, border-top-left-radius 5s, border-top-right-radius 5s; }
-  #messages-panel .messages-opener:hover {
-    background-color: #AAA; }
 
 #copyright {
   margin-top: 5px;

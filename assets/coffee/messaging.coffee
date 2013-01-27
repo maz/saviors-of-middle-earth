@@ -27,6 +27,6 @@ window.addEventListener 'load',->
 		null
 	messages_panel=$('messages-panel')
 	messages_panel.querySelector('.messages-opener').addEventListener 'click',->
-		messages_panel.classList.add('active')
+		messages_panel.classList.toggle('active')
 	,false
 ,false

@@ -45,7 +45,7 @@
     };
     messages_panel = $('messages-panel');
     return messages_panel.querySelector('.messages-opener').addEventListener('click', function() {
-      return messages_panel.classList.add('active');
+      return messages_panel.classList.toggle('active');
     }, false);
   }, false);
 

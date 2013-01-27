@@ -159,8 +159,13 @@ $messages-panel-transition-duration:5s;
 	.messages-opener{
 		border-bottom-left-radius:10px;
 		border-bottom-right-radius:10px;
+		background-color:#DDD;
+	}
+	.messages-opener:hover{
+		background-color:#AAA;
 	}
 }
+$messages-panel-transitions:height $messages-panel-transition-duration,background-color $messages-panel-transition-duration;
 #messages-panel.active{
 	height:100%;
 	position:fixed;
@@ -169,13 +174,14 @@ $messages-panel-transition-duration:5s;
 	.messages-opener{
 		border-top-left-radius:10px;
 		border-top-right-radius:10px;
+		background-color:#AAA;
 	}
+	@include transition($messages-panel-transitions);
 }
 #messages-panel{
 	.messages-opener{
 		position:absolute;
 		bottom:0px;
-		background-color:#DDD;
 		padding-right:4px;
 		padding-left:4px;
 		margin-left:-25px;
@@ -192,13 +198,11 @@ $messages-panel-transition-duration:5s;
 		@include user-select(none);
 		@include transition(border-bottom-left-radius $messages-panel-transition-duration,border-bottom-right-radius $messages-panel-transition-duration,border-top-left-radius $messages-panel-transition-duration,border-top-right-radius $messages-panel-transition-duration);
 	}
-	.messages-opener:hover{
-		background-color:#AAA;
-	}
+	
 	width:100%;
 	left:0px;
 	top:0px;
-	@include transition(height $messages-panel-transition-duration,background-color $messages-panel-transition-duration);
+	@include transition($messages-panel-transitions , z-index 0.01s linear $messages-panel-transition-duration/*delay*/);
 	overflow:hidden;
 }
 
