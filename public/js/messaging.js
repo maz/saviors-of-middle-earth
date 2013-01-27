@@ -26,9 +26,10 @@
   };
 
   window.addEventListener('load', function() {
-    var channel, messages_panel;
+    var channel, messages_opener, messages_panel;
     message_audio = new Audio;
     message_audio.src = "/sounds/message.wav";
+    message_audio.load();
     channel = new goog.appengine.Channel(document.body.getAttribute('data-channel-token'));
     socket = channel.open();
     socket.onmessage = function(evt) {
@@ -36,7 +37,10 @@
       msg = JSON.parse(evt.data);
       if (msg.action === 'new_message') {
         if (!focused) {
-          return play_message_notification();
+          play_message_notification();
+        }
+        if (!messages_panel.classList.contains('active')) {
+          return messages_opener.classList.add('attn');
         }
       }
     };
@@ -44,8 +48,10 @@
       return null;
     };
     messages_panel = $('messages-panel');
-    return messages_panel.querySelector('.messages-opener').addEventListener('click', function() {
-      return messages_panel.classList.toggle('active');
+    messages_opener = messages_panel.querySelector('.messages-opener');
+    return messages_opener.addEventListener('click', function() {
+      messages_panel.classList.toggle('active');
+      return messages_opener.classList.remove('attn');
     }, false);
   }, false);
 

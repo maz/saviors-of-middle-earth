@@ -16,6 +16,7 @@ $=(id)->document.getElementById(id)
 window.addEventListener 'load',->
 	message_audio=new Audio
 	message_audio.src="/sounds/message.wav"
+	message_audio.load()
 	
 	channel=new goog.appengine.Channel(document.body.getAttribute('data-channel-token'))
 	socket=channel.open()
@@ -23,10 +24,13 @@ window.addEventListener 'load',->
 		msg=JSON.parse(evt.data)
 		if msg.action is 'new_message'
 			play_message_notification() if not focused
+			messages_opener.classList.add('attn') unless messages_panel.classList.contains('active')
 	socket.onerror=socket.onclose=->
 		null
 	messages_panel=$('messages-panel')
-	messages_panel.querySelector('.messages-opener').addEventListener 'click',->
+	messages_opener=messages_panel.querySelector('.messages-opener')
+	messages_opener.addEventListener 'click',->
 		messages_panel.classList.toggle('active')
+		messages_opener.classList.remove('attn')
 	,false
 ,false

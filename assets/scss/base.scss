@@ -149,7 +149,7 @@ html,body{
 	}
 }
 
-$messages-panel-transition-duration:5s;
+$messages-panel-transition-duration:1s;
 
 #messages-panel:not(.active){
 	position:absolute;
@@ -169,7 +169,7 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 #messages-panel.active{
 	height:100%;
 	position:fixed;
-	background-color:rgba(200,200,200,0.75);
+	background-color:rgba(200,200,200,0.9);
 	z-index:99;
 	.messages-opener{
 		border-top-left-radius:10px;
@@ -178,6 +178,24 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 	}
 	@include transition($messages-panel-transitions);
 }
+@mixin attn{
+	0%{
+		background-color:#A90100;
+	}
+	100%{
+		background-color:#D17717;
+	}
+}
+@-webkit-keyframes attn{
+	@include attn;
+}
+@-moz-keyframes attn{
+	@include attn;
+}
+@keyframes attn{
+	@include attn;
+}
+
 #messages-panel{
 	.messages-opener{
 		position:absolute;
@@ -197,6 +215,13 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 		cursor:pointer;
 		@include user-select(none);
 		@include transition(border-bottom-left-radius $messages-panel-transition-duration,border-bottom-right-radius $messages-panel-transition-duration,border-top-left-radius $messages-panel-transition-duration,border-top-right-radius $messages-panel-transition-duration);
+	}
+	.messages-opener.attn{
+		@include animation-name(attn);
+		@include animation-duration(1.5s);
+		@include animation-timing-function(ease);
+		@include animation-iteration-count(infinite);
+		@include animation-direction(alternate);
 	}
 	
 	width:100%;

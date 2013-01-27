@@ -105,6 +105,10 @@ handlers:
 - url: /images/
   static_dir: public/images
   secure: always
+  
+- url: /sounds/
+  static_dir: public/sounds
+  secure: always
 
 #Not Found Handler (must go last)
 - url: /.*

@@ -149,27 +149,48 @@ html, body {
 #messages-panel.active {
   height: 100%;
   position: fixed;
-  background-color: rgba(200, 200, 200, 0.75);
+  background-color: rgba(200, 200, 200, 0.9);
   z-index: 99;
-  -webkit-transition: height 5s, background-color 5s;
-  -moz-transition: height 5s, background-color 5s;
-  -ms-transition: height 5s, background-color 5s;
-  -o-transition: height 5s, background-color 5s;
-  transition: height 5s, background-color 5s; }
+  -webkit-transition: height 1s, background-color 1s;
+  -moz-transition: height 1s, background-color 1s;
+  -ms-transition: height 1s, background-color 1s;
+  -o-transition: height 1s, background-color 1s;
+  transition: height 1s, background-color 1s; }
   #messages-panel.active .messages-opener {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: #AAA; }
 
+@-webkit-keyframes attn {
+  0% {
+    background-color: #A90100; }
+
+  100% {
+    background-color: #D17717; } }
+
+@-moz-keyframes attn {
+  0% {
+    background-color: #A90100; }
+
+  100% {
+    background-color: #D17717; } }
+
+@keyframes attn {
+  0% {
+    background-color: #A90100; }
+
+  100% {
+    background-color: #D17717; } }
+
 #messages-panel {
   width: 100%;
   left: 0px;
   top: 0px;
-  -webkit-transition: height 5s, background-color 5s, z-index 0.01s linear 5s;
-  -moz-transition: height 5s, background-color 5s, z-index 0.01s linear 5s;
-  -ms-transition: height 5s, background-color 5s, z-index 0.01s linear 5s;
-  -o-transition: height 5s, background-color 5s, z-index 0.01s linear 5s;
-  transition: height 5s, background-color 5s, z-index 0.01s linear 5s;
+  -webkit-transition: height 1s, background-color 1s, z-index 0.01s linear 1s;
+  -moz-transition: height 1s, background-color 1s, z-index 0.01s linear 1s;
+  -ms-transition: height 1s, background-color 1s, z-index 0.01s linear 1s;
+  -o-transition: height 1s, background-color 1s, z-index 0.01s linear 1s;
+  transition: height 1s, background-color 1s, z-index 0.01s linear 1s;
   overflow: hidden; }
   #messages-panel .messages-opener {
     position: absolute;
@@ -191,11 +212,27 @@ html, body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    -webkit-transition: border-bottom-left-radius 5s, border-bottom-right-radius 5s, border-top-left-radius 5s, border-top-right-radius 5s;
-    -moz-transition: border-bottom-left-radius 5s, border-bottom-right-radius 5s, border-top-left-radius 5s, border-top-right-radius 5s;
-    -ms-transition: border-bottom-left-radius 5s, border-bottom-right-radius 5s, border-top-left-radius 5s, border-top-right-radius 5s;
-    -o-transition: border-bottom-left-radius 5s, border-bottom-right-radius 5s, border-top-left-radius 5s, border-top-right-radius 5s;
-    transition: border-bottom-left-radius 5s, border-bottom-right-radius 5s, border-top-left-radius 5s, border-top-right-radius 5s; }
+    -webkit-transition: border-bottom-left-radius 1s, border-bottom-right-radius 1s, border-top-left-radius 1s, border-top-right-radius 1s;
+    -moz-transition: border-bottom-left-radius 1s, border-bottom-right-radius 1s, border-top-left-radius 1s, border-top-right-radius 1s;
+    -ms-transition: border-bottom-left-radius 1s, border-bottom-right-radius 1s, border-top-left-radius 1s, border-top-right-radius 1s;
+    -o-transition: border-bottom-left-radius 1s, border-bottom-right-radius 1s, border-top-left-radius 1s, border-top-right-radius 1s;
+    transition: border-bottom-left-radius 1s, border-bottom-right-radius 1s, border-top-left-radius 1s, border-top-right-radius 1s; }
+  #messages-panel .messages-opener.attn {
+    -webkit-animation-name: attn;
+    -moz-animation-name: attn;
+    animation-name: attn;
+    -webkit-animation-duration: 1.5s;
+    -moz-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+    -webkit-animation-timing-function: ease;
+    -moz-animation-timing-function: ease;
+    animation-timing-function: ease;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    -moz-animation-direction: alternate;
+    animation-direction: alternate; }
 
 #copyright {
   margin-top: 5px;
