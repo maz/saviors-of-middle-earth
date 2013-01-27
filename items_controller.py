@@ -3,7 +3,6 @@ from handlers import BaseHandler
 import env
 from models import Item
 from datetime import datetime
-import logging
 import base64
 
 class IndexHandler(BaseHandler):
@@ -47,7 +46,7 @@ class AddItemHandler(BaseHandler):
             item.description=item_description
             item.picture=base64.b64decode(item_picture)
             item.put()
-            self.log("item %s"%"created" if creation else "edited")
+            self.log("item %s"%("created" if creation else "edited"))
             self.flash("'%s' was %s!"%(item_name,"created" if creation else "edited"))
             self.redirect(self.current_user.url())
     def post(self):
