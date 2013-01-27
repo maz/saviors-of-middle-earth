@@ -51,6 +51,7 @@
     messages_opener = messages_panel.querySelector('.messages-opener');
     return messages_opener.addEventListener('click', function() {
       messages_panel.classList.toggle('active');
+      messages_opener.textContent = messages_panel.classList.contains('active') ? "Close" : "Messages";
       return messages_opener.classList.remove('attn');
     }, false);
   }, false);

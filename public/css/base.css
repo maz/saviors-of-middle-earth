@@ -145,6 +145,8 @@ html, body {
     background-color: #DDD; }
   #messages-panel:not(.active) .messages-opener:hover {
     background-color: #AAA; }
+  #messages-panel:not(.active) .contents {
+    display: none; }
 
 #messages-panel.active {
   height: 100%;
@@ -197,10 +199,10 @@ html, body {
     bottom: 0px;
     padding-right: 4px;
     padding-left: 4px;
-    margin-left: -25px;
+    margin-left: -30px;
     left: 50%;
     overflow: hidden;
-    width: 50px;
+    width: 60px;
     height: 20px;
     display: block;
     color: black;
@@ -233,6 +235,36 @@ html, body {
     -webkit-animation-direction: alternate;
     -moz-animation-direction: alternate;
     animation-direction: alternate; }
+  #messages-panel .contents {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    bottom: 25px; }
+    #messages-panel .contents .sidebar {
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      bottom: 0px;
+      width: 200px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background-color: rgba(56, 68, 55, 0.73); }
+    #messages-panel .contents .main-pane {
+      position: absolute;
+      top: 5px;
+      left: 210px;
+      right: 5px;
+      bottom: 0px; }
+      #messages-panel .contents .main-pane textarea {
+        resize: none;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        height: 30px; }
+  #messages-panel .template {
+    display: none; }
 
 #copyright {
   margin-top: 5px;

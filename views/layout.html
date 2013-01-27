@@ -61,7 +61,14 @@
 	{%if current_user%}
 	<div id="messages-panel">
 		<div class="messages-opener">
-			<span id="msg-count">0</span> Msgs
+			Messages
+		</div>
+		<div class="contents">
+			<div class="sidebar"></div>
+			<div class="main-pane">
+				<div class="message-holder"></div>
+				<textarea></textarea>
+			</div>
 		</div>
 	</div>
 	{%endif%}

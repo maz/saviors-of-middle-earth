@@ -31,6 +31,7 @@ window.addEventListener 'load',->
 	messages_opener=messages_panel.querySelector('.messages-opener')
 	messages_opener.addEventListener 'click',->
 		messages_panel.classList.toggle('active')
+		messages_opener.textContent=if messages_panel.classList.contains('active') then "Close" else "Messages"
 		messages_opener.classList.remove('attn')
 	,false
 ,false

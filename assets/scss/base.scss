@@ -164,6 +164,9 @@ $messages-panel-transition-duration:1s;
 	.messages-opener:hover{
 		background-color:#AAA;
 	}
+	.contents{
+		display:none;
+	}
 }
 $messages-panel-transitions:height $messages-panel-transition-duration,background-color $messages-panel-transition-duration;
 #messages-panel.active{
@@ -202,10 +205,10 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 		bottom:0px;
 		padding-right:4px;
 		padding-left:4px;
-		margin-left:-25px;
+		margin-left:-30px;
 		left:50%;
 		overflow:hidden;
-		width:50px;
+		width:60px;
 		height:20px;
 		display:block;
 		color:black;
@@ -222,6 +225,42 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 		@include animation-timing-function(ease);
 		@include animation-iteration-count(infinite);
 		@include animation-direction(alternate);
+	}
+	.contents{
+		position:absolute;
+		top:0px;
+		left:0px;
+		width:100%;
+		bottom:25px;
+		.sidebar{
+			position:absolute;
+			left:5px;
+			top:5px;
+			bottom:0px;
+			width:200px;
+			overflow-y:auto;
+			overflow-x:hidden;
+			background-color:rgba(56,68,55,0.73);
+		}
+		.main-pane{
+			position:absolute;
+			top:5px;
+			left:210px;
+			right:5px;
+			bottom:0px;
+			textarea{
+				resize:none;
+				position:absolute;
+				bottom:0px;
+				left:0px;
+				right:0px;
+				height:30px;
+			}
+		}
+	}
+	
+	.template{
+		display:none;
 	}
 	
 	width:100%;
