@@ -38,7 +38,8 @@ class MessagingListAllHandler(BaseHandler):
     def get(self):
         self.response.headers['Content-Type']='application/json'
         self.response.write(json.dumps(map(lambda com:dict(unread=com.last_message_sent>=com.last_read_by(self.current_user),id=com.key().id(),users=map(lambda user_id: StoreUser.get(user_id).nickname,com.users)),json.dumps(self.current_user.communiques().order('-last_message_sent').run()))))
-class MessaingListHandler(CommuniqueFindingHandler):
+class MessagingListHandler(CommuniqueFindingHandler):
+    MESSAGES_PER_PAGE=50
     def get(self,communique_id):
         self.response.headers['Content-Type']='application/json'
         out={}
@@ -46,7 +47,8 @@ class MessaingListHandler(CommuniqueFindingHandler):
         def user_referenced(x):
             referenced_users.add(x)
             return x
-        out['messages']=map(lambda x: dict(user=user_referenced(x.user.key().id()),contents=x.contents,time=x.time.isoformat()),self.communique.messages().run(limit=50,offset=self.request.get('offset') or 0))
+        off=int(self.request.get('offset') or 0)
+        out['messages']=map(lambda x: dict(more_pages=self.communique.messages().count(limit=1,offset=off+MessagingListHandler.MESSAGES_PER_PAGE+1),user=user_referenced(x.user.key().id()),contents=x.contents,time=x.time.isoformat()),self.communique.messages().run(limit=MessagingListHandler.MESSAGES_PER_PAGE,offset=off))
         out['users']=dict.fromkeys(referenced_users)
         #TODO: nicer way to do the following:
         for key in out['users'].keys():
@@ -59,5 +61,5 @@ app = webapp2.WSGIApplication([
     (r'/messaging/(\d+)/read_by',MessagingReadByHandler),
     (r'/messaging/(\d+)/post',MessagingPostHandler),
     (r'/messaging/list',MessagingListAllHandler),
-    (r'/messaging/(\d+)',MessaingListHandler)
+    (r'/messaging/(\d+)',MessagingListHandler)
 ], debug=(env.env==env.DEVELOPMENT))

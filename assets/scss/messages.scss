@@ -100,6 +100,22 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 			overflow-y:auto;
 			overflow-x:hidden;
 			background-color:rgba(56,68,55,0.73);
+			.communique{
+				min-height:30px;
+				width:100%;
+				cursor:pointer;
+				@include user-select(none);
+			}
+			.communique:not(:last-child){
+				border-bottom:1px solid #222;
+				margin-bottom:1px;
+			}
+			.communique.selected{
+				background-color:green;
+			}
+			.communique.unread{
+				background-color:orange;
+			}
 		}
 		.main-pane{
 			position:absolute;
@@ -122,7 +138,6 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 					margin-top:-10px;
 					position:absolute;
 					top:50%;
-					display:none;
 				}
 				@include user-select(none);
 			}

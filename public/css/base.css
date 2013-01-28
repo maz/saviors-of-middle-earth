@@ -260,6 +260,21 @@ html, body {
       overflow-y: auto;
       overflow-x: hidden;
       background-color: rgba(56, 68, 55, 0.73); }
+      #messages-panel .contents .sidebar .communique {
+        min-height: 30px;
+        width: 100%;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none; }
+      #messages-panel .contents .sidebar .communique:not(:last-child) {
+        border-bottom: 1px solid #222222;
+        margin-bottom: 1px; }
+      #messages-panel .contents .sidebar .communique.selected {
+        background-color: green; }
+      #messages-panel .contents .sidebar .communique.unread {
+        background-color: orange; }
     #messages-panel .contents .main-pane {
       position: absolute;
       top: 5px;
@@ -284,8 +299,7 @@ html, body {
           font-weight: bold;
           margin-top: -10px;
           position: absolute;
-          top: 50%;
-          display: none; }
+          top: 50%; }
       #messages-panel .contents .main-pane .messages {
         position: absolute;
         top: 0px;

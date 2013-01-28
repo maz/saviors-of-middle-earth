@@ -13,6 +13,35 @@ window.addEventListener 'blur',-> focused=false
 
 $=(id)->document.getElementById(id)
 
+overlay=null
+loading=null
+sidebar=null
+
+overlay.show=-> overlay.style.display='block'
+overlay.hide=-> overlay.style.display='none'
+loading.show=->
+	overlay.show()
+	loading.style.display='block'
+loading.hide=-> loading.style.display='none'
+
+communique_cache=null
+
+#TODO: property handle xhr onerror(s)
+
+class Communique
+	constructor:(data)->
+		communique_cache[data.id]=this
+		@unread=data.unread
+		@id=data.id
+		@users=data.users
+		
+		@dom=document.createElement('div')
+		@dom.setAttribute('data-id',data.id)
+		@dom.classList.add('communique')
+		@dom.classList.add('unread') if data.unread
+		@dom.textContent=data.users.join(', ')
+		if sidebar.childNodes[0] then sidebar.insertBefore(@dom,sidebar.childNodes[0]) else sidebar.appendChild(@dom)
+
 window.addEventListener 'load',->
 	message_audio=new Audio
 	message_audio.src="/sounds/message.wav"
@@ -36,5 +65,18 @@ window.addEventListener 'load',->
 		messages_panel.classList.toggle('active')
 		messages_opener.textContent=if messages_panel.classList.contains('active') then "Close" else "Messages"
 		messages_opener.classList.remove('attn')
+		if messages_panel.classList.contains('active') and not communique_cache
+			communique_cache={}
+			loading.show()
+			op=new XMLHttpRequest
+			op.open 'get','/messaging/list',true
+			op.responeType='json'
+			op.onload=->
+				for communique in op.response
+					create_communique_dom(communique)
+				loading.hide()
 	,false
+	overlay=messages_panel.querySelector('.overlay')
+	loading=messages_panel.querySelector('.loading')
+	sidebar=messages_panel.querySelector('.sidebar')
 ,false
