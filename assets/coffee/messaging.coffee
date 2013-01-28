@@ -17,13 +17,6 @@ overlay=null
 loading=null
 sidebar=null
 
-overlay.show=-> overlay.style.display='block'
-overlay.hide=-> overlay.style.display='none'
-loading.show=->
-	overlay.show()
-	loading.style.display='block'
-loading.hide=-> loading.style.display='none'
-
 communique_cache=null
 
 #TODO: property handle xhr onerror(s)
@@ -79,4 +72,10 @@ window.addEventListener 'load',->
 	overlay=messages_panel.querySelector('.overlay')
 	loading=messages_panel.querySelector('.loading')
 	sidebar=messages_panel.querySelector('.sidebar')
+    overlay.show=-> overlay.style.display='block'
+    overlay.hide=-> overlay.style.display='none'
+    loading.show=->
+        overlay.show()
+    	loading.style.display='block'
+    loading.hide=-> loading.style.display='none'
 ,false
