@@ -21,6 +21,12 @@ communique_cache=null
 
 #TODO: property handle xhr onerror(s)
 
+post_data=(dict)->
+    arr=["csrf_token=#{encode_uri_component(document.body.getAttribute('csrf-token'))}"]
+    for own k,v of dict
+        arr.push "#{encode_uri_component(k)}=#{encode_uri_component(v)}"
+    return arr.join('&')
+
 class Communique
 	constructor:(data)->
 		communique_cache[data.id]=this
@@ -34,6 +40,10 @@ class Communique
 		@dom.classList.add('unread') if data.unread
 		@dom.textContent=data.users.join(', ')
 		if sidebar.childNodes[0] then sidebar.insertBefore(@dom,sidebar.childNodes[0]) else sidebar.appendChild(@dom)
+
+Communique.load_new=(id)->
+    op=new XMLHttpRequest
+    op.open('get',"/messaging/#{id}",true)
 
 window.addEventListener 'load',->
 	message_audio=new Audio

@@ -31,7 +31,7 @@ class CommuniqueFindingHandler(BaseHandler):
 class MessagingPostHandler(CommuniqueFindingHandler):
     def post(self,communique_id):
         self.communique.post_message(sender=self.current_user,contents=self.request.get('message'))
-class MessaingReadByHandler(CommuniqueFindingHandler):
+class MessagingReadByHandler(CommuniqueFindingHandler):
     def post(self,communique_id):
         self.communique.read_by(self.current_user)
 class MessagingListAllHandler(BaseHandler):
