@@ -146,7 +146,7 @@ html, body {
   #messages-panel:not(.active) .messages-opener:hover {
     background-color: #AAA; }
   #messages-panel:not(.active) .contents {
-    display: none; }
+    background-color: #c8c8c8; }
 
 #messages-panel.active {
   height: 100%;
@@ -162,6 +162,10 @@ html, body {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: #AAA; }
+  #messages-panel.active .message-opener:hover {
+    background-color: #666; }
+  #messages-panel.active .contents {
+    background-color: rgba(200, 200, 200, 0); }
 
 @-webkit-keyframes attn {
   0% {
@@ -237,10 +241,16 @@ html, body {
     animation-direction: alternate; }
   #messages-panel .contents {
     position: absolute;
-    top: 0px;
+    top: 5px;
     left: 0px;
     width: 100%;
-    bottom: 25px; }
+    bottom: 25px;
+    -webkit-transition: bakcground-color 1s;
+    -moz-transition: bakcground-color 1s;
+    -ms-transition: bakcground-color 1s;
+    -o-transition: bakcground-color 1s;
+    transition: bakcground-color 1s;
+    overflow: hidden; }
     #messages-panel .contents .sidebar {
       position: absolute;
       left: 5px;
@@ -256,6 +266,26 @@ html, body {
       left: 210px;
       right: 5px;
       bottom: 0px; }
+      #messages-panel .contents .main-pane .overlay {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background-color: rgba(200, 200, 200, 0.75);
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none; }
+        #messages-panel .contents .main-pane .overlay .loading {
+          width: 100%;
+          text-align: center;
+          height: 20px;
+          font-weight: bold;
+          margin-top: -10px;
+          position: absolute;
+          top: 50%;
+          display: none; }
       #messages-panel .contents .main-pane .messages {
         position: absolute;
         top: 0px;
@@ -263,9 +293,13 @@ html, body {
         right: 0px;
         bottom: 35px;
         overflow-x: hidden;
-        overflow-y: auto; }
+        overflow-y: auto;
+        margin: 0;
+        padding: 0; }
         #messages-panel .contents .main-pane .messages .message-group {
-          min-height: 36px; }
+          min-height: 36px;
+          width: 100%;
+          position: relative; }
           #messages-panel .contents .main-pane .messages .message-group .user {
             margin: 0;
             padding: 0;
@@ -275,13 +309,17 @@ html, body {
               height: 36px;
               background-repeat: no-repeat;
               background-size: contain;
-              background-position: center center; }
+              background-position: center center;
+              background: blue;
+              display: block; }
             #messages-panel .contents .main-pane .messages .message-group .user .name {
-              font-size: 9px;
+              font-size: 10px;
               width: 36px;
               text-align: center; }
           #messages-panel .contents .main-pane .messages .message-group .message {
-            margin-left: 40px; }
+            position: relative;
+            left: 20px;
+            right: 0px; }
         #messages-panel .contents .main-pane .messages .message-group:not(:last-child) {
           margin-bottom: 10px; }
       #messages-panel .contents .main-pane textarea {

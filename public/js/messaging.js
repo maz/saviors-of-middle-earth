@@ -39,7 +39,9 @@
         if (!focused) {
           play_message_notification();
         }
-        if (!messages_panel.classList.contains('active')) {
+        if (messages_panel.classList.contains('active')) {
+          return null;
+        } else {
           return messages_opener.classList.add('attn');
         }
       }

@@ -62,7 +62,6 @@ class StoreUser(db.Model):
     image=db.BlobProperty()
     
     channel_tokens=db.StringListProperty()
-    last_message_read=db.DateTimeProperty(auto_now_add=True)
     
     def notify_channels(self,action,**kwargs):
         kwargs=dict(kwargs)
@@ -120,8 +119,14 @@ class StoreUser(db.Model):
         for itm in self.owned_items().run(): itm.delete()
     def communiques(self):
         return Communique.all().filter('users =',self.key())
-    
+
+class UserLastRead(db.Model):
+    time=db.DateTimeProperty(auto_now=True)
+    user=db.ReferenceProperty(StoreUser,collection_name="user_collection")
+    communique=db.ReferenceProperty(collection_name="communique_collection")
+
 class Communique(db.Model):
+    EPOCH=datetime.fromtimestamp(0)
     users=db.ListProperty(db.Key)
     last_message_sent=db.DateTimeProperty(auto_now_add=True)
     def post_message(self,sender,contents):
@@ -130,6 +135,18 @@ class Communique(db.Model):
             if user!=sender.key().id(): StoreUser.get(user).notify_channels('new_message',user=sender.key().id(),communique=self.key().id(),contents=contents)
     def messages(self):
         Message.all().filter('communique =',self.key()).order('-time')
+    def last_read_by(self,user):
+        arr=UserLastRead.all().filter('user =',user).filter('communique =',self).fetch(limit=1)
+        if arr and len(arr):
+            return arr[0].time
+        else:
+            return Communique.EPOCH
+    def read_by(self,user):
+        arr=UserLastRead.all().filter('user =',user).filter('communique =',self).fetch(limit=1)
+        if arr and len(arr):
+            arr[0].put()
+        else:
+            UserLastRead(user=user,communique=self).put()
 
 class Message(db.Model):
     communique=db.ReferenceProperty(Communique,collection_name="messages_collection")

@@ -24,7 +24,10 @@ window.addEventListener 'load',->
 		msg=JSON.parse(evt.data)
 		if msg.action is 'new_message'
 			play_message_notification() if not focused
-			messages_opener.classList.add('attn') unless messages_panel.classList.contains('active')
+			if messages_panel.classList.contains('active')
+				null
+			else
+				messages_opener.classList.add('attn')
 	socket.onerror=socket.onclose=->
 		null
 	messages_panel=$('messages-panel')

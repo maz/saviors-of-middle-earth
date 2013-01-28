@@ -31,10 +31,13 @@ class CommuniqueFindingHandler(BaseHandler):
 class MessagingPostHandler(CommuniqueFindingHandler):
     def post(self,communique_id):
         self.communique.post_message(sender=self.current_user,contents=self.request.get('message'))
+class MessaingReadByHandler(CommuniqueFindingHandler):
+    def post(self,communique_id):
+        self.communique.read_by(self.current_user)
 class MessagingListAllHandler(BaseHandler):
     def get(self):
         self.response.headers['Content-Type']='application/json'
-        self.response.write(json.dumps(map(lambda com:map(lambda user_id: StoreUser.get(user_id).nickname,com.users) ,json.dumps(self.current_user.communiques().run()))))
+        self.response.write(json.dumps(map(lambda com:dict(unread=com.last_message_sent>=com.last_read_by(self.current_user),id=com.key().id(),users=map(lambda user_id: StoreUser.get(user_id).nickname,com.users)),json.dumps(self.current_user.communiques().order('-last_message_sent').run()))))
 class MessaingListHandler(CommuniqueFindingHandler):
     def get(self,communique_id):
         self.response.headers['Content-Type']='application/json'
@@ -53,6 +56,7 @@ class MessaingListHandler(CommuniqueFindingHandler):
 app = webapp2.WSGIApplication([
     (r'/_ah/channel/connected/',ChannelConnectedHandler),
     (r'/_ah/channel/disconnected/',ChannelDisconnectedHandler),
+    (r'/messaging/(\d+)/read_by',MessagingReadByHandler),
     (r'/messaging/(\d+)/post',MessagingPostHandler),
     (r'/messaging/list',MessagingListAllHandler),
     (r'/messaging/(\d+)',MessaingListHandler)

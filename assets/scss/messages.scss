@@ -16,7 +16,7 @@ $messages-panel-transition-duration:1s;
 		background-color:#AAA;
 	}
 	.contents{
-		display:none;
+		background-color:rgba(200,200,200,1.0);
 	}
 }
 $messages-panel-transitions:height $messages-panel-transition-duration,background-color $messages-panel-transition-duration;
@@ -29,6 +29,12 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 		border-top-left-radius:10px;
 		border-top-right-radius:10px;
 		background-color:#AAA;
+	}
+	.message-opener:hover{
+		background-color:#666;
+	}
+	.contents{
+		background-color:rgba(200,200,200,0.0);
 	}
 	@include transition($messages-panel-transitions);
 }
@@ -79,10 +85,12 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 	}
 	.contents{
 		position:absolute;
-		top:0px;
+		top:5px;
 		left:0px;
 		width:100%;
 		bottom:25px;
+		@include transition(bakcground-color $messages-panel-transition-duration);
+		overflow:hidden;
 		.sidebar{
 			position:absolute;
 			left:5px;
@@ -99,6 +107,25 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 			left:210px;
 			right:5px;
 			bottom:0px;
+			.overlay{
+				position:absolute;
+				top:0px;
+				left:0px;
+				right:0px;
+				bottom:0px;
+				background-color:rgba(200,200,200,0.75);
+				.loading{
+					width:100%;
+					text-align:center;
+					height:20px;
+					font-weight:bold;
+					margin-top:-10px;
+					position:absolute;
+					top:50%;
+					display:none;
+				}
+				@include user-select(none);
+			}
 			.messages{
 				position:absolute;
 				top:0px;
@@ -107,8 +134,12 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 				bottom:35px;
 				overflow-x:hidden;
 				overflow-y:auto;
+				margin:0;
+				padding:0;
 				.message-group{
 					min-height:36px;
+					width:100%;
+					position:relative;
 					.user{
 						margin:0;
 						padding:0;
@@ -118,16 +149,20 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 							background-repeat:no-repeat;
 							background-size:contain;
 							background-position:center center;
+							background:blue;
+							display:block;
 						}
 						.name{
-							font-size:9px;
+							font-size:10px;
 							width:36px;
 							text-align:center;
 						}
 						float:left;
 					}
 					.message{
-						margin-left:40px;
+						position:relative;
+						left:20px;
+						right:0px;
 					}
 				}
 				.message-group:not(:last-child){
