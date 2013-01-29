@@ -33,6 +33,7 @@ class Communique
 		@unread=data.unread
 		@id=data.id
 		@users=data.users
+		@messages=data.messages
 		
 		@dom=document.createElement('div')
 		@dom.setAttribute('data-id',data.id)
@@ -41,9 +42,12 @@ class Communique
 		@dom.textContent=data.users.join(', ')
 		if sidebar.childNodes[0] then sidebar.insertBefore(@dom,sidebar.childNodes[0]) else sidebar.appendChild(@dom)
 
-Communique.load_new=(id)->
+Communique.load_new=(id,cb)->
 	op=new XMLHttpRequest
 	op.open('get',"/messaging/#{id}",true)
+	op.responseType='json'
+	op.onload=->
+		cb(new Communique(op.response))
 
 window.addEventListener 'load',->
 	message_audio=new Audio
