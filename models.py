@@ -105,13 +105,14 @@ class StoreUser(db.Model):
         arr=cls.gql("WHERE userid=:1",user.user_id()).fetch(limit=1)
         if len(arr):
             model=arr[0]
-            if model.email!=user.email() or model.nickname!=user.nickname():
+            if model.email!=user.email():
                 model.email=user.email()
-                model.nickname=user.nickname()
                 model.put()
             return model
         else:
-            model=cls(userid=user.user_id(),admin=users.is_current_user_admin() or user.email() in ["hardcodetest1@gmail.com","hardcodetest2@gmail.com"],email=user.email(),nickname=user.nickname())
+            model=cls(userid=user.user_id(),admin=users.is_current_user_admin() or user.email() in ["hardcodetest1@gmail.com","hardcodetest2@gmail.com"],email=user.email())
+            model.put()
+            model.nickname="User %d"%model.key().id()
             model.put()
             return model
     def google_user(self):
