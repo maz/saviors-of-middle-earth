@@ -50,12 +50,12 @@ class MessagingListHandler(CommuniqueFindingHandler):
         off=int(self.request.get('offset') or 0)
         out['messages']=map(lambda x: dict(more_pages=self.communique.messages().count(limit=1,offset=off+MessagingListHandler.MESSAGES_PER_PAGE+1),user=user_referenced(x.user.key().id()),contents=x.contents,time=x.time.isoformat()),self.communique.messages().run(limit=MessagingListHandler.MESSAGES_PER_PAGE,offset=off))
         if not self.request.get('only_messages'):
-        	out['users']=dict.fromkeys(referenced_users)
-        	out['id']=int(communique_id)
-        	out['unread']=com.last_message_sent>=com.last_read_by(self.current_user)
-        	#TODO: nicer way to do the following:
-       		for key in out['users'].keys():
-            	outs['users'][key]=StoreUser.by_id(key).nickname
+            out['users']=dict.fromkeys(referenced_users)
+            out['id']=int(communique_id)
+            out['unread']=com.last_message_sent>=com.last_read_by(self.current_user)
+            #TODO: nicer way to do the following:
+            for key in out['users'].keys():
+                outs['users'][key]=StoreUser.by_id(key).nickname
         self.response.write(json.dumps(out))
 
 app = webapp2.WSGIApplication([
