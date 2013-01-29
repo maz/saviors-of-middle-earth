@@ -22,10 +22,10 @@ communique_cache=null
 #TODO: property handle xhr onerror(s)
 
 post_data=(dict)->
-    arr=["csrf_token=#{encode_uri_component(document.body.getAttribute('csrf-token'))}"]
-    for own k,v of dict
-        arr.push "#{encode_uri_component(k)}=#{encode_uri_component(v)}"
-    return arr.join('&')
+	arr=["csrf_token=#{encode_uri_component(document.body.getAttribute('csrf-token'))}"]
+	for own k,v of dict
+		arr.push "#{encode_uri_component(k)}=#{encode_uri_component(v)}"
+	return arr.join('&')
 
 class Communique
 	constructor:(data)->
@@ -42,8 +42,8 @@ class Communique
 		if sidebar.childNodes[0] then sidebar.insertBefore(@dom,sidebar.childNodes[0]) else sidebar.appendChild(@dom)
 
 Communique.load_new=(id)->
-    op=new XMLHttpRequest
-    op.open('get',"/messaging/#{id}",true)
+	op=new XMLHttpRequest
+	op.open('get',"/messaging/#{id}",true)
 
 window.addEventListener 'load',->
 	message_audio=new Audio
@@ -82,10 +82,10 @@ window.addEventListener 'load',->
 	overlay=messages_panel.querySelector('.overlay')
 	loading=messages_panel.querySelector('.loading')
 	sidebar=messages_panel.querySelector('.sidebar')
-    overlay.show=-> overlay.style.display='block'
-    overlay.hide=-> overlay.style.display='none'
-    loading.show=->
-        overlay.show()
-    	loading.style.display='block'
-    loading.hide=-> loading.style.display='none'
+	overlay.show=-> overlay.style.display='block'
+	overlay.hide=-> overlay.style.display='none'
+	loading.show=->
+		overlay.show()
+		loading.style.display='block'
+	loading.hide=-> loading.style.display='none'
 ,false
