@@ -1,6 +1,10 @@
 {%macro item_actions(itm)%}
-{%if itm.removeable_by(current_user)%}{#all those who can edit item X can remove item X#}
+{%if current_user%}
 <div class="actions">
+	{%if current_user.key()!=itm.owner.key()%}
+	<input type="button" value="Communicate with Seller" class="item-communicate-button" data-item="{{itm.key().id()}}"/>
+	{%endif%}
+	{%if itm.removeable_by(current_user)%}{#all those who can edit item X can remove item X#}
 	{%if itm.owner.key()==current_user.key()%}
 	<a href="{{itm|url(action='edit')}}">Edit</a>
 	{%endif%}
@@ -8,6 +12,7 @@
 		<input type="hidden" name="csrf_token" value="{{csrf_token}}"/>
 		<input type="submit" value="Delete"/>
 	</form>
+	{%endif%}
 </div>
 {%endif%}
 {%endmacro%}

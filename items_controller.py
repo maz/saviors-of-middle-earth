@@ -100,6 +100,8 @@ class CommunicateItemHandler(BaseHandler):
         if not item: self.abort(404)
         if not item.viewable_by(self.current_user): self.abort(403)
         c=Communique(users=[self.current_user.key(),item.owner.key().id()],title=item.communique_title)
+        c.put()
+        self.response.out.write(str(c.key().id()))
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),
     ('/search',SearchHandler),

@@ -42,7 +42,7 @@ UTC=FixedTimeZone(0)
 
 class BaseHandler(webapp2.RequestHandler):
     def log(self,msg):
-        LogEntry(ip=self.request.remote_addr,user=(self.current_user.key() if self.current_user else None),msg=msg,referrer=self.request.headers['referrer']).put()
+        LogEntry(ip=self.request.remote_addr,user=(self.current_user.key() if self.current_user else None),msg=msg,referrer=self.request.headers.get('Referrer')).put()
     def handle_exception(self,exception,debug):
         if isinstance(exception,webapp2.HTTPException):
             if exception.code==403:
