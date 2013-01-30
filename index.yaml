@@ -10,6 +10,12 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: Communique
+  properties:
+  - name: users
+  - name: last_message_sent
+    direction: desc
+
 - kind: Item
   properties:
   - name: owner

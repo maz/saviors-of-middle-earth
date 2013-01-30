@@ -3,7 +3,7 @@ from webapp2_extras.security import generate_random_string
 from webapp2_extras import sessions
 from webapp2_extras import jinja2
 from jinja2 import Markup
-from models import LogEntry,StoreUser
+from models import LogEntry,StoreUser,Item
 from datetime import tzinfo,timedelta
 import logging
 from google.appengine.api import users
@@ -25,7 +25,7 @@ def generate_url(x,*args,**kwargs):
     return x.url(*args,**kwargs)
 jinja2.default_config['filters']['url']=generate_url
 jinja2.default_config['filters']['date']=lambda x: x.strftime("%m/%d/%y")
-jinja2.default_config['filters']['price']=lambda x: "$%s"%(re.sub(r'(\d\d\d)(\d)',lambda match: "%s,%s"%(match.group(1),match.group(2)),("%.2f"%x)[::-1]))[::-1]
+jinja2.default_config['filters']['price']=Item.price_string
 jinja2.default_config['filters']['urlencode']=urllib.quote_plus
 
 class FixedTimeZone(tzinfo):

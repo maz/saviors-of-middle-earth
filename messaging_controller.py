@@ -37,7 +37,10 @@ class MessagingReadByHandler(CommuniqueFindingHandler):
 class MessagingListAllHandler(BaseHandler):
     def get(self):
         self.response.headers['Content-Type']='application/json'
-        self.response.write(json.dumps(map(lambda com:dict(unread=com.last_message_sent>=com.last_read_by(self.current_user),id=com.key().id(),users=map(lambda user_id: StoreUser.get(user_id).nickname,com.users)),json.dumps(self.current_user.communiques().order('-last_message_sent').run()))))
+        self.response.write(json.dumps(map(lambda com:dict(title=com.title
+            ,unread=com.last_message_sent>=com.last_read_by(self.current_user),
+            id=com.key().id(),
+            users=map(lambda user_id: StoreUser.get(user_id).nickname,com.users)),self.current_user.communiques().order('-last_message_sent').run())))
 class MessagingListHandler(CommuniqueFindingHandler):
     MESSAGES_PER_PAGE=50
     def get(self,communique_id):
@@ -48,11 +51,13 @@ class MessagingListHandler(CommuniqueFindingHandler):
             referenced_users.add(x)
             return x
         off=int(self.request.get('offset') or 0)
-        out['messages']=map(lambda x: dict(more_pages=self.communique.messages().count(limit=1,offset=off+MessagingListHandler.MESSAGES_PER_PAGE+1),user=user_referenced(x.user.key().id()),contents=x.contents,time=x.time.isoformat()),self.communique.messages().run(limit=MessagingListHandler.MESSAGES_PER_PAGE,offset=off))
-        if not self.request.get('only_messages'):
+        out['more_messages']=self.communique.messages().count(limit=1,offset=off+MessagingListHandler.MESSAGES_PER_PAGE+1)
+        out['messages']=map(lambda x: dict(user=user_referenced(x.user.key().id()),contents=x.contents,time=x.time.isoformat()),self.communique.messages().run(limit=MessagingListHandler.MESSAGES_PER_PAGE,offset=off))
+        if not self.request.get('onlymessages'):
             out['users']=dict.fromkeys(referenced_users)
             out['id']=int(communique_id)
             out['unread']=com.last_message_sent>=com.last_read_by(self.current_user)
+            out['title']=com.title
             #TODO: nicer way to do the following:
             for key in out['users'].keys():
                 outs['users'][key]=StoreUser.by_id(key).nickname

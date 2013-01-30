@@ -18,6 +18,11 @@ class Item(db.Model):
     
     picture=db.BlobProperty()
     
+    @staticmethod
+    def price_string(x): return "$%s"%(re.sub(r'(\d\d\d)(\d)',lambda match: "%s,%s"%(match.group(1),match.group(2)),("%.2f"%x)[::-1]))[::-1]
+    @property
+    def communique_title(self):
+        return "%s: %s"%(self.name,self.price_string(self.price))
     @property
     def expired(self):
     	return self.creation_time>=Item.expiry_cutoff()
@@ -133,6 +138,7 @@ class Communique(db.Model):
     EPOCH=datetime.fromtimestamp(0)
     users=db.ListProperty(db.Key)
     last_message_sent=db.DateTimeProperty(auto_now_add=True)
+    title=db.StringProperty()
     def post_message(self,sender,contents):
         Message(communique=self,user=sender,contents=contents).put()
         for user in self.users:

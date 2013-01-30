@@ -21,6 +21,8 @@ communique_cache=null
 
 #TODO: property handle xhr onerror(s)
 
+empty_function= -> null
+
 post_data=(dict)->
 	arr=["csrf_token=#{encode_uri_component(document.body.getAttribute('csrf-token'))}"]
 	for own k,v of dict
@@ -34,6 +36,7 @@ class Communique
 		@id=data.id
 		@users=data.users
 		@messages=data.messages
+		@more_messages=data.more_messages ? true
 		
 		@dom=document.createElement('div')
 		@dom.setAttribute('data-id',data.id)
@@ -41,14 +44,48 @@ class Communique
 		@dom.classList.add('unread') if data.unread
 		@dom.textContent=data.users.join(', ')
 		if sidebar.childNodes[0] then sidebar.insertBefore(@dom,sidebar.childNodes[0]) else sidebar.appendChild(@dom)
+	loadMessages:(cb)->
+		cb?=empty_function
+		return cb() unless @more_messages
+		op=new XMLHttpRequest
+		op.open('get',"/messaging/#{@id}?onlymessages=1&offset=#{@messages.length}")
+		loading.show()
+		op.onload= =>
+			resp=JSON.parse(op.responseText)
+			@more_mesages=resp.more_messages
+			@messages=resp.messages.concat(@messages)
+			cb()
+			loading.hide()
+			overlay.hide()
+		op.send(null)
+	loadMoreMessages:->
+		@loadMessages()
 
 Communique.load_new=(id,cb)->
+	cb?=empty_function
 	op=new XMLHttpRequest
 	op.open('get',"/messaging/#{id}",true)
-	op.responseType='json'
 	op.onload=->
-		cb(new Communique(op.response))
-
+		cb(new Communique(JSON.parse(op.responseText)))
+		loading.hide()
+	op.send(null)
+	loading.show()
+@MessagingLoadCommunique=(id,cb)->
+	cb?=empty_function
+	func=->
+		Communique.load_new(id,cb)
+	if communique_cache then func() else MessagingForceReload(cb)
+MessagingForceReload=(cb)->
+	cb?=empty_function
+	communique_cache={}
+	loading.show()
+	op=new XMLHttpRequest
+	op.open 'get','/messaging/list',true
+	op.onload=->
+		for communique in JSON.parse(op.responseText)
+			new Communique(communique)
+		loading.hide()
+	op.send(null)
 window.addEventListener 'load',->
 	message_audio=new Audio
 	message_audio.src="/sounds/message.wav"
@@ -73,15 +110,7 @@ window.addEventListener 'load',->
 		messages_opener.textContent=if messages_panel.classList.contains('active') then "Close" else "Messages"
 		messages_opener.classList.remove('attn')
 		if messages_panel.classList.contains('active') and not communique_cache
-			communique_cache={}
-			loading.show()
-			op=new XMLHttpRequest
-			op.open 'get','/messaging/list',true
-			op.responeType='json'
-			op.onload=->
-				for communique in op.response
-					create_communique_dom(communique)
-				loading.hide()
+			MessagingForceReload()
 	,false
 	overlay=messages_panel.querySelector('.overlay')
 	loading=messages_panel.querySelector('.loading')

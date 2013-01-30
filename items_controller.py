@@ -1,7 +1,7 @@
 import webapp2
 from handlers import BaseHandler
 import env
-from models import Item
+from models import Item, Communique
 from datetime import datetime
 import base64
 
@@ -91,6 +91,15 @@ class ShowItemHandler(BaseHandler):
         if not item: self.abort(404)
         if not item.viewable_by(self.current_user): self.abort(403)
         self.render_template('items/show.html',item=item)
+class CommunicateItemHandler(BaseHandler):
+    def post(self,ident):
+        try:
+            item=Item.get_by_id(int(ident))
+        except:
+            self.abort(404)
+        if not item: self.abort(404)
+        if not item.viewable_by(self.current_user): self.abort(403)
+        c=Communique(users=[self.current_user.key(),item.owner.key().id()],title=item.communique_title)
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),
     ('/search',SearchHandler),
@@ -101,6 +110,8 @@ app = webapp2.WSGIApplication([
     (r'/items/(\d+)/picture',ItemPictureHandler),
     (r'/items/(\d+)/.*/delete',DeleteItemHandler),
     (r'/items/(\d+)/delete',DeleteItemHandler),
+    (r'/items/(\d+)/.*/communicate',CommunicateItemHandler),
+    (r'/items/(\d+)/communicate',CommunicateItemHandler),
     (r'/items/(\d+)/.*',ShowItemHandler),
     (r'/items/(\d+)',ShowItemHandler),
 ], debug=(env.env==env.DEVELOPMENT))
