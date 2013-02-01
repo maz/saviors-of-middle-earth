@@ -60,7 +60,7 @@
 	</div>
 	{%if current_user%}
 	<div id="messages-panel">
-		<div class="messages-opener">
+		<div class="messages-opener{%if current_user.has_unread_messages%} attn{%endif%}">
 			Messages
 		</div>
 		<div class="contents">
