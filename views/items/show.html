@@ -3,6 +3,10 @@
 {{super()}}
 {{css("items/show")}}
 {%endblock%}
+{%block javascript%}
+{{super()}}
+{%if current_user%} {{js('items/list')}} {%endif%}
+{%endblock%}
 {% set title=item.name %}
 {%block content%}
 {%from 'items/macros.html' import item_actions with context%}

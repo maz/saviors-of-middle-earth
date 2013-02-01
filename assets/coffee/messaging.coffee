@@ -16,6 +16,7 @@ $=(id)->document.getElementById(id)
 overlay=null
 loading=null
 sidebar=null
+messages_panel=null
 
 communique_cache=null
 
@@ -75,6 +76,12 @@ Communique.load_new=(id,cb)->
 	func=->
 		Communique.load_new(id,cb)
 	if communique_cache then func() else MessagingForceReload(cb)
+@MessagingToggle=->
+	messages_panel.classList.toggle('active')
+	messages_opener.textContent=if messages_panel.classList.contains('active') then "Close" else "Messages"
+	messages_opener.classList.remove('attn')
+	if messages_panel.classList.contains('active') and not communique_cache
+		MessagingForceReload()
 MessagingForceReload=(cb)->
 	cb?=empty_function
 	communique_cache={}
@@ -106,11 +113,7 @@ window.addEventListener 'load',->
 	messages_panel=$('messages-panel')
 	messages_opener=messages_panel.querySelector('.messages-opener')
 	messages_opener.addEventListener 'click',->
-		messages_panel.classList.toggle('active')
-		messages_opener.textContent=if messages_panel.classList.contains('active') then "Close" else "Messages"
-		messages_opener.classList.remove('attn')
-		if messages_panel.classList.contains('active') and not communique_cache
-			MessagingForceReload()
+		MessagingToggle()
 	,false
 	overlay=messages_panel.querySelector('.overlay')
 	loading=messages_panel.querySelector('.loading')

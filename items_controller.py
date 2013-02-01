@@ -4,6 +4,7 @@ import env
 from models import Item, Communique
 from datetime import datetime
 import base64
+import logging
 
 class IndexHandler(BaseHandler):
     def get(self):
@@ -99,7 +100,7 @@ class CommunicateItemHandler(BaseHandler):
             self.abort(404)
         if not item: self.abort(404)
         if not item.viewable_by(self.current_user): self.abort(403)
-        c=Communique(users=[self.current_user.key(),item.owner.key().id()],title=item.communique_title)
+        c=Communique(users=[self.current_user.key(),item.owner.key()],title=item.communique_title)
         c.put()
         self.response.out.write(str(c.key().id()))
 app = webapp2.WSGIApplication([

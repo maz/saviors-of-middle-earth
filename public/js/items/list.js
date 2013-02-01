@@ -8,13 +8,16 @@
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       button = _ref[_i];
       _results.push((function(button) {
-        return button.addEventListner('click', function() {
+        return button.addEventListener('click', function() {
           var xhr;
           xhr = new XMLHttpRequest;
           xhr.open('post', "/items/" + (button.getAttribute('data-item')) + "/communicate", true);
+          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
           xhr.onload = function() {
             var id;
-            return id = parseInt(xhr.responseText);
+            id = parseInt(xhr.responseText);
+            MessagingLoadCommunique(id);
+            return MessagingToggle();
           };
           return xhr.send("csrf_token=" + (encodeURIComponent(document.body.getAttribute('data-csrf-token'))));
         }, false);

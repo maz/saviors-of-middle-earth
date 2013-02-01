@@ -8,6 +8,7 @@
 {%endblock%}
 {%block javascript%}
 {{super()}}
+{%if current_user%} {{js('items/list')}} {%endif%}
 {%if current_user and user.key()==current_user.key()%}
 {{js('image-editing')}}
 {%endif%}

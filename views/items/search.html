@@ -4,6 +4,10 @@
 {{super()}}
 {{css('items/search')}}
 {%endblock%}
+{%block javascript%}
+{{super()}}
+{%if current_user%} {{js('items/list')}} {%endif%}
+{%endblock%}
 
 {%block content%}
 {%from 'items/macros.html' import item with context%}
