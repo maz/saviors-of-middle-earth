@@ -166,6 +166,10 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 				overflow-y:auto;
 				margin:0;
 				padding:0;
+				.load-more-messages-button{
+					width:100%;
+					@include button(pill);
+				}
 				.message-group{
 					min-height:36px;
 					width:100%;

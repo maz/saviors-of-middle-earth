@@ -186,6 +186,55 @@
         overflow-y: auto;
         margin: 0;
         padding: 0; }
+        #messages-panel .contents .main-pane .messages .load-more-messages-button {
+          width: 100%;
+          border: 1px solid #3371b2;
+          border-color: #3371b2 #2457a3 #164297;
+          border-radius: 16px;
+          -webkit-box-shadow: inset 0 1px 0 0 #64a9f2, 0 1px 2px 0 #b3b3b3;
+          box-shadow: inset 0 1px 0 0 #64a9f2, 0 1px 2px 0 #b3b3b3;
+          color: white;
+          display: inline-block;
+          font-size: 11px;
+          font-weight: normal;
+          line-height: 1;
+          background-color: #4294f0;
+          background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4294f0), color-stop(100%, #0156fe));
+          background-image: -webkit-linear-gradient(top, #4294f0, #0156fe);
+          background-image: -moz-linear-gradient(top, #4294f0, #0156fe);
+          background-image: -ms-linear-gradient(top, #4294f0, #0156fe);
+          background-image: -o-linear-gradient(top, #4294f0, #0156fe);
+          background-image: linear-gradient(top, #4294f0, #0156fe);
+          padding: 5px 16px;
+          text-align: center;
+          text-decoration: none;
+          text-shadow: 0 -1px 1px #2762bf;
+          -webkit-background-clip: padding-box; }
+          #messages-panel .contents .main-pane .messages .load-more-messages-button:hover:not(:disabled) {
+            border: 1px solid #2062a7;
+            border-color: #2062a7 #0e479a #01318e;
+            -webkit-box-shadow: inset 0 1px 0 0 #519cf0;
+            box-shadow: inset 0 1px 0 0 #519cf0;
+            cursor: pointer;
+            background-color: #2d88ee;
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2d88ee), color-stop(100%, #1554ce));
+            background-image: -webkit-linear-gradient(top, #2d88ee, #1554ce);
+            background-image: -moz-linear-gradient(top, #2d88ee, #1554ce);
+            background-image: -ms-linear-gradient(top, #2d88ee, #1554ce);
+            background-image: -o-linear-gradient(top, #2d88ee, #1554ce);
+            background-image: linear-gradient(top, #2d88ee, #1554ce);
+            text-shadow: 0 -1px 1px #134faf;
+            -webkit-background-clip: padding-box; }
+          #messages-panel .contents .main-pane .messages .load-more-messages-button:active:not(:disabled) {
+            background: #226edd;
+            border: 1px solid #0d3c8c;
+            border-bottom: 1px solid #062d8d;
+            -webkit-box-shadow: inset 0 0 6px 3px #0c44b8, 0 1px 0 0 white;
+            box-shadow: inset 0 0 6px 3px #0c44b8, 0 1px 0 0 white;
+            text-shadow: 0 -1px 1px #1a52aa; }
+          #messages-panel .contents .main-pane .messages .load-more-messages-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed; }
         #messages-panel .contents .main-pane .messages .message-group {
           min-height: 36px;
           width: 100%;
