@@ -17,6 +17,6 @@
 	<label for="confirm-field">Type 'unrecoverable' in the box below to continue:</label>
 	<input id="confirm-field" type="text"/>
 	<input type="submit" value="Delete" disabled id="delete-button"/>
-	<a href="/settings">Take me back to settings!</a>
+	<a href="{{current_user|url}}">Take me back to settings!</a>
 </form>
 {%endblock%}
