@@ -1,8 +1,8 @@
-{%macro item_actions(itm)%}
+{%macro item_actions(itm,small=False)%}
 {%if current_user%}
 <div class="actions">
 	{%if current_user.key()!=itm.owner.key()%}
-	<input type="button" value="Communicate with Seller" class="item-communicate-button" data-item="{{itm.key().id()}}"/>
+	<input type="button" value="{%if small%}Chat{%else%}Communicate with Seller{%endif%}" class="item-communicate-button" data-item="{{itm.key().id()}}"/>
 	{%endif%}
 	{%if itm.removeable_by(current_user)%}{#all those who can edit item X can remove item X#}
 	{%if itm.owner.key()==current_user.key()%}
@@ -32,6 +32,6 @@
 			{{itm.description}}
 		</div>
 	</div>
-	{{item_actions(itm)}}
+	{{item_actions(itm,small=True)}}
 </div>
 {%endmacro%}
