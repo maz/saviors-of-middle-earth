@@ -17,6 +17,7 @@ overlay=null
 loading=null
 sidebar=null
 messages_panel=null
+messages_opener=null
 
 communique_cache=null
 
@@ -25,9 +26,9 @@ communique_cache=null
 empty_function= -> null
 
 post_data=(dict)->
-	arr=["csrf_token=#{encode_uri_component(document.body.getAttribute('csrf-token'))}"]
+	arr=["csrf_token=#{encodeURIComponent(document.body.getAttribute('data-csrf-token'))}"]
 	for own k,v of dict
-		arr.push "#{encode_uri_component(k)}=#{encode_uri_component(v)}"
+		arr.push "#{encodeURIComponent(k)}=#{encodeURIComponent(v)}"
 	return arr.join('&')
 
 class Communique
@@ -38,18 +39,27 @@ class Communique
 		@users=data.users
 		@messages=data.messages
 		@more_messages=data.more_messages ? true
+		@title=data.title
 		
 		@dom=document.createElement('div')
 		@dom.setAttribute('data-id',data.id)
 		@dom.classList.add('communique')
 		@dom.classList.add('unread') if data.unread
-		@dom.textContent=data.users.join(', ')
+		title=document.createElement('div')
+		title.textContent=@title
+		title.classList.add('title')
+		@dom.appendChild(title)
+		users=document.createElement('div')
+		users.classList.add('users')
+		users.textContent=data.users.join(', ')
+		@dom.appendChild(users)
+		@dom.addEventListener 'click',@select,false
 		if sidebar.childNodes[0] then sidebar.insertBefore(@dom,sidebar.childNodes[0]) else sidebar.appendChild(@dom)
 	loadMessages:(cb)->
 		cb?=empty_function
 		return cb() unless @more_messages
 		op=new XMLHttpRequest
-		op.open('get',"/messaging/#{@id}?onlymessages=1&offset=#{@messages.length}")
+		op.open('get',"/messaging/#{@id}?onlymessages=1&offset=#{if @messages then @messages.length else 0}")
 		loading.show()
 		op.onload= =>
 			resp=JSON.parse(op.responseText)
@@ -57,10 +67,20 @@ class Communique
 			@messages=resp.messages.concat(@messages)
 			cb()
 			loading.hide()
-			overlay.hide()
 		op.send(null)
 	loadMoreMessages:->
 		@loadMessages()
+	read:->
+		@dom.classList.remove('unread')
+		xhr=new XMLHttpRequest
+		xhr.open('post',"/messaging/#{@id}/read_by",true)
+		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+		xhr.send(post_data())#we don't care about the result
+	select:=>
+		for com in sidebar.querySelectorAll('.communique.selected')
+			com.classList.remove('selected')
+		@dom.classList.add('selected')
+		@read()
 
 Communique.load_new=(id,cb)->
 	cb?=empty_function
