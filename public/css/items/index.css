@@ -139,3 +139,6 @@
         height: 100%; }
       #content .carousel-container .carousel .carousel-contents .product-spacer:last-child {
         display: none; }
+#content .html5 {
+  display: block;
+  text-align: center; }
