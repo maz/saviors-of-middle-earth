@@ -83,8 +83,6 @@ class Communique
 			cb()
 			loading.hide()
 		op.send(null)
-	loadMoreMessages:(cb)->
-		@loadMessages(cb)
 	read:->
 		@dom.classList.remove('unread')
 		xhr=new XMLHttpRequest
@@ -123,6 +121,22 @@ class Communique
 			group.style.minHeight="#{parseFloat(group.style.minHeight)+div.offsetHeight}px"
 		else
 			group.style.minHeight="#{div.offsetHeight}px"
+	renderMessages:=>
+		@last_rendered_group_user=null
+		messages.innerHTML=""
+		if @more_mesages
+			button=document.createElement("input")
+			button.type="button"
+			button.value="Load More Messages"
+			button.className="load-more-messages-button"
+			button.addEventListener 'click',=>
+				@loadMessages(@renderMessages)
+			,false
+			messages.appendChild(button)
+		for msg in @messages
+			@render_message(msg)
+		overlay.hide()
+		ta.focus()
 	select:=>
 		return if selected_communique==this
 		selected_communique.dom.classList.remove('selected') if selected_communique
@@ -131,14 +145,7 @@ class Communique
 		messaging_title.textContent=@title
 		selected_communique=this
 		ta.value=""
-		func= =>
-			@last_rendered_group_user=null
-			messages.innerHTML=""
-			for msg in @messages
-				@render_message(msg)
-			overlay.hide()
-			ta.focus()
-		if @messages then func() else @loadMessages(func)
+		if @messages then @renderMessages() else @loadMessages(@renderMessages)
 
 Communique.load_new=(id,cb)->
 	cb?=empty_function

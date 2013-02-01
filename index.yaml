@@ -26,4 +26,9 @@ indexes:
   properties:
   - name: communique
   - name: time
+
+- kind: Message
+  properties:
+  - name: communique
+  - name: time
     direction: desc

@@ -56,6 +56,7 @@ class MessagingListHandler(CommuniqueFindingHandler):
         off=int(self.request.get('offset') or 0)
         out['more_messages']=self.communique.messages().count(limit=1,offset=off+MessagingListHandler.MESSAGES_PER_PAGE+1)
         out['messages']=map(lambda x: dict(user=x.user.key().id(),contents=x.contents,time=x.time.isoformat()),self.communique.messages().run(limit=MessagingListHandler.MESSAGES_PER_PAGE,offset=off))
+        out['messages'].reverse()
         if not self.request.get('onlymessages'):
             out['user_map']=generate_user_map(self.communique)
             out['id']=int(communique_id)

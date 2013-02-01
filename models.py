@@ -151,7 +151,7 @@ class Communique(db.Model):
                     user_obj.has_unread_messages=True
                     user_obj.put()
     def messages(self):
-        return Message.all().filter('communique =',self.key()).order('time')
+        return Message.all().filter('communique =',self.key()).order('-time')
     def last_read_by(self,user):
         if isinstance(user,db.Key):
             user=StoreUser.get(user)

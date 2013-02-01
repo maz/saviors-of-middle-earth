@@ -73,6 +73,8 @@
     function Communique(data) {
       this.select = __bind(this.select, this);
 
+      this.renderMessages = __bind(this.renderMessages, this);
+
       var title, users, _ref;
       communique_cache[data.id] = this;
       this.unread = data.unread;
@@ -145,10 +147,6 @@
       return op.send(null);
     };
 
-    Communique.prototype.loadMoreMessages = function(cb) {
-      return this.loadMessages(cb);
-    };
-
     Communique.prototype.read = function() {
       var xhr;
       this.dom.classList.remove('unread');
@@ -199,9 +197,31 @@
       }
     };
 
-    Communique.prototype.select = function() {
-      var func,
+    Communique.prototype.renderMessages = function() {
+      var button, msg, _i, _len, _ref,
         _this = this;
+      this.last_rendered_group_user = null;
+      messages.innerHTML = "";
+      if (this.more_mesages) {
+        button = document.createElement("input");
+        button.type = "button";
+        button.value = "Load More Messages";
+        button.className = "load-more-messages-button";
+        button.addEventListener('click', function() {
+          return _this.loadMessages(_this.renderMessages);
+        }, false);
+        messages.appendChild(button);
+      }
+      _ref = this.messages;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        msg = _ref[_i];
+        this.render_message(msg);
+      }
+      overlay.hide();
+      return ta.focus();
+    };
+
+    Communique.prototype.select = function() {
       if (selected_communique === this) {
         return;
       }
@@ -213,22 +233,10 @@
       messaging_title.textContent = this.title;
       selected_communique = this;
       ta.value = "";
-      func = function() {
-        var msg, _i, _len, _ref;
-        _this.last_rendered_group_user = null;
-        messages.innerHTML = "";
-        _ref = _this.messages;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          msg = _ref[_i];
-          _this.render_message(msg);
-        }
-        overlay.hide();
-        return ta.focus();
-      };
       if (this.messages) {
-        return func();
+        return this.renderMessages();
       } else {
-        return this.loadMessages(func);
+        return this.loadMessages(this.renderMessages);
       }
     };
 
