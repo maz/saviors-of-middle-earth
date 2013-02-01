@@ -173,6 +173,7 @@
   this.MessagingToggle = function() {
     messages_panel.classList.toggle('active');
     messages_opener.textContent = messages_panel.classList.contains('active') ? "Close" : "Messages";
+    document.body.style.overflow = messages_panel.classList.contains('active') ? "hidden" : "";
     messages_opener.classList.remove('attn');
     if (messages_panel.classList.contains('active') && !communique_cache) {
       return MessagingForceReload();

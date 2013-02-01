@@ -99,6 +99,7 @@ Communique.load_new=(id,cb)->
 @MessagingToggle=->
 	messages_panel.classList.toggle('active')
 	messages_opener.textContent=if messages_panel.classList.contains('active') then "Close" else "Messages"
+	document.body.style.overflow=if messages_panel.classList.contains('active') then "hidden" else ""
 	messages_opener.classList.remove('attn')
 	if messages_panel.classList.contains('active') and not communique_cache
 		MessagingForceReload()
