@@ -18,12 +18,19 @@ loading=null
 sidebar=null
 messages_panel=null
 messages_opener=null
+selected_communique=null
+messages=null
+ta=null
+message_group_template=null
+messaging_title=null
 
 communique_cache=null
 
 #TODO: property handle xhr onerror(s)
 
 empty_function= -> null
+
+last= (arr)-> return arr[arr.length-1]
 
 post_data=(dict)->
 	arr=["csrf_token=#{encodeURIComponent(document.body.getAttribute('data-csrf-token'))}"]
@@ -40,6 +47,7 @@ class Communique
 		@messages=data.messages
 		@more_messages=data.more_messages ? true
 		@title=data.title
+		@user_map=data.user_map
 		
 		@dom=document.createElement('div')
 		@dom.setAttribute('data-id',data.id)
@@ -55,6 +63,13 @@ class Communique
 		@dom.appendChild(users)
 		@dom.addEventListener 'click',@select,false
 		if sidebar.childNodes[0] then sidebar.insertBefore(@dom,sidebar.childNodes[0]) else sidebar.appendChild(@dom)
+	newMessage:(msg)->
+		if sidebar.childNodes[0] then sidebar.insertBefore(@dom,sidebar.childNodes[0]) else sidebar.appendChild(@dom)
+		if selected_communique==this
+			@render_message(msg)
+			@read()
+		else
+			@dom.classList.add('unread')
 	loadMessages:(cb)->
 		cb?=empty_function
 		return cb() unless @more_messages
@@ -64,23 +79,66 @@ class Communique
 		op.onload= =>
 			resp=JSON.parse(op.responseText)
 			@more_mesages=resp.more_messages
-			@messages=resp.messages.concat(@messages)
+			if @messages then @messages=resp.messages.concat(@messages) else @messages=resp.messages
 			cb()
 			loading.hide()
 		op.send(null)
-	loadMoreMessages:->
-		@loadMessages()
+	loadMoreMessages:(cb)->
+		@loadMessages(cb)
 	read:->
 		@dom.classList.remove('unread')
 		xhr=new XMLHttpRequest
 		xhr.open('post',"/messaging/#{@id}/read_by",true)
 		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
 		xhr.send(post_data())#we don't care about the result
+	post:(msg)->
+		@render_message(
+			user: parseInt(document.body.getAttribute('data-current-user')),
+			contents: msg
+		)
+		xhr=new XMLHttpRequest
+		xhr.open('post',"/messaging/#{@id}/post",true)
+		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+		xhr.send(post_data(contents: msg))#TODO: what happens if this fails?
+	render_message:(msg)->
+		div=document.createElement('div')
+		div.className='message'
+		div.textContent=msg.contents
+		if @last_rendered_group_user==msg.user
+			group=last(messages.children)
+		else
+			@last_rendered_group_user=msg.user
+			group=document.createElement('div')
+			group.className='message-group'
+			group.innerHTML=message_group_template.innerHTML
+			pic=group.querySelector('.pic')
+			pic.href="/users/#{msg.user}"
+			pic.style.backgroundImage="url('/users/#{msg.user}/thumbnail')"
+			group.querySelector('.name').textContent=@user_map[msg.user]
+			messages.appendChild(group)
+		#This is a nasty solution...
+		div.style.top=group.style.minHeight
+		group.insertBefore(div,group.querySelector('.clearer'))
+		if group.style.minHeight
+			group.style.minHeight="#{parseFloat(group.style.minHeight)+div.offsetHeight}px"
+		else
+			group.style.minHeight="#{div.offsetHeight}px"
 	select:=>
-		for com in sidebar.querySelectorAll('.communique.selected')
-			com.classList.remove('selected')
+		return if selected_communique==this
+		selected_communique.dom.classList.remove('selected') if selected_communique
 		@dom.classList.add('selected')
 		@read()
+		messaging_title.textContent=@title
+		selected_communique=this
+		ta.value=""
+		func= =>
+			@last_rendered_group_user=null
+			messages.innerHTML=""
+			for msg in @messages
+				@render_message(msg)
+			overlay.hide()
+			ta.focus()
+		if @messages then func() else @loadMessages(func)
 
 Communique.load_new=(id,cb)->
 	cb?=empty_function
@@ -126,7 +184,8 @@ window.addEventListener 'load',->
 		if msg.action is 'new_message'
 			play_message_notification() if not focused
 			if messages_panel.classList.contains('active')
-				null
+				com=communique_cache[msg.communique]
+				com.newMessage(msg) if com
 			else
 				messages_opener.classList.add('attn')
 	socket.onerror=socket.onclose=->
@@ -139,6 +198,16 @@ window.addEventListener 'load',->
 	overlay=messages_panel.querySelector('.overlay')
 	loading=messages_panel.querySelector('.loading')
 	sidebar=messages_panel.querySelector('.sidebar')
+	messages=messages_panel.querySelector('.messages')
+	message_group_template=messages_panel.querySelector('.template[data-name=message-group]')
+	messaging_title=messages_panel.querySelector('.title')
+	ta=messages_panel.querySelector('textarea')
+	ta.addEventListener 'keydown',(evt)->
+		if !evt.shiftKey and evt.keyCode==13#enter key
+			evt.preventDefault()
+			selected_communique.post(ta.value) if selected_communique
+			ta.value=""
+	,false
 	overlay.show=-> overlay.style.display='block'
 	overlay.hide=-> overlay.style.display='none'
 	loading.show=->

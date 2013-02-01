@@ -190,9 +190,13 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 						float:left;
 					}
 					.message{
-						position:relative;
-						left:20px;
-						right:0px;
+						position:absolute;
+						left:50px;
+						right:10px;
+						overflow:hidden;
+					}
+					.clearer{
+						clear:both;
 					}
 				}
 				.message-group:not(:last-child){

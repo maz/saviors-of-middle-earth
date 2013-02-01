@@ -142,9 +142,9 @@ class Communique(db.Model):
     def post_message(self,sender,contents):
         Message(communique=self,user=sender,contents=contents).put()
         for user in self.users:
-            if user!=sender.key().id(): StoreUser.get(user).notify_channels('new_message',user=sender.key().id(),communique=self.key().id(),contents=contents)
+            if user!=sender.key(): StoreUser.get(user).notify_channels('new_message',user=sender.key().id(),communique=self.key().id(),contents=contents)
     def messages(self):
-        Message.all().filter('communique =',self.key()).order('-time')
+        return Message.all().filter('communique =',self.key()).order('-time')
     def last_read_by(self,user):
         arr=UserLastRead.all().filter('user =',user).filter('communique =',self).fetch(limit=1)
         if arr and len(arr):

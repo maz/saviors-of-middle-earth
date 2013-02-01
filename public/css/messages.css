@@ -207,9 +207,12 @@
               width: 36px;
               text-align: center; }
           #messages-panel .contents .main-pane .messages .message-group .message {
-            position: relative;
-            left: 20px;
-            right: 0px; }
+            position: absolute;
+            left: 50px;
+            right: 10px;
+            overflow: hidden; }
+          #messages-panel .contents .main-pane .messages .message-group .clearer {
+            clear: both; }
         #messages-panel .contents .main-pane .messages .message-group:not(:last-child) {
           margin-bottom: 10px; }
       #messages-panel .contents .main-pane textarea {
