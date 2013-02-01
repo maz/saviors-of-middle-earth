@@ -142,6 +142,7 @@ class Communique(db.Model):
     title=db.StringProperty()
     def post_message(self,sender,contents):
         Message(communique=self,user=sender,contents=contents).put()
+        LogEntry(msg="message posted to communique '%s' with users %s"%(self.title,','.join(map(str,map(db.Key.id,self.users))))).put()
         for user in self.users:
             if user!=sender.key():
                 user_obj=StoreUser.get(user)
