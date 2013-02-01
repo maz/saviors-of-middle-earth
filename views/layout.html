@@ -8,7 +8,7 @@
 	{{js('timezone')}}
 	{{js('search-keyboard-shortcut')}}
 	{{js('forms')}}
-	{{js('flash')}}
+	{%if flash%}{{js('flash')}}{%endif%}
 	{%if current_user and not current_user.deactivated%}
 	<script type="text/javascript" src="/_ah/channel/jsapi"></script>
 	{{js('messaging')}}
