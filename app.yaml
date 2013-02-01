@@ -43,6 +43,10 @@ handlers:
   secure: always
 
 #Users Controller
+- url: /users/logout
+  script: users_controller.app
+  login: required
+  secure: always
 - url: /users/.*/delete
   script: users_controller.app
   login: required

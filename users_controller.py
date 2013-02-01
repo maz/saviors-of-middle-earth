@@ -5,6 +5,11 @@ from models import StoreUser,Item
 from google.appengine.api import users
 import base64
 
+class UserLogoutHandler(BaseHandler):
+    def get(self):
+        self.session['csrf_token']=''#clear the CSRF token
+        self.redirect(users.create_logout_url("/"))
+
 class UserFindingHandler(BaseHandler):
     def inner_dispatch(self):
         try:
@@ -51,7 +56,7 @@ class UserDeletionHandler(UserFindingHandler):
         self.current_user.delete_data()
         self.current_user.delete()
         self.log('user deleted')
-        self.redirect(users.create_logout_url('/'))
+        self.redirect("/users/logout")
 class UserPromotionHandler(AdminHandler,UserFindingHandler):
     def post(self,user_id):
         self.user.promote()
@@ -63,6 +68,7 @@ class UserDeactivationHandler(AdminHandler,UserFindingHandler):
         self.log('user deactivated')
         self.redirect(self.user.url())
 app = webapp2.WSGIApplication([
+    (r'/users/logout',UserLogoutHandler),
     (r'/users/(.*)/delete',UserDeletionHandler),
     (r'/users/(.*)/picture',UserPictureHandler),
     (r'/users/(.*)/thumbnail',UserThumbnailHandler),

@@ -20,7 +20,7 @@ jinja2.default_config['template_path']='views'
 jinja2.default_config['filters']={}
 jinja2.default_config['filters']['Markup']=Markup
 jinja2.default_config['filters']['login_url']=users.create_login_url
-jinja2.default_config['filters']['logout_url']=users.create_logout_url
+jinja2.default_config['filters']['logout_url']=lambda x: "/users/logout"
 def generate_url(x,*args,**kwargs):
     return x.url(*args,**kwargs)
 jinja2.default_config['filters']['url']=generate_url
