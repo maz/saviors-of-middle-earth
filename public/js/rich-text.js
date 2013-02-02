@@ -5,18 +5,23 @@
 
   FONTS = ["Arial", "Comic Sans MS", "Courier New", "Georiga", "Impact", "Times New Roman", "Trebuchet", "Verdana", "Webdings"];
 
+  this.StyleRuns = function(dom) {
+    return [];
+  };
+
   RichTextEditor = (function() {
 
     function RichTextEditor(field) {
       this.queryEverything = __bind(this.queryEverything, this);
 
-      var font, html, opt, queryEverythingLater, _i, _len,
+      var elem, font, html, opt, queryEverythingLater, _i, _j, _len, _len1, _ref,
         _this = this;
       this.container = field;
       html = field.innerHTML;
       field.innerHTML = "";
       this.toolbar = document.createElement('div');
       this.toolbar.className = 'toolbar';
+      this.toolbar.tabIndex = 0;
       this.fontName = document.createElement('select');
       for (_i = 0, _len = FONTS.length; _i < _len; _i++) {
         font = FONTS[_i];
@@ -29,7 +34,38 @@
       this.fontName.addEventListener('change', function() {
         return _this.exec('fontName', FONTS[_this.fontName.selectedIndex]);
       }, false);
+      this.bold = document.createElement('input');
+      this.bold.type = 'checkbox';
+      this.bold.addEventListener('change', function() {
+        return _this.exec('bold', _this.bold.checked);
+      }, false);
+      this.toolbar.appendChild(this.bold);
+      this.toolbar.appendChild(document.createTextNode('B'));
+      this.italic = document.createElement('input');
+      this.italic.type = 'checkbox';
+      this.italic.addEventListener('change', function() {
+        return _this.exec('italic', _this.italic.checked);
+      }, false);
+      this.toolbar.appendChild(this.italic);
+      this.toolbar.appendChild(document.createTextNode('I'));
+      this.underline = document.createElement('input');
+      this.underline.type = 'checkbox';
+      this.underline.addEventListener('change', function() {
+        return _this.exec('underline', _this.underline.checked);
+      }, false);
+      this.toolbar.appendChild(this.underline);
+      this.toolbar.appendChild(document.createTextNode('U'));
       this.container.appendChild(this.toolbar);
+      _ref = this.toolbar.children;
+      for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+        elem = _ref[_j];
+        elem.addEventListener('focus', function() {
+          return _this.doc.body.focus();
+        }, false);
+      }
+      this.toolbar.addEventListener('focus', function() {
+        return _this.doc.body.focus();
+      }, false);
       this.iframe = document.createElement('iframe');
       field.appendChild(this.iframe);
       this.iframe.src = "/html/blank.html";
@@ -53,7 +89,10 @@
     };
 
     RichTextEditor.prototype.queryEverything = function() {
-      return this.fontName.selectedIndex = FONTS.indexOf(this.doc.queryCommandValue('fontName').replace(/'/g, ""));
+      this.fontName.selectedIndex = FONTS.indexOf(this.doc.queryCommandValue('fontName').replace(/'/g, ""));
+      this.bold.checked = this.doc.queryCommandState('bold');
+      this.italic.checked = this.doc.queryCommandState('italic');
+      return this.underline.checked = this.doc.queryCommandState('underline');
     };
 
     return RichTextEditor;
