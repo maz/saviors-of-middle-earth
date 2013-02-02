@@ -13,7 +13,7 @@ class Item(db.Model):
     name=db.StringProperty()
     owner=db.ReferenceProperty()
     price=db.FloatProperty()
-    description=db.StringProperty(multiline=True)
+    description=db.TextProperty()
     creation_time=db.DateTimeProperty(auto_now_add=True)
     
     picture=db.BlobProperty()
@@ -67,7 +67,7 @@ class StoreUser(db.Model):
     email=db.StringProperty()
     
     nickname=db.StringProperty(indexed=False)
-    bio=db.StringProperty(indexed=False,default="")
+    description=db.TextProperty(default="")
     
     thumbnail=db.BlobProperty()
     image=db.BlobProperty()

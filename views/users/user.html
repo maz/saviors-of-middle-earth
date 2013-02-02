@@ -64,12 +64,13 @@
 	</form>
 	{%endif%}
 	{%if user.key()==current_user.key()%}
-	<form method="post" id="description">
+	<form method="post" id="description" data-completing-label="Updating..." action="{{current_user|url(action='description')}}">
 		{{csrf_field()}}
-		<textarea name="description" id="description-backend"></textarea>
-		<div class="rich-text" data-field="description-backend">
+		<textarea name="description"></textarea>
+		<div class="rich-text">
 			{{user.description|Markup}}
 		</div>
+		<input type="submit" value="Update"/>
 	</form>
 	{%else%}
 	<div id="description">

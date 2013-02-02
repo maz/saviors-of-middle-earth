@@ -25,3 +25,10 @@ window.addEventListener 'load',->
 		setTimeout recalc_width,0
 	,false
 ,false
+
+window.addEventListener 'load',->
+	form=document.getElementById('description')
+	form.addEventListener 'submit',->
+		form.querySelector('textarea').value=JSON.stringify(StyleRuns(form.querySelector('iframe').contentWindow.document.body))
+	,false
+,false

@@ -1,6 +1,34 @@
 FONTS=["Arial","Comic Sans MS","Courier New","Georiga","Impact","Times New Roman","Trebuchet","Verdana","Webdings"]
 
-@StyleRuns=(dom)-> []
+map=(func,iterable)->
+	arr=[]
+	for elem in iterable
+		arr.push(func(elem))
+	return arr
+
+join_arrays=(lsts)->
+	arr=[]
+	for lst in lsts
+		arr=arr.concat(lst)
+	return arr
+
+@StyleRuns=(dom)->
+	if dom.tagName
+		if dom.tagName=="DIV"
+			return [{newline:1}].concat(join_arrays(map(StyleRuns,dom.childNodes)))
+		else
+			style=window.getComputedStyle(dom)
+			arr=[{
+				"font-family":style.fontFamily,
+				"font-size":style.fontSize,
+				"font-weight":style.fontWeight,
+				"text-decoration":style.textDecoration,
+				"font-style":style.fontStyle
+			}].concat(join_arrays(map(StyleRuns,dom.childNodes)))
+			arr.push({end:1})
+			return arr
+	else
+		return [{text:dom.textContent.replace(/[\t\r\n ]+/g," ")}]
 
 class RichTextEditor
 	constructor:(field)->

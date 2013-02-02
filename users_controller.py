@@ -4,6 +4,7 @@ import env
 from models import StoreUser,Item
 from google.appengine.api import users
 import base64
+import rich_text
 
 class UserLogoutHandler(BaseHandler):
     def get(self):
@@ -64,6 +65,12 @@ class UserDeletionHandler(UserFindingHandler):
         self.current_user.delete()
         self.log('user deleted')
         self.redirect("/users/logout")
+class UserDescriptionHandler(UserFindingHandler):
+    def post(self,user_id):
+        if self.current_user.key()!=self.user.key(): return self.abort(403)
+        self.current_user.description=rich_text.from_style_runs(self.request.get('description'))
+        self.current_user.put()
+        self.redirect(self.current_user.url())
 class UserPromotionHandler(AdminHandler,UserFindingHandler):
     def post(self,user_id):
         self.user.promote()
@@ -80,6 +87,7 @@ app = webapp2.WSGIApplication([
     (r'/users/(.*)/picture',UserPictureHandler),
     (r'/users/(.*)/thumbnail',UserThumbnailHandler),
     (r'/users/(.*)/nickname',UserNicknameHandler),
+    (r'/users/(.*)/description',UserDescriptionHandler),
     (r'/users/(.*)/set_picture',UserSetPictureHandler),
     (r'/users/(.*)/deactivate',UserDeactivationHandler),
     (r'/users/(.*)/promote',UserPromotionHandler),

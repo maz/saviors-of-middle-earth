@@ -64,6 +64,10 @@ handlers:
 - url: /users/.*/nickname
   script: users_controller.app
   secure: always
+- url: /users/.*/description
+  script: users_controller.app
+  secure: always
+  login: required
 - url: /users/.*/deactivate
   script: users_controller.app
   login: required
