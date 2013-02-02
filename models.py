@@ -65,7 +65,10 @@ class StoreUser(db.Model):
     admin=db.BooleanProperty()
     deactivated=db.BooleanProperty(default=False,indexed=False)
     email=db.StringProperty()
+    
     nickname=db.StringProperty(indexed=False)
+    bio=db.StringProperty(indexed=False,default="")
+    
     thumbnail=db.BlobProperty()
     image=db.BlobProperty()
     

@@ -12,6 +12,7 @@
 {%if current_user and user.key()==current_user.key()%}
 {{js('image-editing')}}
 {{js('users/profile-editing')}}
+{{js('rich-text')}}
 {%endif%}
 {%endblock%}
 {%block content%}
@@ -61,6 +62,19 @@
 		<input type="submit" value="Make this user an Admin" class="admin-button"/>
 		{%endif%}
 	</form>
+	{%endif%}
+	{%if user.key()==current_user.key()%}
+	<form method="post" id="description">
+		{{csrf_field()}}
+		<textarea name="description" id="description-backend"></textarea>
+		<div class="rich-text" data-field="description-backend">
+			{{user.description|Markup}}
+		</div>
+	</form>
+	{%else%}
+	<div id="description">
+		{{user.description|Markup}}
+	</div>
 	{%endif%}
 </div>
 <div id="clearer"></div>

@@ -1,0 +1,18 @@
+@import "bourbon/bourbon";
+
+.rich-text{
+	position:relative;
+	.toolbar{
+		height:20px;
+		@include user-select(none);
+		background-color:orange;
+	}
+	iframe{
+		border:none;
+		position:absolute;
+		left:0px;
+		width:100%;
+		top:20px;
+		bottom:0px;
+	}
+}

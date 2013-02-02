@@ -98,6 +98,10 @@ handlers:
   secure: always
 
 #Static Content
+- url: /html/
+  static_dir: public/html
+  secure: always
+
 - url: /js/
   static_dir: public/js
   secure: always
