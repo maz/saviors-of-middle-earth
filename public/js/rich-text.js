@@ -3,7 +3,7 @@
   var FONTS, RichTextEditor, join_arrays, map,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  FONTS = ["Arial", "Comic Sans MS", "Courier New", "Georiga", "Impact", "Times New Roman", "Trebuchet", "Verdana", "Webdings"];
+  FONTS = ["Arial", "Comic Sans MS", "Courier New", "Georiga", "Impact", "Times New Roman", "Trebuchet", "Verdana"];
 
   map = function(func, iterable) {
     var arr, elem, _i, _len;

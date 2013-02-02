@@ -1,4 +1,4 @@
-FONTS=["Arial","Comic Sans MS","Courier New","Georiga","Impact","Times New Roman","Trebuchet","Verdana","Webdings"]
+FONTS=["Arial","Comic Sans MS","Courier New","Georiga","Impact","Times New Roman","Trebuchet","Verdana"]
 
 map=(func,iterable)->
 	arr=[]
