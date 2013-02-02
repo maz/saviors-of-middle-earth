@@ -40,6 +40,13 @@ class UserNicknameHandler(UserFindingHandler):
     def get(self,user_id):
         self.response.headers['Content-Type']='text/plain'
         self.response.out.write(self.user.nickname)
+    def post(self,user_id):
+        if self.user.key()!=self.current_user.key():
+            return self.abort(403)
+        if len(self.request.get('nickname').strip()) !=0:
+            self.user.nickname=self.request.get('nickname')
+            self.user.put()
+        self.redirect(self.user.url())
 class UserSetPictureHandler(UserFindingHandler):
     def post(self,user_id):
         if self.current_user.key()!=self.user.key(): return self.abort(403)

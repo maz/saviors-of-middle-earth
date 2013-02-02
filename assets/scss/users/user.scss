@@ -16,6 +16,29 @@
 	}
 }
 
+#nickname-form{
+	display:inline;
+	input[type=text]{
+		outline:none;
+		border:none;
+		-webkit-appearance:none;
+		background:none;
+		cursor:pointer;
+		font-size:inherit;
+		font-family:inherit;
+	}
+	input[type=text]:not(:focus):hover{
+		background:yellow;
+	}
+	input[type=text]:focus{
+		background:auto;
+		outline:auto;
+		border:auto;
+		-webkit-appearance:auto;
+		cursor:auto;
+	}
+}
+
 #clearer{
 	clear:both;
 }

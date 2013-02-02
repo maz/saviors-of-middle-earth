@@ -11,6 +11,7 @@
 {%if current_user%} {{js('items/list')}} {%endif%}
 {%if current_user and user.key()==current_user.key()%}
 {{js('image-editing')}}
+{{js('users/profile-editing')}}
 {%endif%}
 {%endblock%}
 {%block content%}
@@ -27,7 +28,14 @@
 <div id="right">
 	<div class="labeled">
 		<span>Nickname:</span>
+		{%if user.key()==current_user.key()%}
+		<form id="nickname-form" method="post" action="{{user|url(action='nickname')}}">
+			{{csrf_field()}}
+			<input type="text" name="nickname" value="{{user.nickname}}" size="{{user.nickname|length}}"/>
+		</form>
+		{%else%}
 		{{user.nickname}}
+		{%endif%}
 	</div>
 	{%if current_user and user.key()==current_user.key()%}
 	<a href="{{current_user|url(action='delete')}}">Delete All Your Data</a>
