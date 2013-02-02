@@ -64,7 +64,7 @@
     function RichTextEditor(field) {
       this.queryEverything = __bind(this.queryEverything, this);
 
-      var elem, font, html, opt, queryEverythingLater, _i, _j, _len, _len1, _ref,
+      var div, elem, font, html, opt, queryEverythingLater, _i, _j, _len, _len1, _ref,
         _this = this;
       this.container = field;
       html = field.innerHTML;
@@ -117,7 +117,10 @@
         return _this.doc.body.focus();
       }, false);
       this.iframe = document.createElement('iframe');
-      field.appendChild(this.iframe);
+      div = document.createElement('div');
+      div.className = 'container';
+      field.appendChild(div);
+      div.appendChild(this.iframe);
       this.iframe.src = "/html/blank.html";
       queryEverythingLater = function() {
         return setTimeout(_this.queryEverything, 0);

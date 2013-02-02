@@ -78,7 +78,10 @@ class RichTextEditor
 			@doc.body.focus()
 		,false
 		@iframe=document.createElement('iframe')
-		field.appendChild(@iframe)
+		div=document.createElement('div')
+		div.className='container'
+		field.appendChild(div)
+		div.appendChild(@iframe)
 		@iframe.src="/html/blank.html"
 		queryEverythingLater= =>
 			setTimeout @queryEverything,0
