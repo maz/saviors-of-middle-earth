@@ -29,7 +29,7 @@
 <div id="right">
 	<div class="labeled">
 		<span>Nickname:</span>
-		{%if user.key()==current_user.key()%}
+		{%if current_user and user.key()==current_user.key()%}
 		<form id="nickname-form" method="post" action="{{user|url(action='nickname')}}">
 			{{csrf_field()}}
 			<input type="text" name="nickname" value="{{user.nickname}}" size="{{user.nickname|length}}"/>
@@ -63,7 +63,7 @@
 		{%endif%}
 	</form>
 	{%endif%}
-	{%if user.key()==current_user.key()%}
+	{%if current_user and user.key()==current_user.key()%}
 	<form method="post" id="description" data-completing-label="Updating..." action="{{current_user|url(action='description')}}">
 		{{csrf_field()}}
 		<textarea name="description"></textarea>
