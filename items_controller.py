@@ -5,6 +5,7 @@ from models import Item, Communique
 from datetime import datetime
 import base64
 import logging
+import rich_text
 
 class IndexHandler(BaseHandler):
     def get(self):
@@ -28,7 +29,7 @@ class AddItemHandler(BaseHandler):
         if not item: item=Item()
         item_name=self.request.get('name')
         item_price=self.request.get('price')
-        item_description=self.request.get('description')
+        item_description=rich_text.from_style_runs(self.request.get('description'))
         item_picture=self.request.get('picture_512')
         errors=[]
         if item_name=="": errors.append("The item name must not be blank.")
@@ -39,7 +40,7 @@ class AddItemHandler(BaseHandler):
             errors.append("The price must be a number.")
         if item_price <=0: errors.append("The price must be greater than zero.")
         if len(errors):
-            self.render_template('items/form.html',title="Add an Item",item_picture_data=item_picture,item_picture=("data:image/png;base64,%s"%item_picture if item_picture else item.url(named=False,action="picture")),errors=errors,item_expiry=datetime.now()+Item.EXPIRATION_DELTA,item_name=item_name,item_description=item_description,item_price=item_price)
+            self.render_template('items/form.html',title="Add an Item",item_picture_data=item_picture,item_picture=("data:image/png;base64,%s"%item_picture if item_picture or creation else item.url(named=False,action="picture")),errors=errors,item_expiry=datetime.now()+Item.EXPIRATION_DELTA,item_name=item_name,item_description=item_description,item_price=item_price)
         else:
             item.name=item_name
             item.owner=self.current_user.key()

@@ -1,6 +1,7 @@
 @import "bourbon/bourbon";
 
 @import "images";
+@import "rich-text";
 
 #thumbnail{
 	float:left;
@@ -38,7 +39,9 @@ form{
 		font-style:italic;
 	}
 	textarea{
-		resize:none;
+		display:none;
+	}
+	.rich-text{
 		width:100%;
 		height:200px;
 	}

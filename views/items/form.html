@@ -6,6 +6,7 @@
 {%block javascript%}
 {{super()}}
 {{js('image-editing')}}
+{{js('rich-text')}}
 {%endblock%}
 {%block content%}
 <div id="thumbnail" class="image-editable" {%if item_picture%}style="background-image:url('{{item_picture}}')"{%endif%} data-sizes="512" data-field-name="picture" data-form="main-form">
@@ -33,7 +34,8 @@
 	</div>
 	<div class="expiration">This item will expire on {{convert_datetime(item_expiry)|date}}</div>
 	<label for="description">Description:</label>
-	<textarea name="description">{{item_description|default}}</textarea>
+	<textarea name="description"></textarea>
+	<div class="rich-text" data-form="main-form" data-field="description">{{item_description|Markup}}</div>
 	<div class="actions">
 		<a href="{{current_user|url}}">Back to My Items</a>
 		<input type="submit" value="Submit"/>

@@ -67,7 +67,7 @@
 	<form method="post" id="description" data-completing-label="Updating..." action="{{current_user|url(action='description')}}">
 		{{csrf_field()}}
 		<textarea name="description"></textarea>
-		<div class="rich-text">
+		<div class="rich-text" data-form="description" data-field="description">
 			{{user.description|Markup}}
 		</div>
 		<input type="submit" value="Update"/>

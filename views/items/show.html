@@ -19,7 +19,7 @@
 <a id="owner" href="{{item.owner|url}}">{{item.owner.nickname}}</a>
 <div id="expiration">Created on {{item.creation_time|date}}<br/>Expires on {{item.expiration()|date}}</div>
 <div id="description">
-	{{item.description}}
+	{{item.description|Markup}}
 </div>
 <div id="clearer"></div>
 {%endblock%}

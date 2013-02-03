@@ -34,12 +34,4 @@
     }, false);
   }, false);
 
-  window.addEventListener('load', function() {
-    var form;
-    form = document.getElementById('description');
-    return form.addEventListener('submit', function() {
-      return form.querySelector('textarea').value = JSON.stringify(StyleRuns(form.querySelector('iframe').contentWindow.document.body));
-    }, false);
-  }, false);
-
 }).call(this);

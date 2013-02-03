@@ -158,7 +158,17 @@
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       field = _ref[_i];
-      _results.push(new RichTextEditor(field));
+      _results.push((function(field) {
+        var form, rte;
+        rte = new RichTextEditor(field);
+        form = document.getElementById(field.getAttribute('data-form'));
+        if (!form) {
+          return;
+        }
+        return form.addEventListener('submit', function() {
+          return form.querySelector("*[name=" + (field.getAttribute('data-field')) + "]").value = JSON.stringify(StyleRuns(rte.doc.body));
+        }, false);
+      })(field));
     }
     return _results;
   }, false);

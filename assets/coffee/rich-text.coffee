@@ -105,5 +105,11 @@ class RichTextEditor
 
 window.addEventListener 'load',->
 	for field in document.querySelectorAll('.rich-text')
-		new RichTextEditor(field)
+		do (field)->
+			rte=new RichTextEditor(field)
+			form=document.getElementById(field.getAttribute('data-form'))
+			return unless form
+			form.addEventListener 'submit',->
+				form.querySelector("*[name=#{field.getAttribute('data-field')}]").value=JSON.stringify(StyleRuns(rte.doc.body))
+			,false
 ,false
