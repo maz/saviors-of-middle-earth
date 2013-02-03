@@ -28,7 +28,7 @@
   this.StyleRuns = function(dom) {
     var arr, style;
     if (dom.tagName) {
-      if (dom.tagName === "DIV") {
+      if (dom.tagName === "DIV" || dom.tagName === "BR") {
         return [
           {
             newline: 1

@@ -5,7 +5,6 @@
 	.toolbar{
 		height:20px;
 		@include user-select(none);
-		background-color:orange;
 	}
 	.container{
 		position:absolute;

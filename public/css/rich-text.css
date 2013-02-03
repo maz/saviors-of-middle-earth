@@ -5,8 +5,7 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
-    background-color: orange; }
+    user-select: none; }
   .rich-text .container {
     position: absolute;
     left: 0px;

@@ -14,7 +14,7 @@ join_arrays=(lsts)->
 
 @StyleRuns=(dom)->
 	if dom.tagName
-		if dom.tagName=="DIV"
+		if dom.tagName is "DIV" or dom.tagName is "BR"
 			return [{newline:1}].concat(join_arrays(map(StyleRuns,dom.childNodes)))
 		else
 			style=window.getComputedStyle(dom)
