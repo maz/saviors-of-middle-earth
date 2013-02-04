@@ -17,6 +17,12 @@ join_arrays=(lsts)->
 		if dom.tagName is "DIV" or dom.tagName is "BR"
 			return [{newline:1}].concat(join_arrays(map(StyleRuns,dom.childNodes)))
 		else
+			flag=false
+			for nde in dom.childNodes
+				if !nde.tagName and nde.textContent.trim()
+					flag=true
+					break
+			return join_arrays(map(StyleRuns,dom.childNodes)) unless flag
 			style=window.getComputedStyle(dom)
 			arr=[{
 				"font-family":style.fontFamily,
@@ -27,8 +33,10 @@ join_arrays=(lsts)->
 			}].concat(join_arrays(map(StyleRuns,dom.childNodes)))
 			arr.push({end:1})
 			return arr
-	else
+	else if dom.textContent.trim() or dom.textContent.indexOf('\xa0')>=0#if we have a non-breaking space, we're in
 		return [{text:dom.textContent.replace(/[\t\r\n ]+/g," ")}]
+	else
+		return []
 
 class RichTextEditor
 	constructor:(field)->

@@ -26,7 +26,7 @@
   };
 
   this.StyleRuns = function(dom) {
-    var arr, style;
+    var arr, flag, nde, style, _i, _len, _ref;
     if (dom.tagName) {
       if (dom.tagName === "DIV" || dom.tagName === "BR") {
         return [
@@ -35,6 +35,18 @@
           }
         ].concat(join_arrays(map(StyleRuns, dom.childNodes)));
       } else {
+        flag = false;
+        _ref = dom.childNodes;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          nde = _ref[_i];
+          if (!nde.tagName && nde.textContent.trim()) {
+            flag = true;
+            break;
+          }
+        }
+        if (!flag) {
+          return join_arrays(map(StyleRuns, dom.childNodes));
+        }
         style = window.getComputedStyle(dom);
         arr = [
           {
@@ -50,12 +62,14 @@
         });
         return arr;
       }
-    } else {
+    } else if (dom.textContent.trim() || dom.textContent.indexOf('\xa0') >= 0) {
       return [
         {
           text: dom.textContent.replace(/[\t\r\n ]+/g, " ")
         }
       ];
+    } else {
+      return [];
     }
   };
 
