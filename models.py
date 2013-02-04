@@ -150,7 +150,7 @@ class Communique(db.Model):
             if user!=sender.key():
                 user_obj=StoreUser.get(user)
                 user_obj.notify_channels('new_message',user=sender.key().id(),communique=self.key().id(),contents=contents)
-                if user_obj.has_unread_messages:
+                if not user_obj.has_unread_messages:
                     user_obj.has_unread_messages=True
                     user_obj.put()
     def messages(self):
