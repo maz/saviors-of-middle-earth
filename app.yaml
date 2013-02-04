@@ -30,6 +30,10 @@ handlers:
   script: items_controller.app
   secure: always
   login: required
+- url: /items/.*/rate
+  script: items_controller.app
+  secure: always
+  login: required
 - url: /items/.*/edit
   script: items_controller.app
   secure: always

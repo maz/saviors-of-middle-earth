@@ -1,7 +1,7 @@
 import webapp2
 from handlers import BaseHandler
 import env
-from models import Item, Communique
+from models import Item, Communique,ItemRating
 from datetime import datetime
 import base64
 import logging
@@ -92,7 +92,7 @@ class ShowItemHandler(BaseHandler):
             self.abort(404)
         if not item: self.abort(404)
         if not item.viewable_by(self.current_user): self.abort(403)
-        self.render_template('items/show.html',item=item)
+        self.render_template('items/show.html',item=item,ratings=ItemRating.all().filter('item =',item).order('-time').run())
 class CommunicateItemHandler(BaseHandler):
     def post(self,ident):
         try:
@@ -104,12 +104,27 @@ class CommunicateItemHandler(BaseHandler):
         c=Communique(users=[self.current_user.key(),item.owner.key()],title=item.communique_title)
         c.put()
         self.response.out.write(str(c.key().id()))
+class RateItemHandler(BaseHandler):
+    def post(self,ident):
+        try:
+            item=Item.get_by_id(int(ident))
+        except:
+            self.abort(404)
+        if not item: self.abort(404)
+        if not item.viewable_by(self.current_user) or self.current_user.key() is item.owner.key(): self.abort(403)
+        r=ItemRating(contents=rich_text.from_style_runs(self.request.get('contents')),item=item,user=self.current_user,rating=int(self.request.get('rating')))
+        r.put()
+        r.apply_rating()
+        self.flash("Rating added!")
+        self.redirect(item.url())
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),
     ('/search',SearchHandler),
     ('/items/add',AddItemHandler),
     (r'/items/(\d+)/.*/edit',EditItemHandler),
     (r'/items/(\d+)/edit',EditItemHandler),
+    (r'/items/(\d+)/.*/rate',RateItemHandler),
+    (r'/items/(\d+)/rate',RateItemHandler),
     (r'/items/(\d+)/.*/picture',ItemPictureHandler),
     (r'/items/(\d+)/picture',ItemPictureHandler),
     (r'/items/(\d+)/.*/delete',DeleteItemHandler),

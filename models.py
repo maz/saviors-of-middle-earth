@@ -16,6 +16,9 @@ class Item(db.Model):
     description=db.TextProperty()
     creation_time=db.DateTimeProperty(auto_now_add=True)
     
+    rating_count=db.IntegerProperty()
+    avg_rating=db.FloatProperty()
+    
     picture=db.BlobProperty()
     
     @staticmethod
@@ -52,6 +55,17 @@ class Item(db.Model):
     def expired(cls,base=None):#'fresh' means not expired
         if not base: base=cls.all()
         return base.filter('creation_time <',cls.expiry_cutoff())
+
+class ItemRating(db.Model):
+    contents=db.TextProperty()
+    item=db.ReferenceProperty(Item)
+    user=db.ReferenceProperty()
+    rating=db.RatingProperty()
+    time=db.DateTimeProperty(auto_now_add=True)
+    def apply_rating(self):
+        self.item.avg_rating=(self.item.avg_rating*float(self.item.rating_count)+float(self.rating))/(float(self.item.rating_count+1))
+        self.item.rating_count+=1
+        self.item.put()
 
 class LogEntry(db.Model):
     ip=db.StringProperty(indexed=False)

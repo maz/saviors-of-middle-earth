@@ -98,3 +98,87 @@
 
 #clearer {
   clear: both; }
+
+.star-strip {
+  background-repeat: repeat-x;
+  background-size: contain;
+  background-image: url("/images/star-back.svg");
+  position: relative; }
+  .star-strip div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    background-repeat: repeat-x;
+    background-size: contain;
+    background-image: url("/images/star.svg"); }
+
+.star-strip:not(.large) {
+  height: 15px;
+  width: 75px; }
+
+.star-strip.large {
+  height: 30px;
+  width: 150px; }
+
+#rating-form .numerical-rating {
+  float: right;
+  width: 150px;
+  height: 30px;
+  background-repeat: repeat-x;
+  background-size: contain;
+  background-image: url("/images/star-back.svg");
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  overflow: hidden;
+  position: relative;
+  -webkit-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1); }
+  #rating-form .numerical-rating div {
+    position: absolute;
+    top: 0px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    border: none;
+    margin: 0;
+    padding: 0; }
+    #rating-form .numerical-rating div input {
+      background: none;
+      border: none;
+      outline: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -ms-appearance: none;
+      -o-appearance: none;
+      appearance: none;
+      display: block;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 30px;
+      height: 100%;
+      cursor: pointer; }
+    #rating-form .numerical-rating div input:checked {
+      background: blue; }
+  #rating-form .numerical-rating div:hover {
+    background: blue; }
+#rating-form textarea {
+  display: none; }
+#rating-form .rich-text {
+  width: 50%;
+  height: 150px; }
+#rating-form input[type=submit] {
+  margin-right: 50%;
+  display: block;
+  position: relative;
+  margin-left: auto; }

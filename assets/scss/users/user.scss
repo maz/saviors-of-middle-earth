@@ -33,7 +33,7 @@
 	input[type=text]{
 		outline:none;
 		border:none;
-		-webkit-appearance:none;
+		@include appearance(none);
 		background:none;
 		cursor:pointer;
 		font-size:inherit;
@@ -46,7 +46,7 @@
 		background:auto;
 		outline:auto;
 		border:auto;
-		-webkit-appearance:auto;
+		@include appearance(auto);
 		cursor:auto;
 	}
 }

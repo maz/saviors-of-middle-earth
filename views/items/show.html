@@ -2,10 +2,11 @@
 {%block stylesheets%}
 {{super()}}
 {{css("items/show")}}
+{%if current_user%} {{css('rich-text')}} {%endif%}
 {%endblock%}
 {%block javascript%}
 {{super()}}
-{%if current_user%} {{js('items/list')}} {%endif%}
+{%if current_user%} {{js('items/list')}} {{js('rich-text')}} {%endif%}
 {%endblock%}
 {% set title=item.name %}
 {%block content%}
@@ -22,4 +23,20 @@
 	{{item.description|Markup}}
 </div>
 <div id="clearer"></div>
+<h2>Ratings</h2>
+{%if current_user and item.owner.key()!=current_user.key() %}
+<form method="post" action="{{item|url(named=False,action='rate')}}" id="rating-form" data-completing-label="Submitting...">
+	{{csrf_field()}}
+	<div class="numerical-rating">
+		<div><input type="radio" name="rating" value="20"/></div>
+		<div style="left:30px"><input type="radio" name="rating" value="40"/></div>
+		<div style="left:60px"><input type="radio" name="rating" value="60"/></div>
+		<div style="left:90px"><input type="radio" name="rating" value="80"/></div>
+		<div style="left:120px"><input type="radio" name="rating" value="100"/></div>
+	</div>
+	<textarea name="contents"></textarea>
+	<div class="rich-text" data-form="rating-form" data-field="contents"></div>
+	<input type="submit" value="Submit"/>
+</form>
+{%endif%}
 {%endblock%}
