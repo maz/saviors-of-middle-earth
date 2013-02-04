@@ -80,7 +80,7 @@
 		overflow:hidden;
 		position:relative;
 		@include transform(scaleX(-1));
-		div{
+		input{
 			position:absolute;
 			top:0px;
 			display:block;
@@ -90,25 +90,15 @@
 			border:none;
 			margin:0;
 			padding:0;
-			input{
-				background:none;
-				border:none;
-				outline:none;
-				@include appearance(none);
-				display:block;
-				position:absolute;
-				top:0px;
-				left:0px;
-				width:30px;
-				height:100%;
-				cursor:pointer;
-			}
-			input:checked{
-				background:blue;
-			}
+			background:none;
+			border:none;
+			outline:none;
+			cursor:pointer;
 		}
-		div:hover{
-			background:blue;
+		input:hover,input:checked{
+			background-repeat:repeat-x;
+			background-size:contain;
+			background-image:url('/images/star.svg');
 		}
 	}
 	textarea{

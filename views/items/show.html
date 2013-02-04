@@ -28,11 +28,11 @@
 <form method="post" action="{{item|url(named=False,action='rate')}}" id="rating-form" data-completing-label="Submitting...">
 	{{csrf_field()}}
 	<div class="numerical-rating">
-		<div><input type="radio" name="rating" value="20"/></div>
-		<div style="left:30px"><input type="radio" name="rating" value="40"/></div>
-		<div style="left:60px"><input type="radio" name="rating" value="60"/></div>
-		<div style="left:90px"><input type="radio" name="rating" value="80"/></div>
-		<div style="left:120px"><input type="radio" name="rating" value="100"/></div>
+		<input type="radio" name="rating" value="100"/>
+		<input type="radio" style="left:30px"  name="rating" value="80"/>
+		<input type="radio" style="left:60px"  name="rating" value="60"/>
+		<input type="radio" style="left:90px"  name="rating" value="40"/>
+		<input type="radio" style="left:120px" name="rating" value="20"/>
 	</div>
 	<textarea name="contents"></textarea>
 	<div class="rich-text" data-form="rating-form" data-field="contents"></div>

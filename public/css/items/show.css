@@ -138,7 +138,7 @@
   -ms-transform: scaleX(-1);
   -o-transform: scaleX(-1);
   transform: scaleX(-1); }
-  #rating-form .numerical-rating div {
+  #rating-form .numerical-rating input {
     position: absolute;
     top: 0px;
     display: block;
@@ -151,27 +151,15 @@
     appearance: none;
     border: none;
     margin: 0;
-    padding: 0; }
-    #rating-form .numerical-rating div input {
-      background: none;
-      border: none;
-      outline: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      -ms-appearance: none;
-      -o-appearance: none;
-      appearance: none;
-      display: block;
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      width: 30px;
-      height: 100%;
-      cursor: pointer; }
-    #rating-form .numerical-rating div input:checked {
-      background: blue; }
-  #rating-form .numerical-rating div:hover {
-    background: blue; }
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer; }
+  #rating-form .numerical-rating input:hover, #rating-form .numerical-rating input:checked {
+    background-repeat: repeat-x;
+    background-size: contain;
+    background-image: url("/images/star.svg"); }
 #rating-form textarea {
   display: none; }
 #rating-form .rich-text {
