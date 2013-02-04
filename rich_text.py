@@ -1,5 +1,6 @@
 import json
-from cgi import escape
+from jinja2.utils import escape
+
 try:
     from cStringIO import StringIO
 except:
@@ -12,7 +13,7 @@ def from_style_runs(runs):
     io=StringIO()
     
     for run in runs:
-        if 'close' in run:
+        if 'end' in run:
             io.write("</span>")
         elif 'newline' in run:
             io.write("<br/>")
