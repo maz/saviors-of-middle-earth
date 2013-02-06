@@ -41,6 +41,7 @@ class Item(db.Model):
         Item.search_index().put(self.search_document)
     def delete(self):
         Item.search_index().delete(str(self.key()))
+        for rating in ItemRating.all().filter('item =',self).run(limit=None): rating.delete()
         super(Item,self).delete()
     @staticmethod
     def price_string(x): return "$%s"%(re.sub(r'(\d\d\d)(\d)',lambda match: "%s,%s"%(match.group(1),match.group(2)),("%.2f"%x)[::-1]))[::-1]
@@ -172,6 +173,9 @@ class StoreUser(db.Model):
         #TODO: add other models here, as they get added to the database
         #TODO: what to do with messages?
         for itm in self.owned_items().run(): itm.delete()
+        for rating in ItemRating.all().filter('user =',self).run(limit=None):
+            rating.unapply()
+            rating.delete()
     def communiques(self):
         return Communique.all().filter('users =',self.key())
 
