@@ -47,6 +47,7 @@ class UserNicknameHandler(UserFindingHandler):
         if len(self.request.get('nickname').strip()) !=0:
             self.user.nickname=self.request.get('nickname')
             self.user.put()
+        self.log('nickname changed')
         self.redirect(self.user.url())
 class UserSetPictureHandler(UserFindingHandler):
     def post(self,user_id):
@@ -54,6 +55,7 @@ class UserSetPictureHandler(UserFindingHandler):
         self.current_user.image=base64.b64decode(self.request.get('picture_512'))
         self.current_user.thumbnail=base64.b64decode(self.request.get('picture_72'))
         self.current_user.put()
+        self.log('user picture changed')
         self.redirect(self.current_user.url())
 class UserDeletionHandler(UserFindingHandler):
     def get(self,user_id):
@@ -70,6 +72,7 @@ class UserDescriptionHandler(UserFindingHandler):
         if self.current_user.key()!=self.user.key(): return self.abort(403)
         self.current_user.description=rich_text.from_style_runs(self.request.get('description'))
         self.current_user.put()
+        self.log('user description changed')
         self.redirect(self.current_user.url())
 class UserPromotionHandler(AdminHandler,UserFindingHandler):
     def post(self,user_id):

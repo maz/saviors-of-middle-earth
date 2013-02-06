@@ -132,6 +132,7 @@ class RateItemHandler(BaseHandler):
             r=ItemRating(contents=rich_text.from_style_runs(self.request.get('contents')),item=item,user=self.current_user,rating=rating)
             r.put()
             r.apply()
+            self.log('rating created')
             self.flash("Rating added!")
         else:
             self.flash("You must include either a message or a numerical rating in order for it to be submitted.")
@@ -143,6 +144,7 @@ class DeleteRatingHandler(BaseHandler):
         item=rating.item
         rating.unapply()
         rating.delete()
+        self.log("rating deleted")
         self.redirect(item.url())
     
 app = webapp2.WSGIApplication([
