@@ -47,7 +47,7 @@ class AddItemHandler(BaseHandler):
             item.owner=self.current_user.key()
             item.price=item_price
             item.description=item_description
-            item.picture=base64.b64decode(item_picture)
+            if item_picture: item.picture=base64.b64decode(item_picture)
             item.put()
             self.log("item %s"%("created" if creation else "edited"))
             self.flash("'%s' was %s!"%(item_name,"created" if creation else "edited"))
