@@ -11,6 +11,8 @@ ITEM_SEARCH_INDEX_NAME="ITEM_SEARCH_INDEX_NAME"
 
 class Item(db.Model):
     EXPIRATION_DELTA=timedelta(days=16)
+    SEARCH_EXPIRATION_DELTA=timedelta(days=16,hours=1)
+    
     NON_ALNUM_REGEX=re.compile(r'[^A-Za-z0-9]')
     
     name=db.StringProperty()
@@ -63,6 +65,9 @@ class Item(db.Model):
     @classmethod
     def expiry_cutoff(cls):
         return datetime.now()-cls.EXPIRATION_DELTA
+    @classmethod
+    def search_expiry_cutoff(cls):
+        return datetime.now()-cls.SEARCH_EXPIRATION_DELTA
     @classmethod
     def fresh(cls,base=None):#'fresh' means not expired
         if not base: base=cls.all()
