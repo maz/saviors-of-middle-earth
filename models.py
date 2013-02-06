@@ -45,11 +45,8 @@ class Item(db.Model):
     @property
     def communique_title(self):
         return "%s: %s"%(self.name,self.price_string(self.price))
-    @property
-    def expired(self):
-    	return self.creation_time>=Item.expiry_cutoff()
     def viewable_by(self,user):
-        return self.expired or (user and (user.admin or user.key()==self.owner.key()))
+        return self.creation_time<Item.expiry_cutoff() or (user and (user.admin or user.key()==self.owner.key()))
     def removeable_by(self,user):
         return user and (user.admin or user.key()==self.owner.key())
     def expiration(self):

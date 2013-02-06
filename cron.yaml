@@ -1,0 +1,4 @@
+cron:
+- description: remove expired items from the index
+  url: /cron/remove-expired-from-search
+  sechdule: every 24 hours

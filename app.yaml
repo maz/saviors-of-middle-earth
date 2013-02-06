@@ -19,6 +19,11 @@ handlers:
   script: messaging_controller.app
   login: required
 
+#Cron Controller
+- url: /cron/.*
+  script: cron_controller.app
+  login: admin
+
 #Items Controller
 - url: /
   script: items_controller.app
