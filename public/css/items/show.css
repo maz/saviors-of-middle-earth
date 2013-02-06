@@ -170,3 +170,47 @@
   display: block;
   position: relative;
   margin-left: auto; }
+
+#average-rating {
+  float: right; }
+
+h2 .clearer {
+  clear: both; }
+
+.rating {
+  width: 100%;
+  position: relative;
+  margin-bottom: 10px; }
+  .rating .margin {
+    width: 36px;
+    float: left; }
+    .rating .margin .user {
+      margin: 0;
+      padding: 0;
+      display: block;
+      text-decoration: none; }
+      .rating .margin .user .pic {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+        width: 36px;
+        height: 36px;
+        outline: 1px solid black; }
+      .rating .margin .user .name {
+        margin-top: 5px;
+        font-size: 10px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: block;
+        color: black;
+        text-decoration: none; }
+  .rating .message {
+    width: 100%;
+    margin-left: 50px; }
+  .rating .clearer {
+    clear: both; }

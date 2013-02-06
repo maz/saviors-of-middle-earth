@@ -14,6 +14,8 @@ def from_style_runs(runs):
     ACCEPTABLE_CSS_KEYS=["font-family","font-size","font-weight","font-style","text-decoration"]
     if isinstance(runs,basestring):
         runs=json.loads(runs)
+    
+    if not runs: return ""
     io=StringIO()
     
     for run in runs:

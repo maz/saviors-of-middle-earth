@@ -27,6 +27,9 @@
 
   this.StyleRuns = function(dom) {
     var arr, flag, nde, style, _i, _len, _ref;
+    if (dom.textContent.trim() === "") {
+      return null;
+    }
     if (dom.tagName) {
       if (dom.tagName === "DIV" || dom.tagName === "BR") {
         return [

@@ -13,6 +13,7 @@ join_arrays=(lsts)->
 	return arr
 
 @StyleRuns=(dom)->
+	return null if dom.textContent.trim()==""
 	if dom.tagName
 		if dom.tagName is "DIV" or dom.tagName is "BR"
 			return [{newline:1}].concat(join_arrays(map(StyleRuns,dom.childNodes)))

@@ -112,10 +112,17 @@ class RateItemHandler(BaseHandler):
             self.abort(404)
         if not item: self.abort(404)
         if not item.viewable_by(self.current_user) or self.current_user.key() is item.owner.key(): self.abort(403)
-        r=ItemRating(contents=rich_text.from_style_runs(self.request.get('contents')),item=item,user=self.current_user,rating=int(self.request.get('rating')))
-        r.put()
-        r.apply_rating()
-        self.flash("Rating added!")
+        try:
+            rating=(int(self.request.get('rating'))/20)*20
+        except:
+            rating=0
+        if rating or self.request.get('contents')!='null':
+            r=ItemRating(contents=rich_text.from_style_runs(self.request.get('contents')),item=item,user=self.current_user,rating=rating)
+            r.put()
+            r.apply_rating()
+            self.flash("Rating added!")
+        else:
+            self.flash("You must include either a message or a numerical rating in order for it to be submitted.")
         self.redirect(item.url())
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),

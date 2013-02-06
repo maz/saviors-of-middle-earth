@@ -23,7 +23,7 @@
 	{{item.description|Markup}}
 </div>
 <div id="clearer"></div>
-<h2>Ratings</h2>
+<h2>Rate this Item</h2>
 {%if current_user and item.owner.key()!=current_user.key() %}
 <form method="post" action="{{item|url(named=False,action='rate')}}" id="rating-form" data-completing-label="Submitting...">
 	{{csrf_field()}}
@@ -39,4 +39,29 @@
 	<input type="submit" value="Submit"/>
 </form>
 {%endif%}
+<h2>
+	Ratings
+	<div class="star-strip large" id="average-rating">
+		<div style="width:{{item.avg_rating}}%"></div>
+	</div>
+	<div class="clearer"></div>
+</h2>
+{%for rating in ratings%}
+<div class="rating">
+	<div class="margin">
+		<a class="user" href="{{rating.user|url}}">
+			<div class="pic" style="background-image:url('{{rating.user.url(action='thumbnail')}}')"></div>
+			<div class="name">{{rating.user.nickname}}</div>
+		</a>
+	</div>
+	<div class="message">
+		<div class="star-strip">
+			<div style="width:{{rating.rating}}%"></div>
+		</div>
+		{{rating.contents|Markup}}
+	</div>
+	
+	<div class="clearer"></div>
+</div>
+{%endfor%}
 {%endblock%}

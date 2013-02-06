@@ -16,8 +16,8 @@ class Item(db.Model):
     description=db.TextProperty()
     creation_time=db.DateTimeProperty(auto_now_add=True)
     
-    rating_count=db.IntegerProperty()
-    avg_rating=db.FloatProperty()
+    rating_count=db.IntegerProperty(default=0)
+    avg_rating=db.FloatProperty(default=0.0)
     
     picture=db.BlobProperty()
     
@@ -63,6 +63,7 @@ class ItemRating(db.Model):
     rating=db.RatingProperty()
     time=db.DateTimeProperty(auto_now_add=True)
     def apply_rating(self):
+        if self.rating==0: return#assume zero rating is no numerical rating associated
         self.item.avg_rating=(self.item.avg_rating*float(self.item.rating_count)+float(self.rating))/(float(self.item.rating_count+1))
         self.item.rating_count+=1
         self.item.put()
