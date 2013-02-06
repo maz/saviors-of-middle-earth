@@ -53,6 +53,13 @@
 			<div class="pic" style="background-image:url('{{rating.user.url(action='thumbnail')}}')"></div>
 			<div class="name">{{rating.user.nickname}}</div>
 		</a>
+		{%if current_user and current_user.admin%}
+		<form method="post" action="/items/delete-rating" class="delete-form">
+			{{csrf_field()}}
+			<input type="hidden" name="rating" value="{{rating.key()}}"/>
+			<input type="submit" value="Delete"/>
+		</form>
+		{%endif%}
 	</div>
 	<div class="message">
 		<div class="star-strip">

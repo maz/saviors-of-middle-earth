@@ -62,11 +62,17 @@ class ItemRating(db.Model):
     user=db.ReferenceProperty()
     rating=db.RatingProperty()
     time=db.DateTimeProperty(auto_now_add=True)
-    def apply_rating(self):
-        if self.rating==0: return#assume zero rating is no numerical rating associated
+    def apply(self):
+        if self.rating==0: return   #assume zero rating is no numerical rating associated
         self.item.avg_rating=(self.item.avg_rating*float(self.item.rating_count)+float(self.rating))/(float(self.item.rating_count+1))
         self.item.rating_count+=1
         self.item.put()
+    def unapply(self):
+        if self.rating==0: return
+        item=self.item
+        item.avg_rating=float(item.rating_count)*item.avg_rating-float(self.rating)
+        item.rating_count-=1
+        item.put()
 
 class LogEntry(db.Model):
     ip=db.StringProperty(indexed=False)

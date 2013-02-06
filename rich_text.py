@@ -19,6 +19,7 @@ def from_style_runs(runs):
     io=StringIO()
     
     for run in runs:
+        if not run: continue
         if 'end' in run:
             io.write("</span>")
         elif 'newline' in run:

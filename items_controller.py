@@ -6,6 +6,7 @@ from datetime import datetime
 import base64
 import logging
 import rich_text
+from google.appengine.ext.db import Key
 
 class IndexHandler(BaseHandler):
     def get(self):
@@ -119,15 +120,25 @@ class RateItemHandler(BaseHandler):
         if rating or self.request.get('contents')!='null':
             r=ItemRating(contents=rich_text.from_style_runs(self.request.get('contents')),item=item,user=self.current_user,rating=rating)
             r.put()
-            r.apply_rating()
+            r.apply()
             self.flash("Rating added!")
         else:
             self.flash("You must include either a message or a numerical rating in order for it to be submitted.")
         self.redirect(item.url())
+class DeleteRatingHandler(BaseHandler):
+    def post(self):
+        if not self.current_user.admin: return self.abort(403)
+        rating=ItemRating.get(Key(self.request.get('rating')))
+        item=rating.item
+        rating.unapply()
+        rating.delete()
+        self.redirect(item.url())
+    
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),
     ('/search',SearchHandler),
     ('/items/add',AddItemHandler),
+    (r'/items/delete-rating',DeleteRatingHandler),
     (r'/items/(\d+)/.*/edit',EditItemHandler),
     (r'/items/(\d+)/edit',EditItemHandler),
     (r'/items/(\d+)/.*/rate',RateItemHandler),
