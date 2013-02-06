@@ -5,6 +5,9 @@ import re
 from webapp2_extras.security import generate_random_string
 from google.appengine.api.channel import send_message
 import json
+from google.appengine.api import search
+
+ITEM_SEARCH_INDEX_NAME="ITEM_SEARCH_INDEX_NAME"
 
 class Item(db.Model):
     EXPIRATION_DELTA=timedelta(days=16)
@@ -21,6 +24,22 @@ class Item(db.Model):
     
     picture=db.BlobProperty()
     
+    @staticmethod
+    def search_index():
+        return search.Index(ITEM_SEARCH_INDEX_NAME)
+    @property
+    def search_document(self):
+        return search.Document(doc_id=str(self.key()),fields=[
+            search.TextField(name='name',value=self.name),
+            search.NumberField(name='price',value=self.price),
+            search.HtmlField(name='description',value=self.description)
+        ])
+    def put(self):
+        super(Item,self).put()
+        Item.search_index().put(self.search_document)
+    def delete(self):
+        Item.search_index().delete(str(self.key()))
+        super(Item,self).delete()
     @staticmethod
     def price_string(x): return "$%s"%(re.sub(r'(\d\d\d)(\d)',lambda match: "%s,%s"%(match.group(1),match.group(2)),("%.2f"%x)[::-1]))[::-1]
     @property
