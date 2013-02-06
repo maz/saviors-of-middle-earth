@@ -23,8 +23,8 @@
 	{{item.description|Markup}}
 </div>
 <div id="clearer"></div>
-<h2>Rate this Item</h2>
 {%if current_user and item.owner.key()!=current_user.key() %}
+<h2>Rate this Item</h2>
 <form method="post" action="{{item|url(named=False,action='rate')}}" id="rating-form" data-completing-label="Submitting...">
 	{{csrf_field()}}
 	<div class="numerical-rating">
