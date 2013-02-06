@@ -24,6 +24,7 @@
 			<a class="name" href="{{itm|url}}">{{itm.name}}</a>
 			<div class="price">{{itm.price|price}}</div>
 			<div class="expiration">Expiration: {{convert_datetime(itm.expiration())|date}}</div>
+			<div class="star-strip"><div style="width:{{itm.avg_rating}}%"></div></div>
 			<div class="author"><a href="{{itm.owner|url}}">{{itm.owner.nickname}}</a></div>
 		</div>
 	</div>

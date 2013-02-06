@@ -117,7 +117,11 @@
   #nickname-form input[type=text] {
     outline: none;
     border: none;
-    @include appearance( none);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
     background: none;
     cursor: pointer;
     font-size: inherit;
@@ -128,7 +132,11 @@
     background: auto;
     outline: auto;
     border: auto;
-    @include appearance( auto);
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    -ms-appearance: auto;
+    -o-appearance: auto;
+    appearance: auto;
     cursor: auto; }
 
 #clearer {
@@ -207,6 +215,28 @@
 
 .image-editable:hover div {
   display: block; }
+
+.star-strip {
+  background-repeat: repeat-x;
+  background-size: contain;
+  background-image: url("/images/star-back.svg");
+  position: relative; }
+  .star-strip div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    background-repeat: repeat-x;
+    background-size: contain;
+    background-image: url("/images/star.svg"); }
+
+.star-strip:not(.large) {
+  height: 15px;
+  width: 75px; }
+
+.star-strip.large {
+  height: 30px;
+  width: 150px; }
 
 .item {
   width: 100%;
