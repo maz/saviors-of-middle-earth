@@ -78,7 +78,7 @@ class BaseHandler(webapp2.RequestHandler):
             elif not self.session.get('csrf_token'):
                 self.session['csrf_token']=generate_random_string(48)
             self.current_user=StoreUser.current_user()
-            if self.current_user and self.current_user.deactivated:
+            if self.current_user and self.current_user.deactivated and not hasattr(self,'accessible_by_deactivated_users'):
                 self.response.set_status(403)
                 self.render_template('deactivated-account.html')
                 return

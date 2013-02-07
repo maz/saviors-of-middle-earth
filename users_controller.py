@@ -7,6 +7,7 @@ import base64
 import rich_text
 
 class UserLogoutHandler(BaseHandler):
+    accessible_by_deactivated_users=True
     def get(self):
         self.session['csrf_token']=''#clear the CSRF token
         self.redirect(users.create_logout_url("/"))
