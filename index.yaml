@@ -18,6 +18,13 @@ indexes:
 
 - kind: Item
   properties:
+  - name: creation_time
+    direction: desc
+  - name: name
+  - name: price
+
+- kind: Item
+  properties:
   - name: owner
   - name: creation_time
     direction: desc

@@ -207,7 +207,7 @@ class Communique(db.Model):
         if user.has_unread_messages:
             user.has_unread_messages=False
             user.put()
-        arr=UserCommunique.all().filter('user =',user).filter('communique =',self).fetch(limit=1)
+        arr=UserCommunique.all().filter('user =',user).filter('communique =',self).fetch(limit=1,projection=('time'))
         if arr and len(arr):
             return arr[0].time
         else:
