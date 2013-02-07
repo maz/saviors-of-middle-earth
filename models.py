@@ -179,7 +179,7 @@ class StoreUser(db.Model):
     def communiques(self):
         return Communique.all().filter('users =',self.key())
 
-class UserLastRead(db.Model):
+class UserCommunique(db.Model):
     time=db.DateTimeProperty(auto_now=True)
     user=db.ReferenceProperty(StoreUser,collection_name="user_collection")
     communique=db.ReferenceProperty(collection_name="communique_collection")
@@ -207,17 +207,17 @@ class Communique(db.Model):
         if user.has_unread_messages:
             user.has_unread_messages=False
             user.put()
-        arr=UserLastRead.all().filter('user =',user).filter('communique =',self).fetch(limit=1)
+        arr=UserCommunique.all().filter('user =',user).filter('communique =',self).fetch(limit=1)
         if arr and len(arr):
             return arr[0].time
         else:
             return Communique.EPOCH
     def read_by(self,user):
-        arr=UserLastRead.all().filter('user =',user).filter('communique =',self).fetch(limit=1)
+        arr=UserCommunique.all().filter('user =',user).filter('communique =',self).fetch(limit=1)
         if arr and len(arr):
             arr[0].put()
         else:
-            UserLastRead(user=user,communique=self).put()
+            UserCommunique(user=user,communique=self).put()
 
 class Message(db.Model):
     communique=db.ReferenceProperty(Communique,collection_name="messages_collection")
