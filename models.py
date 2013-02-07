@@ -18,7 +18,6 @@ class Item(db.Model):
     token=db.StringProperty()
     
     name=db.StringProperty()
-    owner=db.ReferenceProperty()
     price=db.FloatProperty()
     description=db.TextProperty()
     creation_time=db.DateTimeProperty(auto_now_add=True)
@@ -60,9 +59,9 @@ class Item(db.Model):
     def communique_title(self):
         return "%s: %s"%(self.name,self.price_string(self.price))
     def viewable_by(self,user):
-        return self.creation_time>Item.expiry_cutoff() or (user and (user.admin or user.key()==self.owner.key()))
+        return self.creation_time>Item.expiry_cutoff() or (user and (user.admin or user.key()==self.parent_key()))
     def removeable_by(self,user):
-        return user and (user.admin or user.key()==self.owner.key())
+        return user and (user.admin or user.key()==self.parent_key())
     def expiration(self):
         return self.creation_time+Item.EXPIRATION_DELTA
     def url_name(self):
@@ -180,11 +179,12 @@ class StoreUser(db.Model):
             return model
     def google_user(self):
         return users.User(_user_id=self.userid)
+    @db.transactional
     def delete_data(self):
         #TODO: add other models here, as they get added to the database
         #TODO: what to do with messages?
         for itm in self.owned_items().run(): itm.delete()
-        for rating in ItemRating.all().filter('user =',self).run(limit=None):
+        for rating in ItemRating.all().ancestor(self).filter('user =',self).run(limit=None):
             rating.unapply()
             rating.delete()
     def communiques(self):

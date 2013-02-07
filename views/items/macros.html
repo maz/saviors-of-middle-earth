@@ -1,11 +1,11 @@
 {%macro item_actions(itm,small=False)%}
 {%if current_user%}
 <div class="actions">
-	{%if current_user.key()!=itm.owner.key()%}
+	{%if current_user.key()!=itm.parent_key()%}
 	<input type="button" value="{%if small%}Chat{%else%}Communicate with Seller{%endif%}" class="item-communicate-button" data-item="{{itm.key().id()}}"/>
 	{%endif%}
 	{%if itm.removeable_by(current_user)%}{#all those who can edit item X can remove item X#}
-	{%if itm.owner.key()==current_user.key()%}
+	{%if itm.parent_key()==current_user.key()%}
 	<a href="{{itm|url(action='edit')}}">Edit</a>
 	{%endif%}
 	<form action="{{itm|url(action='delete')}}" method="post" class="delete-form" data-completing-label="Deleting...">
@@ -25,7 +25,7 @@
 			<div class="price">{{itm.price|price}}</div>
 			<div class="expiration">Expiration: {{convert_datetime(itm.expiration())|date}}</div>
 			<div class="star-strip"><div style="width:{{itm.avg_rating}}%"></div></div>
-			<div class="author"><a href="{{itm.owner|url}}">{{itm.owner.nickname}}</a></div>
+			<div class="author"><a href="{{itm.parent()|url}}">{{itm.parent().nickname}}</a></div>
 		</div>
 	</div>
 	<div class="description">

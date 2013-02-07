@@ -63,6 +63,13 @@ indexes:
   - name: time
     direction: desc
 
+- kind: ItemRating
+  ancestor: yes
+  properties:
+  - name: item
+  - name: time
+    direction: desc
+
 - kind: Message
   properties:
   - name: communique

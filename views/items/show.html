@@ -17,13 +17,13 @@
 	{{item_actions(item)}}
 </div>
 <div id="price"><span class="label">Price:</span> {{item.price|price}}</div>
-<a id="owner" href="{{item.owner|url}}">{{item.owner.nickname}}</a>
+<a id="owner" href="{{item.parent()|url}}">{{item.parent().nickname}}</a>
 <div id="expiration">Created on {{item.creation_time|date}}<br/>Expires on {{item.expiration()|date}}</div>
 <div id="description">
 	{{item.description|Markup}}
 </div>
 <div id="clearer"></div>
-{%if current_user and item.owner.key()!=current_user.key() %}
+{%if current_user and item.parent_key()!=current_user.key() %}
 <h2>Rate this Item</h2>
 <form method="post" action="{{item|url(named=False,action='rate')}}" id="rating-form" data-completing-label="Submitting...">
 	{{csrf_field()}}

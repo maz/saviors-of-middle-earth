@@ -55,7 +55,6 @@ class AddItemHandler(BaseHandler):
             self.render_template('items/form.html',title="Add an Item",item_picture_data=item_picture,item_picture=("data:image/png;base64,%s"%item_picture if item_picture or creation else item.url(named=False,action="picture")),errors=errors,item_expiry=datetime.now()+Item.EXPIRATION_DELTA,item_name=item_name,item_description=item_description,item_price=item_price)
         else:
             item.name=item_name
-            item.owner=self.current_user.key()
             item.price=item_price
             item.description=item_description
             if item_picture: item.picture=base64.b64decode(item_picture)
@@ -71,7 +70,7 @@ def my_item_from_ident(handler,ident,allow_admin=False):
     except:
         handler.abort(404)
     if not item: handler.abort(404)
-    if item.owner.key()!=handler.current_user.key() and not (allow_admin and handler.current_user.admin): handler.abort(404)
+    if item.parent_key()!=handler.current_user.key() and not (allow_admin and handler.current_user.admin): handler.abort(404)
     return item
 class EditItemHandler(AddItemHandler):
     def get(self,ident):
@@ -104,7 +103,8 @@ class ShowItemHandler(BaseHandler):
             self.abort(404)
         if not item: self.abort(404)
         if not item.viewable_by(self.current_user): self.abort(403)
-        self.render_template('items/show.html',item=item,ratings=ItemRating.all().filter('item =',item).order('-time').run())
+        ratings=ItemRating.all().filter('item =',item).order('-time').fetch(limit=50)
+        self.render_template('items/show.html',item=item,ratings=ratings)
 class CommunicateItemHandler(BaseHandler):
     def post(self,ident):
         try:
@@ -113,7 +113,7 @@ class CommunicateItemHandler(BaseHandler):
             self.abort(404)
         if not item: self.abort(404)
         if not item.viewable_by(self.current_user): self.abort(403)
-        c=Communique(users=[self.current_user.key(),item.owner.key()],title=item.communique_title)
+        c=Communique(users=[self.current_user.key(),item.parent_key()],title=item.communique_title)
         c.put()
         self.response.out.write(str(c.key().id()))
 class RateItemHandler(BaseHandler):
@@ -123,13 +123,13 @@ class RateItemHandler(BaseHandler):
         except:
             self.abort(404)
         if not item: self.abort(404)
-        if not item.viewable_by(self.current_user) or self.current_user.key() is item.owner.key(): self.abort(403)
+        if not item.viewable_by(self.current_user) or self.current_user.key() is item.parent_key(): self.abort(403)
         try:
             rating=(int(self.request.get('rating'))/20)*20
         except:
             rating=0
         if rating or self.request.get('contents')!='null':
-            r=ItemRating(contents=rich_text.from_style_runs(self.request.get('contents')),item=item,user=self.current_user,rating=rating)
+            r=ItemRating(parent=self.current_user,contents=rich_text.from_style_runs(self.request.get('contents')),item=item,user=self.current_user,rating=rating)
             r.put()
             r.apply()
             self.log('rating created')
