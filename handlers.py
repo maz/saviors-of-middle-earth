@@ -104,6 +104,7 @@ class BaseHandler(webapp2.RequestHandler):
             return self.convert_datetime(x)
         values['convert_datetime']=convert_datetime#this is bound to self, so it can't be a normal filter
         self.response.headers['Content-Type']="text/html; charset=utf-8"#assume that our templates are for html
+        self.response.headers['Content-Security-Policy']="default-src 'self'; object-src 'none'; img-src 'self' http://www.w3.org"
         if self.current_user and not self.current_user.deactivated:
             #we do this here, once we assume we are generating html
             values['channel_token']=create_channel(self.current_user.generate_channel_token())
