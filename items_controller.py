@@ -38,7 +38,7 @@ class AddItemHandler(BaseHandler):
         self.render_template('items/form.html',title="Add an Item",item_expiry=datetime.now()+Item.EXPIRATION_DELTA)
     def commit_item_changes(self,item=None):
         creation=not(item)
-        if not item: item=Item()
+        if not item: item=Item(parent=self.current_user.key())
         item_name=self.request.get('name')
         item_price=self.request.get('price')
         item_description=rich_text.from_style_runs(self.request.get('description'))
@@ -67,7 +67,7 @@ class AddItemHandler(BaseHandler):
         self.commit_item_changes()
 def my_item_from_ident(handler,ident,allow_admin=False):
     try:
-        item=Item.get_by_id(int(ident))
+        item=Item.get_by_token(ident)
     except:
         handler.abort(404)
     if not item: handler.abort(404)
@@ -89,7 +89,7 @@ class DeleteItemHandler(BaseHandler):
 class ItemPictureHandler(BaseHandler):
     def get(self,ident):
         try:
-            item=Item.get_by_id(int(ident))
+            item=Item.get_by_token(ident)
         except:
             self.abort(404)
         if not item: self.abort(404)
@@ -99,7 +99,7 @@ class ItemPictureHandler(BaseHandler):
 class ShowItemHandler(BaseHandler):
     def get(self,ident):
         try:
-            item=Item.get_by_id(int(ident))
+            item=Item.get_by_token(ident)
         except:
             self.abort(404)
         if not item: self.abort(404)
@@ -108,7 +108,7 @@ class ShowItemHandler(BaseHandler):
 class CommunicateItemHandler(BaseHandler):
     def post(self,ident):
         try:
-            item=Item.get_by_id(int(ident))
+            item=Item.get_by_token(ident)
         except:
             self.abort(404)
         if not item: self.abort(404)
@@ -119,7 +119,7 @@ class CommunicateItemHandler(BaseHandler):
 class RateItemHandler(BaseHandler):
     def post(self,ident):
         try:
-            item=Item.get_by_id(int(ident))
+            item=Item.get_by_token(ident)
         except:
             self.abort(404)
         if not item: self.abort(404)
@@ -152,16 +152,16 @@ app = webapp2.WSGIApplication([
     ('/search',SearchHandler),
     ('/items/add',AddItemHandler),
     (r'/items/delete-rating',DeleteRatingHandler),
-    (r'/items/(\d+)/.*/edit',EditItemHandler),
-    (r'/items/(\d+)/edit',EditItemHandler),
-    (r'/items/(\d+)/.*/rate',RateItemHandler),
-    (r'/items/(\d+)/rate',RateItemHandler),
-    (r'/items/(\d+)/.*/picture',ItemPictureHandler),
-    (r'/items/(\d+)/picture',ItemPictureHandler),
-    (r'/items/(\d+)/.*/delete',DeleteItemHandler),
-    (r'/items/(\d+)/delete',DeleteItemHandler),
-    (r'/items/(\d+)/.*/communicate',CommunicateItemHandler),
-    (r'/items/(\d+)/communicate',CommunicateItemHandler),
-    (r'/items/(\d+)/.*',ShowItemHandler),
-    (r'/items/(\d+)',ShowItemHandler),
+    (r'/items/([A-Za-z0-9]+)/.*/edit',EditItemHandler),
+    (r'/items/([A-Za-z0-9]+)/edit',EditItemHandler),
+    (r'/items/([A-Za-z0-9]+)/.*/rate',RateItemHandler),
+    (r'/items/([A-Za-z0-9]+)/rate',RateItemHandler),
+    (r'/items/([A-Za-z0-9]+)/.*/picture',ItemPictureHandler),
+    (r'/items/([A-Za-z0-9]+)/picture',ItemPictureHandler),
+    (r'/items/([A-Za-z0-9]+)/.*/delete',DeleteItemHandler),
+    (r'/items/([A-Za-z0-9]+)/delete',DeleteItemHandler),
+    (r'/items/([A-Za-z0-9]+)/.*/communicate',CommunicateItemHandler),
+    (r'/items/([A-Za-z0-9]+)/communicate',CommunicateItemHandler),
+    (r'/items/([A-Za-z0-9]+)/.*',ShowItemHandler),
+    (r'/items/([A-Za-z0-9]+)',ShowItemHandler),
 ], debug=(env.env==env.DEVELOPMENT))

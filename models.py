@@ -15,6 +15,8 @@ class Item(db.Model):
     
     NON_ALNUM_REGEX=re.compile(r'[^A-Za-z0-9]')
     
+    token=db.StringProperty()
+    
     name=db.StringProperty()
     owner=db.ReferenceProperty()
     price=db.FloatProperty()
@@ -26,6 +28,13 @@ class Item(db.Model):
     
     picture=db.BlobProperty()
     
+    @classmethod
+    def get_by_token(cls,token):
+        arr=cls.all().filter('token =',token).fetch(limit=1)
+        if arr and len(arr):
+            return arr[0]
+        else:
+            return None
     @staticmethod
     def search_index():
         return search.Index(ITEM_SEARCH_INDEX_NAME)
@@ -37,6 +46,8 @@ class Item(db.Model):
             search.HtmlField(name='description',value=self.description)
         ])
     def put(self):
+        if not self.token:
+            self.token=generate_random_string(5)
         super(Item,self).put()
         Item.search_index().put(self.search_document)
     def delete(self):
@@ -60,9 +71,9 @@ class Item(db.Model):
         if action=="show": action=""
         if action!="" and not action.startswith("/"): action="/%s"%action
         if named:
-            return "/items/%d/%s%s"%(self.key().id(),self.url_name(),action)
+            return "/items/%s/%s%s"%(self.token,self.url_name(),action)
         else:
-            return "/items/%d%s"%(self.key().id(),action)
+            return "/items/%s%s"%(self.token,action)
     @classmethod
     def expiry_cutoff(cls):
         return datetime.now()-cls.EXPIRATION_DELTA
@@ -137,7 +148,7 @@ class StoreUser(db.Model):
         self.admin=True
         self.put()
     def owned_items(self):
-        return Item.all().filter("owner =",self.key())
+        return Item.all().ancestor(self).filter("owner =",self.key())
     def url(self,action=None):
         if action:
             return "/users/%d/%s"%(self.key().id(),action)

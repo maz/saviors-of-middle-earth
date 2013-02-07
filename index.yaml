@@ -35,6 +35,13 @@ indexes:
   - name: creation_time
     direction: desc
 
+- kind: Item
+  ancestor: yes
+  properties:
+  - name: owner
+  - name: creation_time
+    direction: desc
+
 - kind: ItemRating
   properties:
   - name: item
