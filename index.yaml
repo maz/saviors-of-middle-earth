@@ -25,9 +25,24 @@ indexes:
 - kind: Item
   properties:
   - name: creation_time
+  - name: name
+  - name: price
+  - name: token
+
+- kind: Item
+  properties:
+  - name: creation_time
     direction: desc
   - name: name
   - name: price
+
+- kind: Item
+  properties:
+  - name: creation_time
+    direction: desc
+  - name: name
+  - name: price
+  - name: token
 
 - kind: Item
   properties:
