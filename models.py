@@ -147,7 +147,7 @@ class StoreUser(db.Model):
         self.admin=True
         self.put()
     def owned_items(self):
-        return Item.all().ancestor(self).filter("owner =",self.key())
+        return Item.all().ancestor(self)
     def url(self,action=None):
         if action:
             return "/users/%d/%s"%(self.key().id(),action)
