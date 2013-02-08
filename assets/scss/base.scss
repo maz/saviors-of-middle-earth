@@ -69,9 +69,11 @@ html,body{
 #flash{
 	background-color:yellow;
 	width:100%;
-	padding-left:20px;
 	min-height:20px;
 	position:relative;
+	.message{
+		padding-left:20px;
+	}
 	.close-button{
 		position:absolute;
 		top:0px;

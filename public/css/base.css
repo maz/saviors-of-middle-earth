@@ -58,9 +58,10 @@ html, body {
 #flash {
   background-color: yellow;
   width: 100%;
-  padding-left: 20px;
   min-height: 20px;
   position: relative; }
+  #flash .message {
+    padding-left: 20px; }
   #flash .close-button {
     position: absolute;
     top: 0px;
