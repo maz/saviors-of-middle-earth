@@ -96,32 +96,22 @@ class ItemPictureHandler(BaseHandler):
         self.response.headers['Content-Type']='image/png'
         self.response.out.write(item.picture)
 class ShowItemHandler(BaseHandler):
-    def get(self,ident):
-        try:
-            item=Item.get_by_token(ident)
-        except:
-            self.abort(404)
-        if not item: self.abort(404)
+    def get(self,ident=None,item=None,ensure_rating=None):
+        if not item:
+            try:
+                item=Item.get_by_token(ident)
+            except:
+                self.abort(404)
+            if not item: self.abort(404)
         if not item.viewable_by(self.current_user): self.abort(403)
         ratings=ItemRating.all().filter('item =',item).order('-time').fetch(limit=50)
+        if ensure_rating and ensure_rating not in ratings:
+            ratings.insert(0,ensure_rating)
         self.render_template('items/show.html',item=item,ratings=ratings)
-class CommunicateItemHandler(BaseHandler):
-    def post(self,ident):
-        try:
-            item=Item.get_by_token(ident)
-        except:
+    def post(self,ident):#RATE
+        if self.request.get('action')!="rate":
             self.abort(404)
-        if not item: self.abort(404)
-        if not item.viewable_by(self.current_user): self.abort(403)
-        c=Communique(users=[self.current_user.key(),item.parent_key()],title=item.communique_title)
-        c.put()
-        self.response.out.write(str(c.key().id()))
-class RateItemHandler(BaseHandler):
-    def post(self,ident):
-        try:
-            item=Item.get_by_token(ident)
-        except:
-            self.abort(404)
+        item=Item.get_by_token(ident)
         if not item: self.abort(404)
         if not item.viewable_by(self.current_user) or self.current_user.key() is item.parent_key(): self.abort(403)
         try:
@@ -136,7 +126,19 @@ class RateItemHandler(BaseHandler):
             self.flash("Rating added!")
         else:
             self.flash("You must include either a message or a numerical rating in order for it to be submitted.")
-        self.redirect(item.url())
+        self.get(item=item,ensure_rating=r)
+    
+class CommunicateItemHandler(BaseHandler):
+    def post(self,ident):
+        try:
+            item=Item.get_by_token(ident)
+        except:
+            self.abort(404)
+        if not item: self.abort(404)
+        if not item.viewable_by(self.current_user): self.abort(403)
+        c=Communique(users=[self.current_user.key(),item.parent_key()],title=item.communique_title)
+        c.put()
+        self.response.out.write(str(c.key().id()))
 class DeleteRatingHandler(BaseHandler):
     def post(self):
         if not self.current_user.admin: return self.abort(403)
@@ -154,8 +156,6 @@ app = webapp2.WSGIApplication([
     (r'/items/delete-rating',DeleteRatingHandler),
     (r'/items/([A-Za-z0-9]+)/.*/edit',EditItemHandler),
     (r'/items/([A-Za-z0-9]+)/edit',EditItemHandler),
-    (r'/items/([A-Za-z0-9]+)/.*/rate',RateItemHandler),
-    (r'/items/([A-Za-z0-9]+)/rate',RateItemHandler),
     (r'/items/([A-Za-z0-9]+)/.*/picture',ItemPictureHandler),
     (r'/items/([A-Za-z0-9]+)/picture',ItemPictureHandler),
     (r'/items/([A-Za-z0-9]+)/.*/delete',DeleteItemHandler),
