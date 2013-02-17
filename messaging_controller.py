@@ -60,8 +60,8 @@ class MessagingListHandler(CommuniqueFindingHandler):
         if not self.request.get('onlymessages'):
             out['user_map']=generate_user_map(self.communique)
             out['id']=int(communique_id)
-            out['unread']=com.last_message_sent>=com.last_read_by(self.current_user)
-            out['title']=com.title
+            out['unread']=self.communique.last_message_sent>=self.communique.last_read_by(self.current_user)
+            out['title']=self.communique.title
             #TODO: nicer way to do the following:
             for key in out['users'].keys():
                 outs['users'][key]=StoreUser.by_id(key).nickname

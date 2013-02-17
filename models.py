@@ -205,7 +205,7 @@ class Communique(db.Model):
         for user in self.users:
             if user!=sender.key():
                 user_obj=StoreUser.get(user)
-                user_obj.notify_channels('new_message',user=sender.key().id(),communique=self.key().id(),contents=contents)
+                user_obj.notify_channels('new_message',user=sender.key().id(),nickname=sender.nickname,communique=self.key().id(),contents=contents)
                 if not user_obj.has_unread_messages:
                     user_obj.has_unread_messages=True
                     user_obj.put()
@@ -217,7 +217,7 @@ class Communique(db.Model):
         if user.has_unread_messages:
             user.has_unread_messages=False
             user.put()
-        arr=UserCommunique.all().ancestor(user).filter('communique =',self).fetch(limit=1,projection=('time'))
+        arr=UserCommunique.all().ancestor(user).filter('communique =',self).fetch(limit=1,projection=['time'])
         if arr and len(arr):
             return arr[0].time
         else:

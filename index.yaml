@@ -86,3 +86,9 @@ indexes:
   - name: communique
   - name: time
     direction: desc
+
+- kind: UserCommunique
+  ancestor: yes
+  properties:
+  - name: communique
+  - name: time

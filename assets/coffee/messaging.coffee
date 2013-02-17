@@ -5,6 +5,15 @@ play_message_notification=->
 	message_audio.currentTime=0
 	message_audio.play()
 
+notifications=@webkitNotifications ? @notifications
+
+notify_new_message=(msg)->
+	play_message_notification()
+	return unless notifications?
+	notifications.createNotification("/users/#{msg.user}/thumbnail",
+		"Message from '#{msg.nickname}'",
+		msg.contents).show() if notifications.checkPermission()==0
+
 focused=true
 
 #we want to know whether our window is currently active, hence the use of focus/blur instead of the page visibility API
@@ -84,6 +93,7 @@ class Communique
 			loading.hide()
 		op.send(null)
 	read:->
+		return unless unread
 		@dom.classList.remove('unread')
 		xhr=new XMLHttpRequest
 		xhr.open('post',"/messaging/#{@id}/read_by",true)
@@ -165,6 +175,7 @@ Communique.load_new=(id,cb)->
 	messages_panel.classList.toggle('active')
 	messages_opener.textContent=if messages_panel.classList.contains('active') then "Close" else "Messages"
 	document.body.style.overflow=if messages_panel.classList.contains('active') then "hidden" else ""
+	notifications.requestPermission() if notifications? and notifications.checkPermission()!=0 and messages_panel.classList.contains('active')
 	messages_opener.classList.remove('attn')
 	if messages_panel.classList.contains('active') and not communique_cache
 		MessagingForceReload()
@@ -189,7 +200,8 @@ window.addEventListener 'load',->
 	socket.onmessage=(evt)->
 		msg=JSON.parse(evt.data)
 		if msg.action is 'new_message'
-			play_message_notification() if not focused
+			
+			notify_new_message(msg) if not focused
 			if messages_panel.classList.contains('active')
 				com=communique_cache[msg.communique]
 				com.newMessage(msg) if com

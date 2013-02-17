@@ -249,7 +249,7 @@
               background-repeat: no-repeat;
               background-size: contain;
               background-position: center center;
-              background: blue;
+              background-color: blue;
               display: block; }
             #messages-panel .contents .main-pane .messages .message-group .user .name {
               font-size: 10px;
