@@ -25,9 +25,8 @@
 <div id="clearer"></div>
 {%if current_user and item.parent_key()!=current_user.key() %}
 <h2>Rate this Item</h2>
-<form method="post" id="rating-form" data-completing-label="Submitting...">
+<form method="post" action="{{item|url(named=False,action='rate')}}" id="rating-form" data-completing-label="Submitting...">
 	{{csrf_field()}}
-	<input type="hidden" name="action" value="rate"/>
 	<div class="numerical-rating">
 		<input type="radio" style="left:0px"   name="rating" value="100"/>
 		<input type="radio" style="left:30px"  name="rating" value="80"/>
