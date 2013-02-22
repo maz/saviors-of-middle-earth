@@ -6,6 +6,7 @@ from webapp2_extras.security import generate_random_string
 from google.appengine.api.channel import send_message
 import json
 from google.appengine.api import search
+from itertools import chain
 
 ITEM_SEARCH_INDEX_NAME="ITEM_SEARCH_INDEX_NAME"
 
@@ -234,3 +235,21 @@ class Message(db.Model):
     time=db.DateTimeProperty(auto_now_add=True)
     user=db.ReferenceProperty()
     contents=db.StringProperty()
+
+def QueryEnsuringAncestor(query,ancestor,limit,order=None):
+    neg=(order.index('-')==0)
+    if neg: order=order.replace('-','')
+    class key_comparer(object):
+        def __init__(self,obj):
+            self.obj=obj
+        def __hash__(self):
+            return hash(self.obj.key())
+        def __eq__(self,obj):
+            return self.obj.key()==obj.obj.key()
+        def __cmp__(self,obj):
+            if self.__eq__(obj): return 0
+            return cmp(getattr(self.obj,order),getattr(obj.obj,order))
+    x=map(lambda x: x.obj,sorted(set(map(key_comparer,chain(query().order(order).run(limit=limit),query().order(order).ancestor(ancestor).run(limit=limit))))))
+    if neg: x.reverse()
+    return x
+    

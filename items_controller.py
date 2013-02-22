@@ -1,7 +1,7 @@
 import webapp2
 from handlers import BaseHandler
 import env
-from models import Item, Communique,ItemRating
+from models import Item, Communique,ItemRating,QueryEnsuringAncestor
 from datetime import datetime
 import base64
 import logging
@@ -103,7 +103,7 @@ class ShowItemHandler(BaseHandler):
             self.abort(404)
         if not item: self.abort(404)
         if not item.viewable_by(self.current_user): self.abort(403)
-        ratings=ItemRating.all().filter('item =',item).order('-time').fetch(limit=50)
+        ratings=QueryEnsuringAncestor(query=lambda: ItemRating.all().filter('item =',item),ancestor=self.current_user,limit=50,order='-time')
         self.render_template('items/show.html',item=item,ratings=ratings)
 class RateItemHandler(BaseHandler):
     def post(self,ident):

@@ -67,7 +67,18 @@ indexes:
   properties:
   - name: item
   - name: time
+
+- kind: ItemRating
+  properties:
+  - name: item
+  - name: time
     direction: desc
+
+- kind: ItemRating
+  ancestor: yes
+  properties:
+  - name: item
+  - name: time
 
 - kind: ItemRating
   ancestor: yes
