@@ -250,10 +250,14 @@
               background-size: contain;
               background-position: center center;
               display: block; }
-            #messages-panel .contents .main-pane .messages .message-group .user .name {
+            #messages-panel .contents .main-pane .messages .message-group .user .name, #messages-panel .contents .main-pane .messages .message-group .user .time {
               font-size: 10px;
               width: 36px;
               text-align: center; }
+          #messages-panel .contents .main-pane .messages .message-group .user:not(:hover) .time {
+            display: none; }
+          #messages-panel .contents .main-pane .messages .message-group .user:hover .name {
+            display: none; }
           #messages-panel .contents .main-pane .messages .message-group .message {
             position: absolute;
             left: 50px;

@@ -186,7 +186,7 @@
     };
 
     Communique.prototype.render_message = function(msg) {
-      var div, group, pic;
+      var date, div, group, pic;
       div = document.createElement('div');
       div.className = 'message';
       div.textContent = msg.contents;
@@ -201,6 +201,8 @@
         pic.href = "/users/" + msg.user;
         pic.style.backgroundImage = "url('/users/" + msg.user + "/thumbnail')";
         group.querySelector('.name').textContent = this.user_map[msg.user];
+        date = new Date(msg.time);
+        group.querySelector('.time').innerHTML = "" + (date.getMonth() + 1) + "/" + (date.getDate()) + "/" + (date.getFullYear()) + "<br/>" + (date.getHours()) + ":" + (date.getMinutes());
         messages.appendChild(group);
       }
       div.style.top = group.style.minHeight;

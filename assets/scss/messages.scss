@@ -185,12 +185,22 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 							background-position:center center;
 							display:block;
 						}
-						.name{
+						.name,.time{
 							font-size:10px;
 							width:36px;
 							text-align:center;
 						}
 						float:left;
+					}
+					.user:not(:hover){
+						.time{
+							display:none;
+						}
+					}
+					.user:hover{
+						.name{
+							display:none;
+						}
 					}
 					.message{
 						position:absolute;

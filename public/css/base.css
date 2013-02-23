@@ -22,7 +22,7 @@ html, body {
     background-repeat: no-repeat;
     background-position: left center;
     background-size: contain;
-    background-image: url("/images/logo.png");
+    background-image: url("/images/logo.svg");
     top: 0px;
     left: 0px;
     display: block;
@@ -388,10 +388,14 @@ html, body {
               background-size: contain;
               background-position: center center;
               display: block; }
-            #messages-panel .contents .main-pane .messages .message-group .user .name {
+            #messages-panel .contents .main-pane .messages .message-group .user .name, #messages-panel .contents .main-pane .messages .message-group .user .time {
               font-size: 10px;
               width: 36px;
               text-align: center; }
+          #messages-panel .contents .main-pane .messages .message-group .user:not(:hover) .time {
+            display: none; }
+          #messages-panel .contents .main-pane .messages .message-group .user:hover .name {
+            display: none; }
           #messages-panel .contents .main-pane .messages .message-group .message {
             position: absolute;
             left: 50px;

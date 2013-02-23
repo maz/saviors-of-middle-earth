@@ -123,6 +123,8 @@ class Communique
 			pic.href="/users/#{msg.user}"
 			pic.style.backgroundImage="url('/users/#{msg.user}/thumbnail')"
 			group.querySelector('.name').textContent=@user_map[msg.user]
+			date=new Date(msg.time)
+			group.querySelector('.time').innerHTML="#{date.getMonth()+1}/#{date.getDate()}/#{date.getFullYear()}<br/>#{date.getHours()}:#{date.getMinutes()}"
 			messages.appendChild(group)
 		#This is a nasty solution...
 		div.style.top=group.style.minHeight
