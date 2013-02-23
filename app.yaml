@@ -10,10 +10,10 @@ handlers:
 #Messaging Controller
 - url: /_ah/channel/connected/
 #This should actually be "organic" admin only, artificial admins shouldn't be able to access this
-#  login: admin
+  login: admin
   script: messaging_controller.app
 - url: /_ah/channel/disconnected/
-#  login: admin
+  login: admin
   script: messaging_controller.app
 - url: /messaging/.*
   script: messaging_controller.app
