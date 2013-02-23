@@ -148,3 +148,17 @@ libraries:
   version: "2.5.2"
 - name: jinja2
   version: "2.6"
+
+skip_files:
+- ^(.*/)?app\.yaml
+- ^(.*/)?app\.yml
+- ^(.*/)?index\.yaml
+- ^(.*/)?index\.yml
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+- ^(.*/)?assets/.*
+- ^(.*/)?.*\.rb$
+- ^(.*/)?.*\.sh$
