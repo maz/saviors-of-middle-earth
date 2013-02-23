@@ -164,3 +164,5 @@ skip_files:
 - ^(.*/)?assets/.*
 - ^(.*/)?.*\.rb$
 - ^(.*/)?.*\.sh$
+builtins:
+- remote_api: on
