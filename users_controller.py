@@ -32,11 +32,15 @@ class UserProfileHandler(UserFindingHandler):
         )
 class UserPictureHandler(UserFindingHandler):
     def get(self,user_id):
+        if self.user.image is None:
+            return self.redirect('/images/user.svg')
         self.response.headers['Content-Type']='image/png'
         self.cache()
         self.response.out.write(self.user.image)
 class UserThumbnailHandler(UserFindingHandler):
     def get(self,user_id):
+        if self.user.image is None:
+            return self.redirect('/images/user.svg')
         self.response.headers['Content-Type']='image/png'
         self.cache()
         self.response.out.write(self.user.thumbnail)

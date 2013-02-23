@@ -118,8 +118,7 @@ html, body {
     z-index: 98;
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center center;
-    background-color: blue; }
+    background-position: center center; }
     #user-panel.loggedin .profilepic .highlight {
       position: absolute;
       top: 0px;
