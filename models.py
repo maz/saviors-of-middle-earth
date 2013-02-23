@@ -1,4 +1,5 @@
 from google.appengine.ext import db
+from google.appengine.ext.db import metadata
 from google.appengine.api import users
 from datetime import timedelta,datetime
 import re
@@ -254,3 +255,16 @@ def QueryEnsuringAncestor(query,ancestor,limit,order=None):
             return cmp(getattr(self.obj,order),getattr(obj.obj,order))
     return map(lambda x: x.obj,sorted(set(map(key_comparer,chain(query().order(order).run(limit=limit),query().order(order).ancestor(ancestor).run(limit=limit)))),reverse=neg))
     
+
+class ModelInitializer(object):
+    _initialized_state=False
+    @staticmethod
+    def initialized():
+        if not ModelInitializer._initialized_state:
+            #let's be atomic here:
+            if len(metadata.get_kinds(start='A',end='Z'))!=0:
+                ModelInitializer._initialized_state=True
+        return ModelInitializer._initialized_state
+    @staticmethod
+    def initialize():
+        LogEntry(msg="joe!").put()

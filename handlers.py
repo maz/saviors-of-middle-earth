@@ -3,7 +3,7 @@ from webapp2_extras.security import generate_random_string
 from webapp2_extras import sessions
 from webapp2_extras import jinja2
 from jinja2 import Markup
-from models import LogEntry,StoreUser,Item
+from models import LogEntry,StoreUser,Item,ModelInitializer
 from datetime import tzinfo,timedelta
 import logging
 from google.appengine.api import users
@@ -73,6 +73,8 @@ class BaseHandler(webapp2.RequestHandler):
         if not dt.tzinfo: dt=dt.replace(tzinfo=UTC)
         return dt.astimezone(self.gmt_offset())
     def dispatch(self):
+        if not ModelInitializer.initialized():
+            ModelInitializer.initialize()
         self.session_store=sessions.get_store(request=self.request)
         try:
             if self.request.method not in ['GET','HEAD']:
