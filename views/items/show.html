@@ -49,9 +49,9 @@
 {%for rating in ratings%}
 <div class="rating">
 	<div class="margin">
-		<a class="user" href="{{rating.user|url}}">
-			<div class="pic" style="background-image:url('{{rating.user.url(action='thumbnail')}}')"></div>
-			<div class="name">{{rating.user.nickname}}</div>
+		<a class="user" href="{{rating.parent()|url}}">
+			<div class="pic" style="background-image:url('{{rating.parent().url(action='thumbnail')}}')"></div>
+			<div class="name">{{rating.parent().nickname}}</div>
 		</a>
 		{%if current_user and current_user.admin%}
 		<form method="post" action="/items/delete-rating" class="delete-form">

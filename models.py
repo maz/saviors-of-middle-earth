@@ -95,7 +95,6 @@ class Item(db.Model):
 class ItemRating(db.Model):
     contents=db.TextProperty()
     item=db.ReferenceProperty(Item)
-    user=db.ReferenceProperty()
     rating=db.RatingProperty()
     time=db.DateTimeProperty(auto_now_add=True)
     def apply(self):
@@ -269,16 +268,28 @@ class ModelInitializer(object):
     @staticmethod
     def initialize():
         f=open(os.path.join(os.path.dirname(__file__),'fixtures.json'),'r')
-        data=json.load(f)
+        all_data=json.load(f)
         f.close()
+        data=all_data['users']
+        reviews=all_data['reviews']
+        items={}
         users={}
         for name in data.keys():
             user=StoreUser(nickname=name,email="%s@example.com"%name.lower())
             user.put()
-            users[name]=user
+            users[name]=user.key()
             if not data[name]: continue
             @db.transactional
             def add_products():
                 for pdata in data[name]:
-                    Item(parent=user,name=pdata['name'],description=pdata['description'],price=float(pdata['price']),creation_time=datetime.utcfromtimestamp(pdata['expiration'])-Item.EXPIRATION_DELTA).put()
+                    itm=Item(parent=user,name=pdata['name'],rating_count=pdata['rating_count'],avg_rating=pdata['avg_rating'],description=pdata['description'],price=float(pdata['price']),creation_time=datetime.utcfromtimestamp(pdata['expiration'])-Item.EXPIRATION_DELTA)
+                    itm.put()
+                    items[pdata['id']]=itm.key()
             add_products()
+        for name in reviews.keys():
+            user=users[name]
+            @db.transactional
+            def add_reviews():
+                for review in reviews[name]:
+                    ItemRating(parent=user,contents=review['text'],item=items[review['product']],rating=review['rating']).put()
+            add_reviews()

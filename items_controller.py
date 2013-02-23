@@ -122,7 +122,7 @@ class RateItemHandler(BaseHandler):
         except:
             rating=0
         if rating or self.request.get('contents')!='null':
-            r=ItemRating(parent=self.current_user,contents=rich_text.from_style_runs(self.request.get('contents')),item=item,user=self.current_user,rating=rating)
+            r=ItemRating(parent=self.current_user,contents=rich_text.from_style_runs(self.request.get('contents')),item=item,rating=rating)
             r.put()
             r.apply()
             self.log('rating created')

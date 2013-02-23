@@ -21,18 +21,24 @@ def keys_to_symbols(x)
 end
 keys_to_symbols @inputs
 
+@next_itm_id=1
+
 @products=[]
 @inputs[:classes].each do |cls|
   @inputs[:per_class].each do |itm|
     itm=itm.clone#SHALLOW copy
     itm[:name]="#{cls} #{itm[:name]}"
     itm[:description]=itm[:description].gsub("$CLASS",cls)
-    itm[:reviews]=[]
+    itm[:avg_rating]=0.0
+    itm[:rating_count]=0
+    itm[:id]=@next_itm_id
+    @next_itm_id+=1
     @products<<itm
   end
 end
 
 @users={}
+@reviews={}
 @random=Random.new(@inputs[:seed])
 
 @five_percent=@products.length/20
@@ -74,12 +80,22 @@ end
       user=name
       user=@users.keys[@random.rand(@users.keys.length)] while user==name
       review=@inputs[:reviews][@random.rand(@inputs[:reviews].length)]
-      product[:reviews]<<{
-        :user=>user,
-        :rating=>rtween(review[:min],review[:max]),
+      @reviews[user]||=[]
+      rating=rtween(review[:min],review[:max])*20
+      product[:avg_rating]+=rating
+      product[:rating_count]+=1
+      @reviews[user]<<{
+        :product=>product[:id],
+        :rating=>rating,
         :text=>review[:messages][@random.rand(review[:messages].length)]
       }
     end
+  end
+end
+@users.each_pair do |name,products|
+  next if products.nil?
+  products.each do |prod|
+    prod[:avg_rating]=Float(prod[:avg_rating])/Float(prod[:rating_count]) unless prod[:rating_count]==0
   end
 end
 
@@ -87,5 +103,8 @@ end
 @users[@inputs[:names].last]+=@products if @products.length>0
 
 File.open(File.join(File.dirname(__FILE__),'fixtures.json'),'w') do |f|
-  f<<JSON.generate(@users)
+  f<<JSON.generate({
+    :users=>@users,
+    :reviews=>@reviews
+  })
 end
