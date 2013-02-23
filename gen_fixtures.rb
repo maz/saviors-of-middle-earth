@@ -1,4 +1,5 @@
 require 'yaml'
+require 'json'
 require 'date'
 require 'time'
 
@@ -84,6 +85,6 @@ end
 #dump any remaining products on the last user
 @users[@inputs[:names].last]+=@products if @products.length>0
 
-File.open(File.join(File.dirname(__FILE__),'fixtures.yaml'),'w') do |f|
-  f<<@users.to_yaml
+File.open(File.join(File.dirname(__FILE__),'fixtures.json'),'w') do |f|
+  f<<JSON.generate(@users)
 end

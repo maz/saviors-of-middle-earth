@@ -8,6 +8,8 @@ from google.appengine.api.channel import send_message
 import json
 from google.appengine.api import search
 from itertools import chain
+import json
+import os
 
 ITEM_SEARCH_INDEX_NAME="ITEM_SEARCH_INDEX_NAME"
 
@@ -254,7 +256,6 @@ def QueryEnsuringAncestor(query,ancestor,limit,order=None):
             if self.__eq__(obj): return 0
             return cmp(getattr(self.obj,order),getattr(obj.obj,order))
     return map(lambda x: x.obj,sorted(set(map(key_comparer,chain(query().order(order).run(limit=limit),query().order(order).ancestor(ancestor).run(limit=limit)))),reverse=neg))
-    
 
 class ModelInitializer(object):
     _initialized_state=False
@@ -267,4 +268,6 @@ class ModelInitializer(object):
         return ModelInitializer._initialized_state
     @staticmethod
     def initialize():
-        LogEntry(msg="joe!").put()
+        f=open(os.path.join(os.path.dirname(__file__),'fixtures.json'),'r')
+        data=json.load(f)
+        f.close()
