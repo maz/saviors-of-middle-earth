@@ -106,7 +106,11 @@ class ShowItemHandler(BaseHandler):
             self.abort(404)
         if not item: self.abort(404)
         if not item.viewable_by(self.current_user): self.abort(403)
-        ratings=QueryEnsuringAncestor(query=lambda: ItemRating.all().filter('item =',item),ancestor=self.current_user,limit=50,order='-time')
+        query=lambda: ItemRating.all().filter('item =',item)
+        if self.current_user:
+            ratings=QueryEnsuringAncestor(query=query,ancestor=self.current_user,limit=50,order='-time')
+        else:
+            ratings=query().order('-time').run(limit=50)
         self.render_template('items/show.html',item=item,ratings=ratings)
 class RateItemHandler(BaseHandler):
     def post(self,ident):

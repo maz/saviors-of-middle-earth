@@ -119,7 +119,7 @@ class LogEntry(db.Model):
 
 class StoreUser(db.Model):
     userid=db.StringProperty()
-    admin=db.BooleanProperty()
+    admin=db.BooleanProperty(default=False)
     deactivated=db.BooleanProperty(default=False,indexed=False)
     email=db.StringProperty()
     
@@ -271,3 +271,14 @@ class ModelInitializer(object):
         f=open(os.path.join(os.path.dirname(__file__),'fixtures.json'),'r')
         data=json.load(f)
         f.close()
+        users={}
+        for name in data.keys():
+            user=StoreUser(nickname=name,email="%s@example.com"%name.lower())
+            user.put()
+            users[name]=user
+            if not data[name]: continue
+            @db.transactional
+            def add_products():
+                for pdata in data[name]:
+                    Item(parent=user,name=pdata['name'],description=pdata['description'],price=float(pdata['price']),creation_time=datetime.utcfromtimestamp(pdata['expiration'])-Item.EXPIRATION_DELTA).put()
+            add_products()

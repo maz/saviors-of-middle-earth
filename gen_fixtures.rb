@@ -43,7 +43,8 @@ while @eprod.length>0
     idx=@random.rand(@eprod.length)
     prod=@eprod[idx]
     @eprod.delete_at idx
-    prod[:expiration]=@start_date.strftime
+    prod[:expiration]=@start_date.to_time.utc.to_i
+    prod[:price]=Float(@random.rand(10000))/Float(100)
   end
   @start_date+=1
 end
