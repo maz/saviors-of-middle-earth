@@ -35,17 +35,21 @@ def rtween(min,max)
 end
 
 @inputs[:names].each do |name|
-  break if @products.length==0
-  @users[name]=[]
-  rtween(@inputs[:min_products],@inputs[:max_products]).times do
-    break unless @products.length>0
-    idx=@random.rand(@products.length)
-    @users[name]<<@products[idx]
-    @products.delete_at idx
+  if @products.length==0
+    @users[name]=nil
+  else
+    @users[name]=[]
+    rtween(@inputs[:min_products],@inputs[:max_products]).times do
+      break unless @products.length>0
+      idx=@random.rand(@products.length)
+      @users[name]<<@products[idx]
+      @products.delete_at idx
+    end
   end
 end
 
 @users.each_pair do |name,products|
+  next if products.nil?
   products.each do |product|
     rtween(@inputs[:min_reviews],@inputs[:max_reviews]).times do
       user=name
