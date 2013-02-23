@@ -9,6 +9,7 @@ import logging
 from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.api.channel import create_channel
+from google.appengine.api import memcache
 import urllib
 import re
 import json
@@ -88,8 +89,16 @@ class BaseHandler(webapp2.RequestHandler):
             self.inner_dispatch()
         finally:
             self.session_store.save_sessions(self.response)
-    def cache(self,seconds=5*60):
+    def cache(self,seconds=1*60):
         self.response.headers['Cache-Control']="max-age=%d"%seconds
+    def memcache(self,key,func,expiration):
+        val=memcache.get(key)
+        if val is not None:
+            return val
+        else:
+            val=func()
+            memcache.add(key,val,expiration)
+            return val
     @webapp2.cached_property
     def session(self):
         return self.session_store.get_session()

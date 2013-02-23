@@ -11,7 +11,7 @@ from google.appengine.api import search
 
 class IndexHandler(BaseHandler):
     def get(self):
-        self.render_template('items/index.html',recently_added=Item.fresh().order('-creation_time').run(limit=10,projection=('name','price','token')),about_to_expire=Item.fresh().order('creation_time').run(projection=('name','price','token'),limit=10))
+        self.render_template('items/index.html',**self.memcache("homepage-contents",lambda: dict(recently_added=Item.fresh().order('-creation_time').fetch(limit=10,projection=('name','price','token')),about_to_expire=Item.fresh().order('creation_time').fetch(projection=('name','price','token'),limit=10)),expiration=5))
 class SearchHandler(BaseHandler):
     PER_PAGE=10
     def get(self):
