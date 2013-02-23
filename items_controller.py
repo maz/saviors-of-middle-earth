@@ -94,6 +94,7 @@ class ItemPictureHandler(BaseHandler):
         if not item: self.abort(404)
         if not item.viewable_by(self.current_user): self.abort(403)
         self.response.headers['Content-Type']='image/png'
+        self.cache()
         self.response.out.write(item.picture)
 class ShowItemHandler(BaseHandler):
     def get(self,ident):
