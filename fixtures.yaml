@@ -1,0 +1,1054 @@
+---
+James:
+- :name: ! '{:"Imperial Battleship"=>"a study of modern military strategy"} Software'
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in .<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: Biology Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Biology lectures when you've got these notes at
+    your fingertips?! Comes with no guarantee of accuracy.
+- :name: Management Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Management are like.
+- :name: ! '{:"Moon Runes"=>"a study of ancicent language"} Textbook'
+  :image: textbook.png
+  :description: The companion book for . This book provides very interesting reading
+    material.
+- :name: Management Textbook
+  :image: textbook.png
+  :description: The companion book for Management. This book provides very interesting
+    reading material.
+- :name: ! '{:Starcrash=>"an analysis of the acting of David Hasselhoff"} Software'
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in .<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: Writing and Humanistic Studies Textbook
+  :image: textbook.png
+  :description: The companion book for Writing and Humanistic Studies. This book provides
+    very interesting reading material.
+- :name: Foreign Languages and Literatures Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Foreign Languages and Literatures
+    will further your understanding of the material.
+Mary: []
+John:
+- :name: Comparative Media Studies Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Comparative Media Studies are like.
+- :name: Physics Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Physics are like.
+Patricia:
+- :name: Economics Tutoring
+  :description: You will ace Economics with my help! I took the class last year and
+    got 205% in the class.
+- :name: Biological Engineering Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Biological Engineering.<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: ! '{:Hipsteritis=>"how to cope with being so awesome"} Tutoring'
+  :description: You will ace  with my help! I took the class last year and got 205%
+    in the class.
+Robert:
+- :name: Electrical Engineering and Computer Science Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Electrical Engineering and
+    Computer Science will further your understanding of the material.
+- :name: Writing and Humanistic Studies Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Writing and Humanistic Studies are like.
+Elizabeth:
+- :name: Mechanical Engineering Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Mechanical Engineering.<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: Electrical Engineering and Computer Science Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Electrical Engineering and Computer Science are like.
+- :name: Biology Tutoring
+  :description: You will ace Biology with my help! I took the class last year and
+    got 205% in the class.
+- :name: ! '{:"Stairway to Heaven"=>"an existential question of the afterlife"} Tutoring'
+  :description: You will ace  with my help! I took the class last year and got 205%
+    in the class.
+- :name: Mechanical Engineering Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Mechanical Engineering lectures when you've got
+    these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: Nuclear Science and Engineering Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Nuclear Science
+    and Engineering.<div>System Requirements: OS2 or Windows CE</div>'
+- :name: Chemical Engineering Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Chemical Engineering are like.
+- :name: Brain and Cognitive Sciences Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Brain and Cognitive Sciences lectures when you've
+    got these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: ! '{:"Forever Young"=>"a study of stem cells to reverse the aging process"}
+    Reading Material'
+  :image: book.png
+  :description: This supplementary reading material for  will further your understanding
+    of the material.
+Michael:
+- :name: Civil and Environmental Engineering Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Civil and Environmental
+    Engineering.<div>System Requirements: OS2 or Windows CE</div>'
+Jennifer:
+- :name: Engineering Systems Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Engineering Systems are like.
+- :name: Mathematics Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Mathematics lectures when you've got these notes
+    at your fingertips?! Comes with no guarantee of accuracy.
+- :name: ! '{:"Forever Young"=>"a study of stem cells to reverse the aging process"}
+    Textbook'
+  :image: textbook.png
+  :description: The companion book for . This book provides very interesting reading
+    material.
+- :name: Economics Textbook
+  :image: textbook.png
+  :description: The companion book for Economics. This book provides very interesting
+    reading material.
+- :name: Media Arts and Sciences Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Media Arts and Sciences will
+    further your understanding of the material.
+- :name: ! '{:Starcrash=>"an analysis of the acting of David Hasselhoff"} Archival
+    Test'
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in  are like.
+William: []
+Linda:
+- :name: Media Arts and Sciences Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Media Arts and
+    Sciences.<div>System Requirements: OS2 or Windows CE</div>'
+- :name: Management Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Management will further your
+    understanding of the material.
+- :name: How not to be seen Reading Material
+  :image: book.png
+  :description: This supplementary reading material for How not to be seen will further
+    your understanding of the material.
+- :name: Architecture Textbook
+  :image: textbook.png
+  :description: The companion book for Architecture. This book provides very interesting
+    reading material.
+- :name: Aeronautics and Astronautics Tutoring
+  :description: You will ace Aeronautics and Astronautics with my help! I took the
+    class last year and got 205% in the class.
+- :name: Music and Theater Arts Textbook
+  :image: textbook.png
+  :description: The companion book for Music and Theater Arts. This book provides
+    very interesting reading material.
+- :name: Literature Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Literature will further your
+    understanding of the material.
+David:
+- :name: Literature Tutoring
+  :description: You will ace Literature with my help! I took the class last year and
+    got 205% in the class.
+- :name: Biology Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Biology will further your
+    understanding of the material.
+- :name: Management Tutoring
+  :description: You will ace Management with my help! I took the class last year and
+    got 205% in the class.
+- :name: ! '{:Hipsteritis=>"how to cope with being so awesome"} Software'
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in .<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: Architecture Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Architecture.<div>System
+    Requirements: OS2 or Windows CE</div>'
+Barbara:
+- :name: Chemical Engineering Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Chemical Engineering.<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: Management Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Management.<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: Mechanical Engineering Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Mechanical Engineering will
+    further your understanding of the material.
+- :name: Engineering Systems Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Engineering Systems lectures when you've got these
+    notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: How to recognize trees from very far away Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in How to recognize
+    trees from very far away.<div>System Requirements: OS2 or Windows CE</div>'
+- :name: Nuclear Science and Engineering Tutoring
+  :description: You will ace Nuclear Science and Engineering with my help! I took
+    the class last year and got 205% in the class.
+- :name: Linguistics and Philosophy Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Linguistics and Philosophy are like.
+Richard:
+- :name: ! '{:"Gotta Catch them All"=>"a modern critique of the criminal justice system"}
+    Textbook'
+  :image: textbook.png
+  :description: The companion book for . This book provides very interesting reading
+    material.
+- :name: Nuclear Science and Engineering Textbook
+  :image: textbook.png
+  :description: The companion book for Nuclear Science and Engineering. This book
+    provides very interesting reading material.
+- :name: Physics Textbook
+  :image: textbook.png
+  :description: The companion book for Physics. This book provides very interesting
+    reading material.
+- :name: Electrical Engineering and Computer Science Tutoring
+  :description: You will ace Electrical Engineering and Computer Science with my help!
+    I took the class last year and got 205% in the class.
+- :name: ! '{:"Imperial Battleship"=>"a study of modern military strategy"} Tutoring'
+  :description: You will ace  with my help! I took the class last year and got 205%
+    in the class.
+Susan:
+- :name: Materials Science and Engineering Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Materials Science and Engineering
+    will further your understanding of the material.
+- :name: Aeronautics and Astronautics Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Aeronautics and Astronautics
+    will further your understanding of the material.
+- :name: Mathematics Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Mathematics are like.
+- :name: ! '{:"Forever Young"=>"a study of stem cells to reverse the aging process"}
+    Archival Test'
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in  are like.
+- :name: Materials Science and Engineering Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Materials Science and Engineering are like.
+Joseph:
+- :name: Mechanical Engineering Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Mechanical Engineering are like.
+- :name: Civil and Environmental Engineering Tutoring
+  :description: You will ace Civil and Environmental Engineering with my help! I took
+    the class last year and got 205% in the class.
+- :name: Civil and Environmental Engineering Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Civil and Environmental Engineering
+    will further your understanding of the material.
+- :name: Physics Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Physics will further your
+    understanding of the material.
+- :name: Aeronautics and Astronautics Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Aeronautics and Astronautics are like.
+- :name: Literature Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Literature lectures when you've got these notes
+    at your fingertips?! Comes with no guarantee of accuracy.
+Margaret:
+- :name: Architecture Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Architecture will further
+    your understanding of the material.
+- :name: How to recognize trees from very far away Tutoring
+  :description: You will ace How to recognize trees from very far away with my help!
+    I took the class last year and got 205% in the class.
+Charles:
+- :name: Health Sciences and Technology Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Health Sciences and Technology are like.
+- :name: Economics Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Economics.<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: Urban Studies and Planning Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Urban Studies and Planning
+    will further your understanding of the material.
+- :name: ! '{:"Forever Young"=>"a study of stem cells to reverse the aging process"}
+    Software'
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in .<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: Chemistry Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Chemistry will further your
+    understanding of the material.
+- :name: History Textbook
+  :image: textbook.png
+  :description: The companion book for History. This book provides very interesting
+    reading material.
+Dorothy:
+- :name: Civil and Environmental Engineering Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Civil and Environmental Engineering lectures when
+    you've got these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: Engineering Systems Tutoring
+  :description: You will ace Engineering Systems with my help! I took the class last
+    year and got 205% in the class.
+Thomas:
+- :name: Humanities Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Humanities lectures when you've got these notes
+    at your fingertips?! Comes with no guarantee of accuracy.
+- :name: ! '{:"Imperial Battleship"=>"a study of modern military strategy"} Reading
+    Material'
+  :image: book.png
+  :description: This supplementary reading material for  will further your understanding
+    of the material.
+- :name: Biology Textbook
+  :image: textbook.png
+  :description: The companion book for Biology. This book provides very interesting
+    reading material.
+- :name: Biological Engineering Tutoring
+  :description: You will ace Biological Engineering with my help! I took the class
+    last year and got 205% in the class.
+- :name: Comparative Media Studies Tutoring
+  :description: You will ace Comparative Media Studies with my help! I took the class
+    last year and got 205% in the class.
+- :name: Management Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Management lectures when you've got these notes
+    at your fingertips?! Comes with no guarantee of accuracy.
+- :name: Chemistry Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Chemistry are like.
+- :name: Economics Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Economics lectures when you've got these notes
+    at your fingertips?! Comes with no guarantee of accuracy.
+- :name: ! '{:"Gotta Catch them All"=>"a modern critique of the criminal justice system"}
+    Software'
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in .<div>System
+    Requirements: OS2 or Windows CE</div>'
+Jessica: []
+Christopher:
+- :name: Electrical Engineering and Computer Science Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Electrical Engineering
+    and Computer Science.<div>System Requirements: OS2 or Windows CE</div>'
+Sarah:
+- :name: Engineering Systems Textbook
+  :image: textbook.png
+  :description: The companion book for Engineering Systems. This book provides very
+    interesting reading material.
+- :name: Mathematics Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Mathematics will further your
+    understanding of the material.
+- :name: Humanities Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Humanities.<div>System
+    Requirements: OS2 or Windows CE</div>'
+Daniel:
+- :name: Engineering Systems Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Engineering Systems will further
+    your understanding of the material.
+Betty:
+- :name: How to recognize trees from very far away Textbook
+  :image: textbook.png
+  :description: The companion book for How to recognize trees from very far away.
+    This book provides very interesting reading material.
+- :name: Anthropology Textbook
+  :image: textbook.png
+  :description: The companion book for Anthropology. This book provides very interesting
+    reading material.
+- :name: Humanities Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Humanities will further your
+    understanding of the material.
+- :name: Mathematics Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Mathematics.<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: Computational and Systems Biology Textbook
+  :image: textbook.png
+  :description: The companion book for Computational and Systems Biology. This book
+    provides very interesting reading material.
+Matthew:
+- :name: ! '{:"Gotta Catch them All"=>"a modern critique of the criminal justice system"}
+    Reading Material'
+  :image: book.png
+  :description: This supplementary reading material for  will further your understanding
+    of the material.
+- :name: Architecture Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Architecture lectures when you've got these notes
+    at your fingertips?! Comes with no guarantee of accuracy.
+- :name: Nuclear Science and Engineering Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Nuclear Science and Engineering
+    will further your understanding of the material.
+- :name: Civil and Environmental Engineering Textbook
+  :image: textbook.png
+  :description: The companion book for Civil and Environmental Engineering. This book
+    provides very interesting reading material.
+- :name: ! '{:"American Pie"=>"a historical account of the day the music died"} Tutoring'
+  :description: You will ace  with my help! I took the class last year and got 205%
+    in the class.
+Nancy:
+- :name: Political Science Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Political Science.<div>System
+    Requirements: OS2 or Windows CE</div>'
+Donald:
+- :name: Biological Engineering Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Biological Engineering lectures when you've got
+    these notes at your fingertips?! Comes with no guarantee of accuracy.
+Karen: []
+Anthony:
+- :name: Political Science Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Political Science are like.
+- :name: ! '{:Hipsteritis=>"how to cope with being so awesome"} Archival Test'
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in  are like.
+- :name: Political Science Tutoring
+  :description: You will ace Political Science with my help! I took the class last
+    year and got 205% in the class.
+- :name: Chemistry Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Chemistry.<div>System
+    Requirements: OS2 or Windows CE</div>'
+Lisa:
+- :name: Political Science Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Political Science will further
+    your understanding of the material.
+- :name: Literature Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Literature.<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: How to recognize trees from very far away Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in How to recognize trees from very far away are like.
+- :name: Electrical Engineering and Computer Science Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Electrical Engineering and Computer Science lectures
+    when you've got these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: Anthropology Tutoring
+  :description: You will ace Anthropology with my help! I took the class last year
+    and got 205% in the class.
+- :name: Brain and Cognitive Sciences Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Brain and Cognitive
+    Sciences.<div>System Requirements: OS2 or Windows CE</div>'
+- :name: History Tutoring
+  :description: You will ace History with my help! I took the class last year and
+    got 205% in the class.
+- :name: ! '{:"Stop the Flow of Time"=>"learn how to meditate"} Software'
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in .<div>System
+    Requirements: OS2 or Windows CE</div>'
+Paul:
+- :name: Mathematics Textbook
+  :image: textbook.png
+  :description: The companion book for Mathematics. This book provides very interesting
+    reading material.
+- :name: How to recognize trees from very far away Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to How to recognize trees from very far away lectures
+    when you've got these notes at your fingertips?! Comes with no guarantee of accuracy.
+Helen:
+- :name: Mechanical Engineering Tutoring
+  :description: You will ace Mechanical Engineering with my help! I took the class
+    last year and got 205% in the class.
+- :name: Physics Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Physics.<div>System
+    Requirements: OS2 or Windows CE</div>'
+Mark:
+- :name: Foreign Languages and Literatures Tutoring
+  :description: You will ace Foreign Languages and Literatures with my help! I took
+    the class last year and got 205% in the class.
+- :name: Music and Theater Arts Tutoring
+  :description: You will ace Music and Theater Arts with my help! I took the class
+    last year and got 205% in the class.
+- :name: ! '{:"American Pie"=>"a historical account of the day the music died"} Software'
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in .<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: Comparative Media Studies Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Comparative Media Studies lectures when you've
+    got these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: Media Arts and Sciences Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Media Arts and Sciences are like.
+- :name: Aeronautics and Astronautics Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Aeronautics and
+    Astronautics.<div>System Requirements: OS2 or Windows CE</div>'
+Sandra:
+- :name: Writing and Humanistic Studies Tutoring
+  :description: You will ace Writing and Humanistic Studies with my help! I took the
+    class last year and got 205% in the class.
+- :name: Computational and Systems Biology Tutoring
+  :description: You will ace Computational and Systems Biology with my help! I took
+    the class last year and got 205% in the class.
+- :name: ! '{:"Stop the Flow of Time"=>"learn how to meditate"} Archival Test'
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in  are like.
+- :name: Linguistics and Philosophy Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Linguistics and Philosophy lectures when you've
+    got these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: Chemistry Tutoring
+  :description: You will ace Chemistry with my help! I took the class last year and
+    got 205% in the class.
+- :name: Physics Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Physics lectures when you've got these notes at
+    your fingertips?! Comes with no guarantee of accuracy.
+George:
+- :name: Architecture Tutoring
+  :description: You will ace Architecture with my help! I took the class last year
+    and got 205% in the class.
+- :name: Materials Science and Engineering Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Materials Science
+    and Engineering.<div>System Requirements: OS2 or Windows CE</div>'
+- :name: ! '{:"Imperial Battleship"=>"a study of modern military strategy"} Archival
+    Test'
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in  are like.
+- :name: Brain and Cognitive Sciences Textbook
+  :image: textbook.png
+  :description: The companion book for Brain and Cognitive Sciences. This book provides
+    very interesting reading material.
+- :name: Physics Tutoring
+  :description: You will ace Physics with my help! I took the class last year and
+    got 205% in the class.
+- :name: Chemical Engineering Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Chemical Engineering lectures when you've got these
+    notes at your fingertips?! Comes with no guarantee of accuracy.
+Donna:
+- :name: Writing and Humanistic Studies Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Writing and Humanistic Studies
+    will further your understanding of the material.
+- :name: How not to be seen Tutoring
+  :description: You will ace How not to be seen with my help! I took the class last
+    year and got 205% in the class.
+Steven:
+- :name: Health Sciences and Technology Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Health Sciences
+    and Technology.<div>System Requirements: OS2 or Windows CE</div>'
+- :name: Computational and Systems Biology Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Computational and Systems
+    Biology will further your understanding of the material.
+- :name: Foreign Languages and Literatures Textbook
+  :image: textbook.png
+  :description: The companion book for Foreign Languages and Literatures. This book
+    provides very interesting reading material.
+- :name: Urban Studies and Planning Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Urban Studies
+    and Planning.<div>System Requirements: OS2 or Windows CE</div>'
+Ashley:
+- :name: Urban Studies and Planning Tutoring
+  :description: You will ace Urban Studies and Planning with my help! I took the class
+    last year and got 205% in the class.
+- :name: Engineering Systems Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Engineering Systems.<div>System
+    Requirements: OS2 or Windows CE</div>'
+Kenneth:
+- :name: ! '{:"Stairway to Heaven"=>"an existential question of the afterlife"} Software'
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in .<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: Anthropology Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Anthropology.<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: ! '{:"Stop the Flow of Time"=>"learn how to meditate"} Tutoring'
+  :description: You will ace  with my help! I took the class last year and got 205%
+    in the class.
+- :name: Aeronautics and Astronautics Textbook
+  :image: textbook.png
+  :description: The companion book for Aeronautics and Astronautics. This book provides
+    very interesting reading material.
+- :name: Biological Engineering Textbook
+  :image: textbook.png
+  :description: The companion book for Biological Engineering. This book provides
+    very interesting reading material.
+- :name: ! '{:Starcrash=>"an analysis of the acting of David Hasselhoff"} Lecture
+    Notes'
+  :image: notes.png
+  :description: Who needs to go to  lectures when you've got these notes at your fingertips?!
+    Comes with no guarantee of accuracy.
+- :name: Chemistry Textbook
+  :image: textbook.png
+  :description: The companion book for Chemistry. This book provides very interesting
+    reading material.
+- :name: Architecture Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Architecture are like.
+- :name: Computational and Systems Biology Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Computational and Systems Biology lectures when
+    you've got these notes at your fingertips?! Comes with no guarantee of accuracy.
+Kimberly:
+- :name: History Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in History are like.
+- :name: History Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in History.<div>System
+    Requirements: OS2 or Windows CE</div>'
+Andrew:
+- :name: History Reading Material
+  :image: book.png
+  :description: This supplementary reading material for History will further your
+    understanding of the material.
+- :name: Humanities Textbook
+  :image: textbook.png
+  :description: The companion book for Humanities. This book provides very interesting
+    reading material.
+- :name: Linguistics and Philosophy Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Linguistics and Philosophy
+    will further your understanding of the material.
+- :name: ! '{:"Moon Runes"=>"a study of ancicent language"} Lecture Notes'
+  :image: notes.png
+  :description: Who needs to go to  lectures when you've got these notes at your fingertips?!
+    Comes with no guarantee of accuracy.
+- :name: Economics Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Economics are like.
+- :name: Writing and Humanistic Studies Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Writing and Humanistic
+    Studies.<div>System Requirements: OS2 or Windows CE</div>'
+- :name: ! '{:Starcrash=>"an analysis of the acting of David Hasselhoff"} Textbook'
+  :image: textbook.png
+  :description: The companion book for . This book provides very interesting reading
+    material.
+- :name: Comparative Media Studies Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Comparative Media
+    Studies.<div>System Requirements: OS2 or Windows CE</div>'
+Carol:
+- :name: Brain and Cognitive Sciences Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Brain and Cognitive Sciences are like.
+- :name: Music and Theater Arts Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Music and Theater Arts lectures when you've got
+    these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: Nuclear Science and Engineering Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Nuclear Science and Engineering are like.
+Edward:
+- :name: ! '{:"American Pie"=>"a historical account of the day the music died"} Lecture
+    Notes'
+  :image: notes.png
+  :description: Who needs to go to  lectures when you've got these notes at your fingertips?!
+    Comes with no guarantee of accuracy.
+Michelle:
+- :name: Electrical Engineering and Computer Science Textbook
+  :image: textbook.png
+  :description: The companion book for Electrical Engineering and Computer Science.
+    This book provides very interesting reading material.
+- :name: Foreign Languages and Literatures Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Foreign Languages and Literatures lectures when
+    you've got these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: Materials Science and Engineering Tutoring
+  :description: You will ace Materials Science and Engineering with my help! I took
+    the class last year and got 205% in the class.
+- :name: Linguistics and Philosophy Tutoring
+  :description: You will ace Linguistics and Philosophy with my help! I took the class
+    last year and got 205% in the class.
+- :name: Anthropology Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Anthropology are like.
+- :name: ! '{:"Stairway to Heaven"=>"an existential question of the afterlife"} Textbook'
+  :image: textbook.png
+  :description: The companion book for . This book provides very interesting reading
+    material.
+- :name: Urban Studies and Planning Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Urban Studies and Planning are like.
+Brian:
+- :name: ! '{:"Forever Young"=>"a study of stem cells to reverse the aging process"}
+    Lecture Notes'
+  :image: notes.png
+  :description: Who needs to go to  lectures when you've got these notes at your fingertips?!
+    Comes with no guarantee of accuracy.
+- :name: Foreign Languages and Literatures Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Foreign Languages
+    and Literatures.<div>System Requirements: OS2 or Windows CE</div>'
+- :name: Foreign Languages and Literatures Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Foreign Languages and Literatures are like.
+- :name: ! '{:Hipsteritis=>"how to cope with being so awesome"} Reading Material'
+  :image: book.png
+  :description: This supplementary reading material for  will further your understanding
+    of the material.
+- :name: ! '{:"Forever Young"=>"a study of stem cells to reverse the aging process"}
+    Tutoring'
+  :description: You will ace  with my help! I took the class last year and got 205%
+    in the class.
+- :name: Chemical Engineering Textbook
+  :image: textbook.png
+  :description: The companion book for Chemical Engineering. This book provides very
+    interesting reading material.
+- :name: ! '{:"Moon Runes"=>"a study of ancicent language"} Tutoring'
+  :description: You will ace  with my help! I took the class last year and got 205%
+    in the class.
+- :name: ! '{:"American Pie"=>"a historical account of the day the music died"} Reading
+    Material'
+  :image: book.png
+  :description: This supplementary reading material for  will further your understanding
+    of the material.
+Amanda:
+- :name: Chemical Engineering Tutoring
+  :description: You will ace Chemical Engineering with my help! I took the class last
+    year and got 205% in the class.
+- :name: Music and Theater Arts Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Music and Theater
+    Arts.<div>System Requirements: OS2 or Windows CE</div>'
+- :name: ! '{:"Imperial Battleship"=>"a study of modern military strategy"} Lecture
+    Notes'
+  :image: notes.png
+  :description: Who needs to go to  lectures when you've got these notes at your fingertips?!
+    Comes with no guarantee of accuracy.
+- :name: How not to be seen Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in How not to be
+    seen.<div>System Requirements: OS2 or Windows CE</div>'
+Joshua:
+- :name: Health Sciences and Technology Tutoring
+  :description: You will ace Health Sciences and Technology with my help! I took the
+    class last year and got 205% in the class.
+- :name: Nuclear Science and Engineering Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Nuclear Science and Engineering lectures when you've
+    got these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: How not to be seen Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to How not to be seen lectures when you've got these
+    notes at your fingertips?! Comes with no guarantee of accuracy.
+Emily: []
+Kevin:
+- :name: Health Sciences and Technology Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Health Sciences and Technology lectures when you've
+    got these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: ! '{:"Gotta Catch them All"=>"a modern critique of the criminal justice system"}
+    Tutoring'
+  :description: You will ace  with my help! I took the class last year and got 205%
+    in the class.
+- :name: Mathematics Tutoring
+  :description: You will ace Mathematics with my help! I took the class last year
+    and got 205% in the class.
+- :name: History Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to History lectures when you've got these notes at
+    your fingertips?! Comes with no guarantee of accuracy.
+Melissa:
+- :name: Literature Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Literature are like.
+- :name: Biological Engineering Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Biological Engineering will
+    further your understanding of the material.
+- :name: How to recognize trees from very far away Reading Material
+  :image: book.png
+  :description: This supplementary reading material for How to recognize trees from
+    very far away will further your understanding of the material.
+- :name: Computational and Systems Biology Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Computational
+    and Systems Biology.<div>System Requirements: OS2 or Windows CE</div>'
+- :name: Writing and Humanistic Studies Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Writing and Humanistic Studies lectures when you've
+    got these notes at your fingertips?! Comes with no guarantee of accuracy.
+Ronald:
+- :name: How not to be seen Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in How not to be seen are like.
+- :name: Mechanical Engineering Textbook
+  :image: textbook.png
+  :description: The companion book for Mechanical Engineering. This book provides
+    very interesting reading material.
+- :name: ! '{:"Gotta Catch them All"=>"a modern critique of the criminal justice system"}
+    Archival Test'
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in  are like.
+Laura:
+- :name: ! '{:"Imperial Battleship"=>"a study of modern military strategy"} Textbook'
+  :image: textbook.png
+  :description: The companion book for . This book provides very interesting reading
+    material.
+- :name: ! '{:"American Pie"=>"a historical account of the day the music died"} Archival
+    Test'
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in  are like.
+- :name: Economics Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Economics will further your
+    understanding of the material.
+- :name: Humanities Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Humanities are like.
+- :name: Materials Science and Engineering Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Materials Science and Engineering lectures when
+    you've got these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: ! '{:"Stop the Flow of Time"=>"learn how to meditate"} Reading Material'
+  :image: book.png
+  :description: This supplementary reading material for  will further your understanding
+    of the material.
+Timothy:
+- :name: ! '{:Starcrash=>"an analysis of the acting of David Hasselhoff"} Reading
+    Material'
+  :image: book.png
+  :description: This supplementary reading material for  will further your understanding
+    of the material.
+- :name: Media Arts and Sciences Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Media Arts and Sciences lectures when you've got
+    these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: Biology Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Biology.<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: ! '{:"Stop the Flow of Time"=>"learn how to meditate"} Lecture Notes'
+  :image: notes.png
+  :description: Who needs to go to  lectures when you've got these notes at your fingertips?!
+    Comes with no guarantee of accuracy.
+- :name: ! '{:"Stairway to Heaven"=>"an existential question of the afterlife"} Reading
+    Material'
+  :image: book.png
+  :description: This supplementary reading material for  will further your understanding
+    of the material.
+- :name: Political Science Textbook
+  :image: textbook.png
+  :description: The companion book for Political Science. This book provides very
+    interesting reading material.
+Deborah:
+- :name: Computational and Systems Biology Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Computational and Systems Biology are like.
+- :name: Brain and Cognitive Sciences Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Brain and Cognitive Sciences
+    will further your understanding of the material.
+- :name: ! '{:Starcrash=>"an analysis of the acting of David Hasselhoff"} Tutoring'
+  :description: You will ace  with my help! I took the class last year and got 205%
+    in the class.
+Jason:
+- :name: Music and Theater Arts Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Music and Theater Arts are like.
+- :name: ! '{:"American Pie"=>"a historical account of the day the music died"} Textbook'
+  :image: textbook.png
+  :description: The companion book for . This book provides very interesting reading
+    material.
+- :name: Urban Studies and Planning Textbook
+  :image: textbook.png
+  :description: The companion book for Urban Studies and Planning. This book provides
+    very interesting reading material.
+- :name: ! '{:Hipsteritis=>"how to cope with being so awesome"} Lecture Notes'
+  :image: notes.png
+  :description: Who needs to go to  lectures when you've got these notes at your fingertips?!
+    Comes with no guarantee of accuracy.
+- :name: ! '{:"Moon Runes"=>"a study of ancicent language"} Software'
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in .<div>System
+    Requirements: OS2 or Windows CE</div>'
+- :name: Biology Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Biology are like.
+- :name: How not to be seen Textbook
+  :image: textbook.png
+  :description: The companion book for How not to be seen. This book provides very
+    interesting reading material.
+- :name: Media Arts and Sciences Textbook
+  :image: textbook.png
+  :description: The companion book for Media Arts and Sciences. This book provides
+    very interesting reading material.
+- :name: Health Sciences and Technology Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Health Sciences and Technology
+    will further your understanding of the material.
+Stephanie:
+- :name: Anthropology Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Anthropology will further
+    your understanding of the material.
+- :name: Political Science Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Political Science lectures when you've got these
+    notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: ! '{:"Stairway to Heaven"=>"an existential question of the afterlife"} Lecture
+    Notes'
+  :image: notes.png
+  :description: Who needs to go to  lectures when you've got these notes at your fingertips?!
+    Comes with no guarantee of accuracy.
+Jeffrey:
+- :name: Brain and Cognitive Sciences Tutoring
+  :description: You will ace Brain and Cognitive Sciences with my help! I took the
+    class last year and got 205% in the class.
+Rebecca:
+- :name: Media Arts and Sciences Tutoring
+  :description: You will ace Media Arts and Sciences with my help! I took the class
+    last year and got 205% in the class.
+- :name: Linguistics and Philosophy Textbook
+  :image: textbook.png
+  :description: The companion book for Linguistics and Philosophy. This book provides
+    very interesting reading material.
+- :name: Health Sciences and Technology Textbook
+  :image: textbook.png
+  :description: The companion book for Health Sciences and Technology. This book provides
+    very interesting reading material.
+- :name: Music and Theater Arts Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Music and Theater Arts will
+    further your understanding of the material.
+- :name: Chemical Engineering Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Chemical Engineering will
+    further your understanding of the material.
+- :name: ! '{:"Moon Runes"=>"a study of ancicent language"} Reading Material'
+  :image: book.png
+  :description: This supplementary reading material for  will further your understanding
+    of the material.
+- :name: Aeronautics and Astronautics Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Aeronautics and Astronautics lectures when you've
+    got these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: ! '{:Hipsteritis=>"how to cope with being so awesome"} Textbook'
+  :image: textbook.png
+  :description: The companion book for . This book provides very interesting reading
+    material.
+- :name: Materials Science and Engineering Textbook
+  :image: textbook.png
+  :description: The companion book for Materials Science and Engineering. This book
+    provides very interesting reading material.
+Gary:
+- :name: ! '{:"Stairway to Heaven"=>"an existential question of the afterlife"} Archival
+    Test'
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in  are like.
+- :name: Urban Studies and Planning Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Urban Studies and Planning lectures when you've
+    got these notes at your fingertips?! Comes with no guarantee of accuracy.
+- :name: Civil and Environmental Engineering Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Civil and Environmental Engineering are like.
+Sharon:
+- :name: Humanities Tutoring
+  :description: You will ace Humanities with my help! I took the class last year and
+    got 205% in the class.
+- :name: Comparative Media Studies Reading Material
+  :image: book.png
+  :description: This supplementary reading material for Comparative Media Studies
+    will further your understanding of the material.
+- :name: Literature Textbook
+  :image: textbook.png
+  :description: The companion book for Literature. This book provides very interesting
+    reading material.
+Ryan:
+- :name: ! '{:"Gotta Catch them All"=>"a modern critique of the criminal justice system"}
+    Lecture Notes'
+  :image: notes.png
+  :description: Who needs to go to  lectures when you've got these notes at your fingertips?!
+    Comes with no guarantee of accuracy.
+- :name: Linguistics and Philosophy Software
+  :image: software.png
+  :description: ! 'This software will aid your ability to do well in Linguistics and
+    Philosophy.<div>System Requirements: OS2 or Windows CE</div>'
+- :name: Biological Engineering Archival Test
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in Biological Engineering are like.
+Ruth:
+- :name: Chemistry Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Chemistry lectures when you've got these notes
+    at your fingertips?! Comes with no guarantee of accuracy.
+- :name: Anthropology Lecture Notes
+  :image: notes.png
+  :description: Who needs to go to Anthropology lectures when you've got these notes
+    at your fingertips?! Comes with no guarantee of accuracy.
+- :name: ! '{:"Stop the Flow of Time"=>"learn how to meditate"} Textbook'
+  :image: textbook.png
+  :description: The companion book for . This book provides very interesting reading
+    material.
+- :name: Comparative Media Studies Textbook
+  :image: textbook.png
+  :description: The companion book for Comparative Media Studies. This book provides
+    very interesting reading material.
+Eric:
+- :name: ! '{:"Moon Runes"=>"a study of ancicent language"} Archival Test'
+  :image: test.png
+  :description: This test is no longer in use. It will provide you with a decent idea
+    of what the tests in  are like.

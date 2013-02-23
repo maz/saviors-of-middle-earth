@@ -1,0 +1,290 @@
+seed: 14758
+min_products: 0
+max_products: 10
+min_reviews: 0
+max_reviews: 15
+names: #from http://www.ssa.gov/oact/babynames/decades/century.htmlhttp://www.ssa.gov/oact/babynames/decades/century.html
+  - James
+  - Mary
+  - John
+  - Patricia
+  - Robert
+  - Elizabeth
+  - Michael
+  - Jennifer
+  - William
+  - Linda
+  - David
+  - Barbara
+  - Richard
+  - Susan
+  - Joseph
+  - Margaret
+  - Charles
+  - Dorothy
+  - Thomas
+  - Jessica
+  - Christopher
+  - Sarah
+  - Daniel
+  - Betty
+  - Matthew
+  - Nancy
+  - Donald
+  - Karen
+  - Anthony
+  - Lisa
+  - Paul
+  - Helen
+  - Mark
+  - Sandra
+  - George
+  - Donna
+  - Steven
+  - Ashley
+  - Kenneth
+  - Kimberly
+  - Andrew
+  - Carol
+  - Edward
+  - Michelle
+  - Brian
+  - Amanda
+  - Joshua
+  - Emily
+  - Kevin
+  - Melissa
+  - Ronald
+  - Laura
+  - Timothy
+  - Deborah
+  - Jason
+  - Stephanie
+  - Jeffrey
+  - Rebecca
+  - Gary
+  - Sharon
+  - Ryan
+  - Ruth
+  - Eric
+  - Cynthia
+  - Nicholas
+  - Kathleen
+  - Stephen
+  - Anna
+  - Jacob
+  - Shirley
+  - Frank
+  - Amy
+  - Larry
+  - Angela
+  - Jonathan
+  - Virginia
+  - Scott
+  - Brenda
+  - Justin
+  - Catherine
+  - Raymond
+  - Pamela
+  - Brandon
+  - Katherine
+  - Gregory
+  - Christine
+  - Samuel
+  - Nicole
+  - Patrick
+  - Janet
+  - Benjamin
+  - Debra
+  - Jack
+  - Carolyn
+  - Dennis
+  - Rachel
+  - Jerry
+  - Samantha
+  - Alexander
+  - Heather
+  - Douglas
+  - Frances
+  - Walter
+  - Diane
+  - Tyler
+  - Maria
+  - Peter
+  - Joyce
+  - Henry
+  - Julie
+  - Aaron
+  - Martha
+  - Jose
+  - Joan
+  - Harold
+  - Evelyn
+  - Adam
+  - Kelly
+  - Zachary
+  - Christina
+  - Nathan
+  - Alice
+  - Carl
+  - Marie
+  - Arthur
+  - Lauren
+  - Kyle
+  - Judith
+  - Gerald
+  - Emma
+  - Lawrence
+  - Doris
+  - Albert
+  - Ann
+  - Roger
+  - Jean
+  - Keith
+  - Cheryl
+  - Joe
+  - Victoria
+  - Jeremy
+  - Megan
+  - Terry
+  - Kathryn
+  - Willie
+  - Andrea
+  - Sean
+  - Jacqueline
+  - Ralph
+  - Gloria
+  - Jesse
+  - Teresa
+  - Billy
+  - Janice
+  - Bruce
+  - Rose
+  - Roy
+  - Sara
+  - Austin
+  - Julia
+  - Bryan
+  - Theresa
+  - Christian
+  - Mildred
+  - Eugene
+  - Judy
+  - Louis
+  - Hannah
+  - Harry
+  - Beverly
+  - Wayne
+  - Grace
+  - Russell
+  - Denise
+  - Alan
+  - Marilyn
+  - Jordan
+  - Amber
+  - Philip
+  - Danielle
+  - Randy
+  - Brittany
+  - Howard
+  - Jane
+  - Ethan
+  - Diana
+  - Juan
+  - Lori
+  - Bobby
+  - Kathy
+  - Vincent
+  - Tiffany
+  - Johnny
+  - Tammy
+  - Dylan
+  - Crystal
+  - Phillip
+  - Lillian
+  - Craig
+  - Kayla
+per_class:
+  - name: Textbook
+    image: textbook.png
+    description: The companion book for $CLASS. This book provides very interesting reading material.
+  - name: Software
+    image: software.png
+    description: "This software will aid your ability to do well in $CLASS.<div>System Requirements: OS2 or Windows CE</div>"
+  - name: Archival Test
+    image: test.png
+    description: This test is no longer in use. It will provide you with a decent idea of what the tests in $CLASS are like.
+  - name: Reading Material
+    image: book.png
+    description: This supplementary reading material for $CLASS will further your understanding of the material.
+  - name: Lecture Notes
+    image: notes.png
+    description: Who needs to go to $CLASS lectures when you've got these notes at your fingertips?! Comes with no guarantee of accuracy.
+  - name: Tutoring
+    description: You will ace $CLASS with my help! I took the class last year and got 205% in the class.
+classes: #from the MIT course catalog
+  - Civil and Environmental Engineering
+  - Mechanical Engineering
+  - Materials Science and Engineering
+  - Architecture
+  - Chemistry
+  - Electrical Engineering and Computer Science
+  - Biology
+  - Physics
+  - Brain and Cognitive Sciences
+  - Chemical Engineering
+  - Urban Studies and Planning
+  - Economics
+  - Management
+  - Aeronautics and Astronautics
+  - Political Science
+  - Mathematics
+  - Biological Engineering
+  - Humanities
+  - Anthropology
+  - Foreign Languages and Literatures
+  - History
+  - Literature
+  - Music and Theater Arts
+  - Writing and Humanistic Studies
+  - Nuclear Science and Engineering
+  - Linguistics and Philosophy
+  - Comparative Media Studies
+  - Computational and Systems Biology
+  - Engineering Systems
+  - Health Sciences and Technology
+  - Media Arts and Sciences
+  #these are unfortunately not classes at MIT :)
+  - How to recognize trees from very far away
+  - How not to be seen
+  - Hipsteritis: how to cope with being so awesome
+  - Starcrash: an analysis of the acting of David Hasselhoff
+  - American Pie: a historical account of the day the music died
+  - Stairway to Heaven: an existential question of the afterlife
+  - Forever Young: a study of stem cells to reverse the aging process
+  - Imperial Battleship: a study of modern military strategy
+  - Stop the Flow of Time: learn how to meditate
+  - Moon Runes: a study of ancicent language
+  - Gotta Catch them All: a modern critique of the criminal justice system
+reviews:
+  good:
+    messages:
+      - This is really quite awesome!
+      - You would have to be crazy to not buy this!
+      - MY PRECIOUS
+    min: 4
+    max: 5
+  meh:
+    messages:
+      - Halfway-decent
+      - It could be worse.
+      - It's meh.
+    min: 3
+    max: 3
+  bad:
+    messages:
+      - REVOLTING
+      - DO NOT BUY
+      - It couldn't be worse!!
+    min: 1
+    max: 2
