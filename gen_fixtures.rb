@@ -1,4 +1,8 @@
 require 'yaml'
+require 'date'
+require 'time'
+
+@start_date=ARGV[0] ? DateTime.parse(ARGV[0]) : DateTime.now
 
 @inputs=YAML.load_file(File.join(File.dirname(__FILE__),'assets','fixtures','fixture-inputs.yaml'))
 def keys_to_symbols(x)
@@ -29,6 +33,19 @@ end
 
 @users={}
 @random=Random.new(@inputs[:seed])
+
+@five_percent=@products.length/20
+@eprod=@products.clone
+
+while @eprod.length>0
+  @five_percent.times do
+    idx=@random.rand(@eprod.length)
+    prod=@eprod[idx]
+    @eprod.delete_at idx
+    prod[:expiration]=@start_date.strftime
+  end
+  @start_date+=1
+end
 
 def rtween(min,max)
   @random.rand(max-min+1)+min
