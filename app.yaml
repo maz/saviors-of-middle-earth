@@ -1,6 +1,6 @@
 application: saviors-of-middle-earth
 #the below needs to be incremented after each upload to appengine
-version: 3
+version: 4
 runtime: python27
 api_version: 1
 threadsafe: true
