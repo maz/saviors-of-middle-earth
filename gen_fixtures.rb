@@ -71,7 +71,7 @@ end
   products.each do |product|
     rtween(@inputs[:min_reviews],@inputs[:max_reviews]).times do
       user=name
-      user=@users[@random.rand(@users.length)] while user==name
+      user=@users.keys[@random.rand(@users.keys.length)] while user==name
       review=@inputs[:reviews][@random.rand(@inputs[:reviews].length)]
       product[:reviews]<<{
         :user=>user,
