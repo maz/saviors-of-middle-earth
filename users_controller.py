@@ -33,10 +33,12 @@ class UserProfileHandler(UserFindingHandler):
 class UserPictureHandler(UserFindingHandler):
     def get(self,user_id):
         self.response.headers['Content-Type']='image/png'
+        self.cache(5*60*60)
         self.response.out.write(self.user.image)
 class UserThumbnailHandler(UserFindingHandler):
     def get(self,user_id):
         self.response.headers['Content-Type']='image/png'
+        self.cache(5*60*60)
         self.response.out.write(self.user.thumbnail)
 class UserNicknameHandler(UserFindingHandler):
     def get(self,user_id):
