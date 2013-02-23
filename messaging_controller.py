@@ -66,12 +66,21 @@ class MessagingListHandler(CommuniqueFindingHandler):
             for key in out['users'].keys():
                 outs['users'][key]=StoreUser.by_id(key).nickname
         self.response.write(json.dumps(out))
-
+class MessagingAddHandler(CommuniqueFindingHandler):
+    def post(self,communique_id):
+        self.response.headers['Content-Type']='text/plain'
+        u=StoreUser.get_by_id(int(self.request.get('user')))
+        if u.key() in self.communique.users:
+            return halt(400)
+        self.communique.users.append(u.key())
+        self.communique.put()
+        UserCommunique(parent=u,communique=self.communique).put()
 app = webapp2.WSGIApplication([
     (r'/_ah/channel/connected/',ChannelConnectedHandler),
     (r'/_ah/channel/disconnected/',ChannelDisconnectedHandler),
     (r'/messaging/(\d+)/read_by',MessagingReadByHandler),
     (r'/messaging/(\d+)/post',MessagingPostHandler),
     (r'/messaging/list',MessagingListAllHandler),
+    (r'/messaging/(\d+)/add',MessagingAddHandler),
     (r'/messaging/(\d+)',MessagingListHandler)
 ], debug=(env.env==env.DEVELOPMENT))

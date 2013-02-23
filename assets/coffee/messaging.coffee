@@ -71,6 +71,15 @@ class Communique
 		users.textContent=data.users.join(', ')
 		@dom.appendChild(users)
 		@dom.addEventListener 'click',@select,false
+		
+		@dom.addEventListener 'dblclick',=>
+			return unless document.body.getAttribute('data-page-user')?
+			xhr=new XMLHttpRequest
+			xhr.open('post',"/messaging/#{@id}/add",true)
+			xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+			xhr.send(post_data(user:document.body.getAttribute('data-page-user')))
+		,false
+		
 		if sidebar.childNodes[0] then sidebar.insertBefore(@dom,sidebar.childNodes[0]) else sidebar.appendChild(@dom)
 	newMessage:(msg)->
 		if sidebar.childNodes[0] then sidebar.insertBefore(@dom,sidebar.childNodes[0]) else sidebar.appendChild(@dom)

@@ -87,7 +87,8 @@
 
       this.renderMessages = __bind(this.renderMessages, this);
 
-      var title, users, _ref1;
+      var title, users, _ref1,
+        _this = this;
       communique_cache[data.id] = this;
       this.unread = data.unread;
       this.id = data.id;
@@ -111,6 +112,18 @@
       users.textContent = data.users.join(', ');
       this.dom.appendChild(users);
       this.dom.addEventListener('click', this.select, false);
+      this.dom.addEventListener('dblclick', function() {
+        var xhr;
+        if (document.body.getAttribute('data-page-user') == null) {
+          return;
+        }
+        xhr = new XMLHttpRequest;
+        xhr.open('post', "/messaging/" + _this.id + "/add", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        return xhr.send(post_data({
+          user: document.body.getAttribute('data-page-user')
+        }));
+      }, false);
       if (sidebar.childNodes[0]) {
         sidebar.insertBefore(this.dom, sidebar.childNodes[0]);
       } else {
