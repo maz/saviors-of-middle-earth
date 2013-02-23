@@ -88,7 +88,7 @@ class BaseHandler(webapp2.RequestHandler):
             self.inner_dispatch()
         finally:
             self.session_store.save_sessions(self.response)
-    def cache(self,seconds=5*60*60):
+    def cache(self,seconds=5*60):
         self.response.headers['Cache-Control']="max-age=%d"%seconds
     @webapp2.cached_property
     def session(self):
