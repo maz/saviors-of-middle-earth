@@ -257,32 +257,29 @@ classes: #from the MIT course catalog
   #these are unfortunately not classes at MIT :)
   - How to recognize trees from very far away
   - How not to be seen
-  - Hipsteritis: how to cope with being so awesome
-  - Starcrash: an analysis of the acting of David Hasselhoff
-  - American Pie: a historical account of the day the music died
-  - Stairway to Heaven: an existential question of the afterlife
-  - Forever Young: a study of stem cells to reverse the aging process
-  - Imperial Battleship: a study of modern military strategy
-  - Stop the Flow of Time: learn how to meditate
-  - Moon Runes: a study of ancicent language
-  - Gotta Catch them All: a modern critique of the criminal justice system
+  - "Hipsteritis: how to cope with being so awesome"
+  - "Starcrash: an analysis of the acting of David Hasselhoff"
+  - "American Pie: a historical account of the day the music died"
+  - "Stairway to Heaven: an existential question of the afterlife"
+  - "Forever Young: a study of stem cells to reverse the aging process"
+  - "Imperial Battleship: a study of modern military strategy"
+  - "Stop the Flow of Time: learn how to meditate"
+  - "Moon Runes: a study of ancicent language"
+  - "Gotta Catch them All: a modern critique of the criminal justice system"
 reviews:
-  good:
-    messages:
+  - messages:
       - This is really quite awesome!
       - You would have to be crazy to not buy this!
       - MY PRECIOUS
     min: 4
     max: 5
-  meh:
-    messages:
+  - messages:
       - Halfway-decent
       - It could be worse.
       - It's meh.
     min: 3
     max: 3
-  bad:
-    messages:
+  - messages:
       - REVOLTING
       - DO NOT BUY
       - It couldn't be worse!!
