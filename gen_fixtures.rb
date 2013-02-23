@@ -61,7 +61,7 @@ end
 
 @inputs[:names].each do |name|
   if @products.length==0
-    @users[name]=nil
+    #@users[name]=nil
   else
     @users[name]=[]
     rtween(@inputs[:min_products],@inputs[:max_products]).times do
