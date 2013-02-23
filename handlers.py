@@ -12,9 +12,12 @@ from google.appengine.api.channel import create_channel
 import urllib
 import re
 import json
+import env
 
 sessions.default_config['secret_key']="2vCmFcbxs4G4D8DiiGMLPQmSm8vun57ffl0lq5Wt"
 sessions.default_config['cookie_args']['httponly']=True
+if env.env==env.PRODUCTION:
+    sessions.default_config['cookie_args']['secure']=True
 
 jinja2.default_config['template_path']='views'
 jinja2.default_config['filters']={}
