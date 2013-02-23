@@ -282,7 +282,7 @@ class ModelInitializer(object):
             @db.transactional
             def add_products():
                 for pdata in data[name]:
-                    itm=Item(parent=user,name=pdata['name'],rating_count=pdata['rating_count'],avg_rating=pdata['avg_rating'],description=pdata['description'],price=float(pdata['price']),creation_time=datetime.utcfromtimestamp(pdata['expiration']))
+                    itm=Item(parent=user,name=pdata['name'],rating_count=pdata['rating_count'],avg_rating=pdata['avg_rating'],description=pdata['description'],price=float(pdata['price']),creation_time=datetime.utcfromtimestamp(pdata['creation']))
                     itm.put()
                     items[pdata['id']]=itm.key()
             add_products()
