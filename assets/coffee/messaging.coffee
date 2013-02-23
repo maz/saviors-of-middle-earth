@@ -93,7 +93,7 @@ class Communique
 			loading.hide()
 		op.send(null)
 	read:->
-		return unless unread
+		return unless @unread
 		@dom.classList.remove('unread')
 		xhr=new XMLHttpRequest
 		xhr.open('post',"/messaging/#{@id}/read_by",true)

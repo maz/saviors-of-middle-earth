@@ -161,7 +161,7 @@
 
     Communique.prototype.read = function() {
       var xhr;
-      if (!unread) {
+      if (!this.unread) {
         return;
       }
       this.dom.classList.remove('unread');

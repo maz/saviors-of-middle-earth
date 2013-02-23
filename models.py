@@ -200,6 +200,9 @@ class Communique(db.Model):
     users=db.ListProperty(db.Key)
     last_message_sent=db.DateTimeProperty(auto_now_add=True)
     title=db.StringProperty()
+    def add_user_communiques(self):
+        for user in self.users:
+            UserCommunique(parent=user,communique=self).put()
     def post_message(self,sender,contents):
         Message(communique=self,user=sender,contents=contents).put()
         LogEntry(msg="message posted to communique '%s' with users %s"%(self.title,','.join(map(str,map(db.Key.id,self.users))))).put()
@@ -249,7 +252,5 @@ def QueryEnsuringAncestor(query,ancestor,limit,order=None):
         def __cmp__(self,obj):
             if self.__eq__(obj): return 0
             return cmp(getattr(self.obj,order),getattr(obj.obj,order))
-    x=map(lambda x: x.obj,sorted(set(map(key_comparer,chain(query().order(order).run(limit=limit),query().order(order).ancestor(ancestor).run(limit=limit))))))
-    if neg: x.reverse()
-    return x
+    return map(lambda x: x.obj,sorted(set(map(key_comparer,chain(query().order(order).run(limit=limit),query().order(order).ancestor(ancestor).run(limit=limit)))),reverse=neg))
     

@@ -134,6 +134,7 @@ class CommunicateItemHandler(BaseHandler):
         if not item.viewable_by(self.current_user): self.abort(403)
         c=Communique(users=[self.current_user.key(),item.parent_key()],title=item.communique_title)
         c.put()
+        c.add_user_communiques()
         self.response.out.write(str(c.key().id()))
 class DeleteRatingHandler(BaseHandler):
     def post(self):

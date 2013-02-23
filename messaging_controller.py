@@ -1,6 +1,6 @@
 import webapp2
 import env
-from models import StoreUser,Communique
+from models import StoreUser,Communique,UserCommunique
 from handlers import BaseHandler
 import logging
 import json
@@ -47,7 +47,7 @@ class MessagingListAllHandler(BaseHandler):
             ,unread=com.last_message_sent>=com.last_read_by(self.current_user),
             id=com.key().id(),
             user_map=generate_user_map(com),
-            users=map(lambda user_id: StoreUser.get(user_id).nickname,com.users)),self.current_user.communiques().order('-last_message_sent').run())))
+            users=map(lambda user_id: StoreUser.get(user_id).nickname,com.users)),sorted(map(lambda uc:uc.communique,UserCommunique.all().ancestor(self.current_user).run()),key=lambda com_x: com_x.last_message_sent,reverse=True))))
 class MessagingListHandler(CommuniqueFindingHandler):
     MESSAGES_PER_PAGE=50
     def get(self,communique_id):
