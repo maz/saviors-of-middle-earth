@@ -20,10 +20,12 @@
 No results were found.
 {%endif%}
 
-{%if fewer_pages %}
-<a href="/search?q={{q|urlencode}}&amp;page={{page-1}}">&larr;</a>
-{%endif%}
-{%if more_pages %}
-<a href="/search?q={{q|urlencode}}&amp;page={{page+1}}">&rarr;</a>
-{%endif%}
+<div id="pagination">
+	{%if fewer_pages %}
+	<a href="/search?q={{q|urlencode}}&amp;page={{page-1}}">&larr;</a>
+	{%endif%}
+	{%if more_pages %}
+	<a href="/search?q={{q|urlencode}}&amp;page={{page+1}}">&rarr;</a>
+	{%endif%}
+</div>
 {%endblock%}

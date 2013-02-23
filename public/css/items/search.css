@@ -147,3 +147,8 @@
 
 #header .title .subtitle {
   display: none; }
+
+#pagination {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px; }

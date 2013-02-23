@@ -19,20 +19,20 @@ class SearchHandler(BaseHandler):
         page=int(self.request.get('page')) if self.request.get('page') else 0
         while condition:
             condition=False# I want my do-while loops back!
+            off=int(self.request.get('page'))*SearchHandler.PER_PAGE if self.request.get('page') else 0
             query=search.Query(query_string=self.request.get('q'),options=search.QueryOptions(
                 limit=SearchHandler.PER_PAGE,
                 ids_only=True,
                 number_found_accuracy=SearchHandler.PER_PAGE+1,
-                offset=int(self.request.get('page'))*SearchHandler.PER_PAGE if self.request.get('page') else 0
+                offset=off
             ))
             results=Item.search_index().search(query)
             arr=map(lambda x: Item.get(Key(x.doc_id)),results.results)
             for result in arr:
                 if result.creation_time<Item.search_expiry_cutoff():
                     condition=True
-                    Item.search_index().delete(str(result.key()))
-            
-        self.render_template('items/search.html',q=self.request.get('q'),results=arr,more_pages=(results.number_found>SearchHandler.PER_PAGE),fewer_pages=(page!=0),per_page=SearchHandler.PER_PAGE,page=page)
+                    Item.search_index().delete(str(result.key()))   
+        self.render_template('items/search.html',q=self.request.get('q'),results=arr,more_pages=((results.number_found-off)>SearchHandler.PER_PAGE),fewer_pages=(page!=0),per_page=SearchHandler.PER_PAGE,page=page)
 class AddItemHandler(BaseHandler):
     def get(self):
         self.render_template('items/form.html',title="Add an Item",item_expiry=datetime.now()+Item.EXPIRATION_DELTA)
