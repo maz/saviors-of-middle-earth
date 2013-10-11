@@ -142,7 +142,7 @@ class CommunicateItemHandler(BaseHandler):
         c=Communique(users=[self.current_user.key(),item.parent_key()],title=item.communique_title)
         c.put()
         c.add_user_communiques()
-        self.response.out.write(str(c.key().id()))
+        self.response.out.write(str(c.key().id_or_name()))
 class DeleteRatingHandler(BaseHandler):
     def post(self):
         if not self.current_user.admin: return self.abort(403)

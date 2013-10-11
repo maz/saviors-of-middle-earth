@@ -10,6 +10,7 @@ from google.appengine.api import search
 from itertools import chain
 import json
 import os
+import hashlib
 
 ITEM_SEARCH_INDEX_NAME="ITEM_SEARCH_INDEX_NAME"
 
@@ -117,7 +118,6 @@ class LogEntry(db.Model):
     referrer=db.StringProperty(indexed=False)
 
 class StoreUser(db.Model):
-    userid=db.StringProperty()
     admin=db.BooleanProperty(default=False)
     deactivated=db.BooleanProperty(default=False,indexed=False)
     email=db.StringProperty()
@@ -137,7 +137,7 @@ class StoreUser(db.Model):
         encoded=json.dumps(kwargs)
         for token in self.channel_tokens:
             send_message(token,encoded)
-    def generate_channel_token_string(self): return "%d_%s"%(self.key().id(),generate_random_string(24))
+    def generate_channel_token_string(self): return "%s_%s"%(str(self.key().id_or_name()),generate_random_string(24))
     def generate_channel_token(self):
         token=self.generate_channel_token_string()
         while token in self.channel_tokens: token=self.generate_channel_token_string()
@@ -153,9 +153,16 @@ class StoreUser(db.Model):
         return Item.all().ancestor(self)
     def url(self,action=None):
         if action:
-            return "/users/%d/%s"%(self.key().id(),action)
+            return "/users/%s/%s"%(str(self.key().id_or_name()),action)
         else:
-            return "/users/%d"%self.key().id()
+            return "/users/%s"%str(self.key().id_or_name())
+    @classmethod
+    def by_name_or_id(cls, name_or_id):
+        try:
+            user=cls.get_by_id(int(name_or_id))
+            if user is not None: return user
+        except ValueError: pass #it's not a number
+        return StoreUser.get_by_key_name(name_or_id)  
     @classmethod
     def by_email(cls,email):
         arr=cls.all().filter("email =",email).fetch(limit=1)
@@ -167,17 +174,17 @@ class StoreUser(db.Model):
     def current_user(cls):
         user=users.get_current_user()
         if not user: return None
-        arr=cls.gql("WHERE userid=:1",user.user_id()).fetch(limit=1)
-        if len(arr):
-            model=arr[0]
+        user_id=hashlib.sha256(user.user_id()).hexdigest()
+        model=cls.get_by_key_name(user_id)
+        if model is not None:
             if model.email!=user.email():
                 model.email=user.email()
                 model.put()
             return model
         else:
-            model=cls(userid=user.user_id(),admin=users.is_current_user_admin() or user.email() in ["hardcodetest1@gmail.com","hardcodetest2@gmail.com"],email=user.email())
+            model=cls(key_name=user_id,admin=users.is_current_user_admin() or user.email() in ["hardcodetest1@gmail.com","hardcodetest2@gmail.com"],email=user.email())
             model.put()
-            model.nickname="User %d"%model.key().id()
+            model.nickname="User %s"%(model.key().id_or_name()[0:10])
             model.put()
             return model
     def google_user(self):
@@ -211,7 +218,7 @@ class Communique(db.Model):
         for user in self.users:
             if user!=sender.key():
                 user_obj=StoreUser.get(user)
-                user_obj.notify_channels('new_message',user=sender.key().id(),nickname=sender.nickname,communique=self.key().id(),contents=contents)
+                user_obj.notify_channels('new_message',user=sender.key().id_or_name(),nickname=sender.nickname,communique=self.key().id_or_name(),contents=contents)
                 if not user_obj.has_unread_messages:
                     user_obj.has_unread_messages=True
                     user_obj.put()

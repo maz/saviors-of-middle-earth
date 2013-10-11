@@ -8,12 +8,12 @@ import json
 def generate_user_map(com):
     d=dict()
     for user in com.users:
-        d[user.id()]=StoreUser.get(user).nickname
+        d[user.id_or_name()]=StoreUser.get(user).nickname
     return d
 
 class ChannelConnectedHandler(webapp2.RequestHandler):
     def post(self):
-        user=StoreUser.get_by_id(int(self.request.get('from').split('_')[0]))
+        user=StoreUser.by_id_or_name(self.request.get('from').split('_')[0])
         user.channel_tokens.append(self.request.get('from'))
         user.put()
 class ChannelDisconnectedHandler(webapp2.RequestHandler):
@@ -27,7 +27,7 @@ class ChannelDisconnectedHandler(webapp2.RequestHandler):
 class CommuniqueFindingHandler(BaseHandler):
     def inner_dispatch(self):
         try:
-            self.communique=Communique.get_by_id(int(self.request.route_args[0]))
+            self.communique=Communique.by_id_or_name(self.request.route_args[0])
         except:
             self.communique=None
         if not self.communique: self.abort(404)
@@ -45,7 +45,7 @@ class MessagingListAllHandler(BaseHandler):
         self.response.headers['Content-Type']='application/json'
         self.response.write(json.dumps(map(lambda com:dict(title=com.title
             ,unread=com.last_message_sent>=com.last_read_by(self.current_user),
-            id=com.key().id(),
+            id=com.key().id_or_name(),
             user_map=generate_user_map(com),
             users=map(lambda user_id: StoreUser.get(user_id).nickname,com.users)),sorted(map(lambda uc:uc.communique,UserCommunique.all().ancestor(self.current_user).run()),key=lambda com_x: com_x.last_message_sent,reverse=True))))
 class MessagingListHandler(CommuniqueFindingHandler):
@@ -55,7 +55,7 @@ class MessagingListHandler(CommuniqueFindingHandler):
         out={}
         off=int(self.request.get('offset') or 0)
         out['more_messages']=self.communique.messages().count(limit=1,offset=off+MessagingListHandler.MESSAGES_PER_PAGE+1)
-        out['messages']=map(lambda x: dict(user=x.user.key().id(),contents=x.contents,time=x.time.isoformat()),self.communique.messages().run(limit=MessagingListHandler.MESSAGES_PER_PAGE,offset=off))
+        out['messages']=map(lambda x: dict(user=x.user.key().id_or_name(),contents=x.contents,time=x.time.isoformat()),self.communique.messages().run(limit=MessagingListHandler.MESSAGES_PER_PAGE,offset=off))
         out['messages'].reverse()
         if not self.request.get('onlymessages'):
             out['user_map']=generate_user_map(self.communique)
@@ -64,12 +64,12 @@ class MessagingListHandler(CommuniqueFindingHandler):
             out['title']=self.communique.title
             #TODO: nicer way to do the following:
             for key in out['users'].keys():
-                outs['users'][key]=StoreUser.by_id(key).nickname
+                outs['users'][key]=StoreUser.by_id_or_name(key).nickname
         self.response.write(json.dumps(out))
 class MessagingAddHandler(CommuniqueFindingHandler):
     def post(self,communique_id):
         self.response.headers['Content-Type']='text/plain'
-        u=StoreUser.get_by_id(int(self.request.get('user')))
+        u=StoreUser.by_id_or_name(self.request.get('user'))
         if u.key() in self.communique.users:
             return halt(400)
         self.communique.users.append(u.key())

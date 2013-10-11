@@ -14,11 +14,10 @@ class UserLogoutHandler(BaseHandler):
 
 class UserFindingHandler(BaseHandler):
     def inner_dispatch(self):
-        try:
-            self.user=StoreUser.get_by_id(int(self.request.route_args[0]))
-        except ValueError:
+        self.user=StoreUser.by_name_or_id(self.request.route_args[0])
+        if self.user is None:
             self.user=StoreUser.by_email(self.request.route_args[0])
-        if self.user:
+        if self.user is not None:
             super(UserFindingHandler,self).inner_dispatch()
         else:
             self.flash("No user with email '%s' could be found."%self.request.route_args[0])

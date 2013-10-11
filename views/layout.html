@@ -19,7 +19,7 @@
 	{{css('base')}}
 	{%endblock%}
 </head>
-<body{%if current_user%} data-channel-token="{{channel_token}}" data-csrf-token="{{csrf_token}}" data-current-user="{{current_user.key().id()}}"{%endif%}{%if user %} data-page-user="{{user.key().id()}}"{%endif%}>
+<body{%if current_user%} data-channel-token="{{channel_token}}" data-csrf-token="{{csrf_token}}" data-current-user="{{current_user.key().id_or_name()}}"{%endif%}{%if user %} data-page-user="{{user.key().id_or_name()}}"{%endif%}>
 	{%macro csrf_field()%}<input type="hidden" name="csrf_token" value="{{csrf_token}}"/>{%endmacro%}
 	<div id="header">
 		<a href="/" class="homepage-link"></a>
