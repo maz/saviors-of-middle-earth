@@ -8,7 +8,7 @@ except:
 
 def escape_css(x):
     if x.isalnum(): return x
-    return json.dumps(x).replace("\"","'")
+    return "'%s'"%escape(x)
 
 def from_style_runs(runs):
     ACCEPTABLE_CSS_KEYS=["font-family","font-size","font-weight","font-style","text-decoration"]
