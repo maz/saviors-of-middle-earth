@@ -3,7 +3,7 @@ require 'json'
 require 'date'
 require 'time'
 
-@start_date=ARGV[0] ? DateTime.parse(ARGV[0]) : DateTime.now
+@start_date=(ARGV[0] and __FILE__==$0) ? DateTime.parse(ARGV[0]) : DateTime.now
 
 @inputs=YAML.load_file(File.join(File.dirname(__FILE__),'assets','fixtures','fixture-inputs.yaml'))
 def keys_to_symbols(x)
