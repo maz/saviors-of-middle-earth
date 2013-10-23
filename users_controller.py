@@ -14,7 +14,7 @@ class UserLogoutHandler(BaseHandler):
 
 class UserFindingHandler(BaseHandler):
     def inner_dispatch(self):
-        self.user=StoreUser.by_name_or_id(self.request.route_args[0])
+        self.user=StoreUser.by_id_or_name(self.request.route_args[0])
         if self.user is None:
             self.user=StoreUser.by_email(self.request.route_args[0])
         if self.user is not None:

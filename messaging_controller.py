@@ -27,7 +27,7 @@ class ChannelDisconnectedHandler(webapp2.RequestHandler):
 class CommuniqueFindingHandler(BaseHandler):
     def inner_dispatch(self):
         try:
-            self.communique=Communique.by_id_or_name(self.request.route_args[0])
+            self.communique=Communique.get_by_id(int(self.request.route_args[0]))
         except:
             self.communique=None
         if not self.communique: self.abort(404)

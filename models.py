@@ -157,7 +157,7 @@ class StoreUser(db.Model):
         else:
             return "/users/%s"%str(self.key().id_or_name())
     @classmethod
-    def by_name_or_id(cls, name_or_id):
+    def by_id_or_name(cls, name_or_id):
         try:
             user=cls.get_by_id(int(name_or_id))
             if user is not None: return user
