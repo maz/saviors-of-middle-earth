@@ -11,6 +11,7 @@ from itertools import chain
 import json
 import os
 import hashlib
+import logging
 
 ITEM_SEARCH_INDEX_NAME="ITEM_SEARCH_INDEX_NAME"
 
@@ -106,8 +107,9 @@ class ItemRating(db.Model):
     def unapply(self):
         if self.rating==0: return
         item=self.item
-        item.avg_rating=float(item.rating_count)*item.avg_rating-float(self.rating)
+        item.avg_rating=(float(item.rating_count)*float(item.avg_rating))-float(self.rating)
         item.rating_count-=1
+        item.avg_rating/=float(item.rating_count)
         item.put()
 
 class LogEntry(db.Model):
