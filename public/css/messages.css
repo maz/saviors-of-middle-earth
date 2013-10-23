@@ -35,21 +35,18 @@
 
   100% {
     background-color: #D17717; } }
-
 @-moz-keyframes attn {
   0% {
     background-color: #A90100; }
 
   100% {
     background-color: #D17717; } }
-
 @keyframes attn {
   0% {
     background-color: #A90100; }
 
   100% {
     background-color: #D17717; } }
-
 #messages-panel {
   width: 100%;
   left: 0px;
@@ -255,7 +252,8 @@
         position: absolute;
         bottom: 0px;
         left: 0px;
-        right: 0px;
+        margin-right: 2px;
+        width: 100%;
         height: 30px; }
   #messages-panel .template {
     display: none; }

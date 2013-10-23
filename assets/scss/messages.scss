@@ -221,7 +221,8 @@ $messages-panel-transitions:height $messages-panel-transition-duration,backgroun
 				position:absolute;
 				bottom:0px;
 				left:0px;
-				right:0px;
+				margin-right:2px;
+				width:100%;
 				height:30px;
 			}
 		}
