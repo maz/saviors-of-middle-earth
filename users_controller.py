@@ -1,6 +1,7 @@
 import webapp2
 from handlers import BaseHandler,AdminHandler
 import env
+from wsgi import wsgi
 from models import StoreUser,Item
 from google.appengine.api import users
 import base64
@@ -90,7 +91,7 @@ class UserDeactivationHandler(AdminHandler,UserFindingHandler):
         self.user.deactivate()
         self.log('user deactivated')
         self.redirect(self.user.url())
-app = webapp2.WSGIApplication([
+app = wsgi([
     (r'/users/logout',UserLogoutHandler),
     (r'/users/(.*)/delete',UserDeletionHandler),
     (r'/users/(.*)/picture',UserPictureHandler),
@@ -102,4 +103,4 @@ app = webapp2.WSGIApplication([
     (r'/users/(.*)/promote',UserPromotionHandler),
     (r'/users/(.*)',UserProfileHandler),
     (r'/users/(.*)/',UserProfileHandler)
-], debug=(env.env==env.DEVELOPMENT))
+])

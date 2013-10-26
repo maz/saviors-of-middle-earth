@@ -1,5 +1,6 @@
 import webapp2
 import env
+from wsgi import wsgi
 from models import StoreUser,Communique,UserCommunique
 from handlers import BaseHandler
 import logging
@@ -75,7 +76,7 @@ class MessagingAddHandler(CommuniqueFindingHandler):
         self.communique.users.append(u.key())
         self.communique.put()
         UserCommunique(parent=u,communique=self.communique).put()
-app = webapp2.WSGIApplication([
+app = wsgi([
     (r'/_ah/channel/connected/',ChannelConnectedHandler),
     (r'/_ah/channel/disconnected/',ChannelDisconnectedHandler),
     (r'/messaging/(\d+)/read_by',MessagingReadByHandler),
@@ -83,4 +84,4 @@ app = webapp2.WSGIApplication([
     (r'/messaging/list',MessagingListAllHandler),
     (r'/messaging/(\d+)/add',MessagingAddHandler),
     (r'/messaging/(\d+)',MessagingListHandler)
-], debug=(env.env==env.DEVELOPMENT))
+])

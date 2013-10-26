@@ -1,6 +1,7 @@
 import webapp2
 from handlers import AdminHandler
 import env
+from wsgi import wsgi
 from models import LogEntry,StoreUser
 
 class IndexHandler(AdminHandler):
@@ -24,9 +25,9 @@ class UserSearchHandler(AdminHandler):
         else:
             self.flash("There is no registered user with the email address: '%s'"%self.request.get('email'))
             self.redirect('/admin/')
-app = webapp2.WSGIApplication([
+app = wsgi([
     ('/admin',IndexHandler),
     ('/admin/',IndexHandler),
     ('/admin/logs',LogsHandler),
     ('/admin/user',UserSearchHandler),
-], debug=(env.env==env.DEVELOPMENT))
+])

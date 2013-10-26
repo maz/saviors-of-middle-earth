@@ -1,5 +1,6 @@
 import webapp2
 from handlers import BaseHandler
 import env
+from wsgi import wsgi
 
-app = webapp2.WSGIApplication([], debug=(env.env==env.DEVELOPMENT))
+app = wsgi([])

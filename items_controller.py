@@ -1,6 +1,7 @@
 import webapp2
 from handlers import BaseHandler
 import env
+from wsgi import wsgi
 from models import Item, Communique,ItemRating,QueryEnsuringAncestor
 from datetime import datetime
 import base64
@@ -159,7 +160,7 @@ class DeleteRatingHandler(BaseHandler):
             self.log("rating deleted")
         self.redirect(item.url())
     
-app = webapp2.WSGIApplication([
+app = wsgi([
     ('/',IndexHandler),
     ('/search',SearchHandler),
     ('/items/add',AddItemHandler),
@@ -176,4 +177,4 @@ app = webapp2.WSGIApplication([
     (r'/items/([A-Za-z0-9]+)/communicate',CommunicateItemHandler),
     (r'/items/([A-Za-z0-9]+)/.*',ShowItemHandler),
     (r'/items/([A-Za-z0-9]+)',ShowItemHandler),
-], debug=(env.env==env.DEVELOPMENT))
+])
