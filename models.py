@@ -111,6 +111,8 @@ class ItemRating(db.Model):
         item.rating_count-=1
         item.avg_rating/=float(item.rating_count)
         item.put()
+    def deletion_memcache_key(self):
+        return "rating-deleted-%s"%str(self.key())
 
 class LogEntry(db.Model):
     ip=db.StringProperty(indexed=False)

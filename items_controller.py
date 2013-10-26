@@ -7,7 +7,7 @@ import base64
 import logging
 import rich_text
 from google.appengine.ext.db import Key
-from google.appengine.api import search
+from google.appengine.api import search, memcache
 
 class IndexHandler(BaseHandler):
     def get(self):
@@ -111,6 +111,10 @@ class ShowItemHandler(BaseHandler):
             ratings=QueryEnsuringAncestor(query=query,ancestor=self.current_user,limit=50,order='-time')
         else:
             ratings=query().order('-time').run(limit=50)
+        if self.current_user.admin:
+            #We need to filter out the ratings which have been deleted, so they don't show up again. This only matters for admins, since if non-admins see an old rating for a few seconds, it's not an issue.
+            deleted_keys=memcache.get_multi(map(lambda x: x.deletion_memcache_key(), ratings)).values()
+            ratings=filter(lambda rating: str(rating.key()) not in deleted_keys, ratings)
         self.render_template('items/show.html',item=item,ratings=ratings)
 class RateItemHandler(BaseHandler):
     def post(self,ident):
@@ -147,10 +151,12 @@ class DeleteRatingHandler(BaseHandler):
     def post(self):
         if not self.current_user.admin: return self.abort(403)
         rating=ItemRating.get(Key(self.request.get('rating')))
-        item=rating.item
-        rating.unapply()
-        rating.delete()
-        self.log("rating deleted")
+        if rating is not None:
+            item=rating.item
+            memcache.set(rating.deletion_memcache_key(), str(rating.key()), time=5)
+            rating.unapply()
+            rating.delete()
+            self.log("rating deleted")
         self.redirect(item.url())
     
 app = webapp2.WSGIApplication([
