@@ -111,7 +111,7 @@ class ShowItemHandler(BaseHandler):
             ratings=QueryEnsuringAncestor(query=query,ancestor=self.current_user,limit=50,order='-time')
         else:
             ratings=query().order('-time').run(limit=50)
-        if self.current_user.admin:
+        if self.current_user is not None and self.current_user.admin:
             #We need to filter out the ratings which have been deleted, so they don't show up again. This only matters for admins, since if non-admins see an old rating for a few seconds, it's not an issue.
             deleted_keys=memcache.get_multi(map(lambda x: x.deletion_memcache_key(), ratings)).values()
             ratings=filter(lambda rating: str(rating.key()) not in deleted_keys, ratings)
