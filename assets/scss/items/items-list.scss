@@ -32,7 +32,9 @@
 		}
 	}
 	.details,.description{
-		display:table;
+		display:block;
+		margin-right:3px;
+		margin-top:3px;
 		.container{
 			display:table-cell;
 			vertical-align:middle;

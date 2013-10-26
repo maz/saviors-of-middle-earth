@@ -247,7 +247,9 @@
     .item .details .expiration, .item .details .author {
       font-style: italic; }
   .item .details, .item .description {
-    display: table; }
+    display: block;
+    margin-right: 3px;
+    margin-top: 3px; }
     .item .details .container, .item .description .container {
       display: table-cell;
       vertical-align: middle; }
