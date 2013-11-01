@@ -193,7 +193,6 @@ class StoreUser(db.Model):
             return model
     def google_user(self):
         return users.User(_user_id=self.userid)
-    @db.transactional
     def delete_data(self):
         #TODO: add other models here, as they get added to the database
         #TODO: what to do with messages?
